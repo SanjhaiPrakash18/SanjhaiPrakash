@@ -14,7 +14,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 99%;
+    width: 105%;
     overflow-x: hidden;
     transition: background-color 0.3s;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Adjust shadow opacity */

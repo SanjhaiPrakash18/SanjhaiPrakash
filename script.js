@@ -900,3 +900,33 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("scroll", revealIfVisible);
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.service-reveal');
+
+    function revealSection() {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const sectionBottom = section.getBoundingClientRect().bottom;
+
+            // Calculate the delay based on the index of the section
+            const index = Array.from(sections).indexOf(section);
+            const delay = index * 150; // Adjust the delay time as needed
+
+            if (sectionTop < window.innerHeight && sectionBottom >= 0) {
+                setTimeout(() => {
+                    section.classList.add('active');
+                    section.classList.add('revealed'); // Add revealed class when section is revealed
+                }, delay);
+            } else {
+                // Check if the section has been revealed before removing the active class
+                if (!section.classList.contains('revealed')) {
+                    section.classList.remove('active');
+                }
+            }
+        });
+    }
+
+    window.addEventListener('scroll', revealSection);
+    revealSection(); // Call revealSection on page load
+});
+

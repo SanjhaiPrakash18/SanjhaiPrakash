@@ -196,7 +196,7 @@
             case "Services":
                 message = "Currently, I offer Business Intelligence solutions to clients worldwide, including those in India.<br><br>" +
                     "I am the creator of a product called the Customer Segmentation Dashboard Template, developed using Microsoft Power BI.<br><br>" +
-                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$18</b>.<br><br>" +
+                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$44</b>.<br><br>" +
                     "Users can purchase it through the Services section on my website, which redirects to the Metricalist website.";
                 break;
             case "Resume":

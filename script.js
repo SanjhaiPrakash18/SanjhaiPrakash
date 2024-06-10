@@ -930,3 +930,36 @@ document.addEventListener('DOMContentLoaded', function () {
     revealSection(); // Call revealSection on page load
 });
 
+// JavaScript code for filtering projects
+const projectContainers = document.querySelectorAll('.project-container');
+const filterButtons = document.querySelectorAll('.filter-button');
+const allButton = document.getElementById('all-projects-button');
+allButton.classList.add('active');
+allButton.style.color = '#FFFFFF';
+allButton.style.backgroundColor = '#1DBF73';
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const selectedLabel = this.getAttribute('technology-label');
+
+        if (selectedLabel === 'ALL') {
+            projectContainers.forEach(container => {
+                container.classList.remove('hidden'); // Show all projects
+            });
+        } else {
+            projectContainers.forEach(container => {
+                const labels = container.querySelectorAll('.technology-label');
+                const showProject = Array.from(labels).some(label => label.textContent === selectedLabel);
+                if (showProject) {
+                    container.classList.remove('hidden');
+                } else {
+                    container.classList.add('hidden');
+                }
+            });
+        }
+
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+    });
+});
+

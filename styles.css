@@ -2584,8 +2584,17 @@ button {
     margin-top: 50px;
 }
 
+#projects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust gap as needed */
+}
+
 .project-container {
-    position: relative;
+    flex: 1 1 calc(33.333% - 20px); /* Adjust for three projects per row with a 20px gap */
+    box-sizing: border-box;
+    visibility: visible; /* Default to visible */
+    position: relative; /* Ensure the position is relative */
     border-radius: 20px; /* Adjust the border-radius as needed for the desired roundness */
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); /* Adjust the box-shadow values for the desired drop shadow effect */
@@ -2595,6 +2604,13 @@ button {
     margin: 20px; /* Adjust margin as needed for spacing between project containers */
     /* Add other existing styles for the project container here */
 }
+
+    .project-container.hidden {
+        visibility: hidden; /* Hide the project but keep its space */
+        position: absolute; /* Remove it from the layout flow */
+        height: 0; /* Collapse the space */
+        width: 0; /* Collapse the space */
+    }
 
 .move-right-package {
     margin-left: 20px; /* Adjust the margin-left value as needed to move the description to the right */

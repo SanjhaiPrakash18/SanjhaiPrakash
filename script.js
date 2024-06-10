@@ -962,4 +962,3 @@ filterButtons.forEach(button => {
         this.classList.add('active');
     });
 });
-

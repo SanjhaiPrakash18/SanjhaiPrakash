@@ -667,11 +667,22 @@ document.addEventListener("DOMContentLoaded", function () {
     popUpNextRectangle(0);
 });
 
-function togglePopup(popupId) {
+function togglePopup(popupId, offset = -750) {
     var popup = document.getElementById(popupId);
-    if (popup) {
-        popup.classList.toggle("show");
-        document.body.classList.toggle("popup-open"); // Toggle popup-open class on body
+    var body = document.querySelector('body');
+    if (popup.style.display === "flex") {
+        popup.style.display = "none";
+        body.classList.remove('popup-open');
+    } else {
+        popup.style.display = "flex";
+        body.classList.add('popup-open');
+        // Scroll to the about section with a slight offset
+        var aboutSection = document.getElementById('about');
+        var scrollPosition = aboutSection.offsetTop - offset;
+        window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+        });
     }
 }
 
@@ -962,3 +973,4 @@ filterButtons.forEach(button => {
         this.classList.add('active');
     });
 });
+

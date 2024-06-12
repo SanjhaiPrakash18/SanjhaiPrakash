@@ -2552,6 +2552,17 @@ button {
     font-size: 12px; /* Adjust the font size as needed */
 }
 
+.technology-label-two {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: #FFFFFF;
+    color: #1DBF73;
+    border-radius: 20px;
+    border: 1px solid #77DD86;
+    margin-bottom: 10px; /* Adjust margin as needed */
+    font-size: 12px; /* Adjust the font size as needed */
+}
+
 #filter-buttons {
     font-family: 'Montserrat', sans-serif; /* Set font to Montserrat */
     margin-top: 40px;
@@ -2628,6 +2639,10 @@ button {
         position: absolute; /* Remove it from the layout flow */
         height: 0; /* Collapse the space */
         width: 0; /* Collapse the space */
+    }
+
+    .project-container.move-left {
+        margin-left: 10px; /* Adjust the left margin as needed */
     }
 
 .move-right-package {

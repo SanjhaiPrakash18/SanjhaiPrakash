@@ -188,7 +188,7 @@
                 message = "I have over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics.";
                 break;
             case "Portfolio":
-                message = "My portfolio consists of 15 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
+                message = "My portfolio consists of 16 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
                     "The majority of my projects are created using Microsoft Power BI.<br><br>" +
                     "For a clear view of my projects, please visit the Portfolio section on my website.<br><br>" +
                     "These projects are hosted on the Maven Analytics web platform, where users will be redirected for further exploration.<br>";
@@ -948,7 +948,6 @@ const allButton = document.getElementById('all-projects-button');
 allButton.classList.add('active');
 allButton.style.color = '#FFFFFF';
 allButton.style.backgroundColor = '#1DBF73';
-
 filterButtons.forEach(button => {
     button.addEventListener('click', function () {
         const selectedLabel = this.getAttribute('technology-label');
@@ -956,6 +955,7 @@ filterButtons.forEach(button => {
         if (selectedLabel === 'ALL') {
             projectContainers.forEach(container => {
                 container.classList.remove('hidden'); // Show all projects
+                container.style.margin = '20px'; // Reset margin for all projects
             });
         } else {
             projectContainers.forEach(container => {
@@ -963,14 +963,35 @@ filterButtons.forEach(button => {
                 const showProject = Array.from(labels).some(label => label.textContent === selectedLabel);
                 if (showProject) {
                     container.classList.remove('hidden');
+                    if (selectedLabel === 'SQL') {
+                        container.style.margin = '10px'; // Adjust margin for SQL projects
+                    } else {
+                        container.style.margin = '20px'; // Reset margin for other projects
+                    }
                 } else {
                     container.classList.add('hidden');
                 }
             });
         }
 
+        // Move the Consumer Goods project left after filtering SQL projects
+        if (selectedLabel === 'SQL') {
+            const consumerGoodsProject = document.querySelector('.project-title:contains("CONSUMER GOODS AD-HOC ANALYSIS")');
+            if (consumerGoodsProject) {
+                const projectContainer = consumerGoodsProject.closest('.project-container');
+                projectContainer.style.marginLeft = '10px';
+            }
+        }
+
         filterButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
     });
 });
+
+
+
+
+
+
+
 

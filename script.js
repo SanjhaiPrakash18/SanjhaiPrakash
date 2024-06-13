@@ -948,50 +948,43 @@ const allButton = document.getElementById('all-projects-button');
 allButton.classList.add('active');
 allButton.style.color = '#FFFFFF';
 allButton.style.backgroundColor = '#1DBF73';
+
+// Function to update margin for all project containers
+function updateProjectMargin(marginValue) {
+    projectContainers.forEach(container => {
+        container.style.margin = marginValue;
+    });
+}
+
+// Initial margin setup
+updateProjectMargin('20px');
+
 filterButtons.forEach(button => {
     button.addEventListener('click', function () {
-        const selectedLabel = this.getAttribute('technology-label');
+        const selectedLabel = this.getAttribute('data-technology');
 
         if (selectedLabel === 'ALL') {
             projectContainers.forEach(container => {
                 container.classList.remove('hidden'); // Show all projects
-                container.style.margin = '20px'; // Reset margin for all projects
             });
+            updateProjectMargin('20px'); // Reset margin for all projects
         } else {
             projectContainers.forEach(container => {
-                const labels = container.querySelectorAll('.technology-label');
+                const labels = container.querySelectorAll('.technology-label, .technology-label-two');
                 const showProject = Array.from(labels).some(label => label.textContent === selectedLabel);
                 if (showProject) {
                     container.classList.remove('hidden');
-                    if (selectedLabel === 'SQL') {
-                        container.style.margin = '10px'; // Adjust margin for SQL projects
-                    } else {
-                        container.style.margin = '20px'; // Reset margin for other projects
-                    }
                 } else {
                     container.classList.add('hidden');
                 }
             });
-        }
 
-        // Move the Consumer Goods project left after filtering SQL projects
-        if (selectedLabel === 'SQL') {
-            const consumerGoodsProject = document.querySelector('.project-title:contains("CONSUMER GOODS AD-HOC ANALYSIS")');
-            if (consumerGoodsProject) {
-                const projectContainer = consumerGoodsProject.closest('.project-container');
-                projectContainer.style.marginLeft = '10px';
-            }
+            // Update margin for visible projects
+            updateProjectMargin('20px');
         }
 
         filterButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
     });
 });
-
-
-
-
-
-
-
 

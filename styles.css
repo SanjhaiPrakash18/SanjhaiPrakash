@@ -1229,15 +1229,15 @@ section#contact h2 {
     overflow: auto; /* Enable scrolling for excess logos */
     height: 110px;
     background-color: #F1F3F4;
-    max-width: 600px; /* Adjust the value as needed */
+    max-width: 640px; /* Adjust the value as needed */
     border-radius: 60px;
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.04); /* Add shadow effect */
     animation: moveUpDown 3s ease infinite alternate; /* Apply animation */
 }
 
 .logo-item {
-    height: 70px;
-    width: 70px;
+    height: 65px;
+    width: 80px;
     margin: 10px; /* Add spacing between items */
     border-radius: 50px; /* Add border radius for rounded corners */
     display: flex;
@@ -2544,10 +2544,10 @@ button {
 .technology-label {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #FFFFFF;
-    color: #1DBF73;
+    background-color: #1DBF73;
+    color: #FFFFFF;
     border-radius: 20px;
-    border: 1px solid #77DD86;
+    border: 1px solid #1DBF73;
     margin-bottom: 10px; /* Adjust margin as needed */
     font-size: 12px; /* Adjust the font size as needed */
 }
@@ -2617,10 +2617,13 @@ button {
     display: flex;
     flex-wrap: wrap;
     gap: 20px; /* Adjust gap as needed */
+    justify-content: center; /* Center the project containers */
+    align-items: flex-start; /* Align items to the top of the container */
+    padding: 20px; /* Add padding to prevent projects from touching the edges */
 }
 
 .project-container {
-    flex: 1 1 calc(33.333% - 20px); /* Adjust for three projects per row with a 20px gap */
+    flex: 1 1 540px; /* Ensure the project containers maintain the fixed width */
     box-sizing: border-box;
     visibility: visible; /* Default to visible */
     position: relative; /* Ensure the position is relative */
@@ -2629,20 +2632,16 @@ button {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); /* Adjust the box-shadow values for the desired drop shadow effect */
     overflow: hidden; /* Ensures that the shadow is applied to the rounded container */
     width: 400px; /* Set a fixed width for all project containers */
-    height: 530px;
+    height: 540px; /* Set a fixed height for all project containers */
     margin: 20px; /* Adjust margin as needed for spacing between project containers */
-    /* Add other existing styles for the project container here */
+    transition: opacity 0.3s ease-in-out; /* Add transition for opacity */
 }
 
     .project-container.hidden {
-        visibility: hidden; /* Hide the project but keep its space */
-        position: absolute; /* Remove it from the layout flow */
+        opacity: 0; /* Fade out hidden projects */
         height: 0; /* Collapse the space */
         width: 0; /* Collapse the space */
-    }
-
-    .project-container.move-left {
-        margin-left: 10px; /* Adjust the left margin as needed */
+        margin: 0; /* Remove margin to avoid empty space */
     }
 
 .move-right-package {

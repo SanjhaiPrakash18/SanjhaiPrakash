@@ -715,7 +715,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Call the function for each number with desired end values
-    animateValue("portfolio-stats-number", 0, 15, 1000, 5000); // Adjust duration and delay as needed
+    animateValue("portfolio-stats-number", 0, 16, 1000, 5000); // Adjust duration and delay as needed
     animateValue("experience-stats-number", 0, 2, 1000, 5000);
     animateValue("service-stats-number", 0, 1, 1000, 5000);
     animateValue("customers-stats-number", 0, 7, 1000, 5000);

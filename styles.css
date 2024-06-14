@@ -231,6 +231,11 @@ button[type="submit"] {
     max-height: 100px;
 }
 
+    .logo-small:hover {
+        transform: scale(1.2); /* Scale the image by 10% on hover */
+        transition: transform 0.3s ease-in-out; /* Smooth transition */
+    }
+
 .social-links {
     display: flex;
     justify-content: space-between;

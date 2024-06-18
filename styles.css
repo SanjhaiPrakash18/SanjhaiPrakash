@@ -3731,3 +3731,234 @@ button {
             font-weight: bold; /* Make font bold on hover */
             text-align: right; /* Align text to the right on hover */
         }
+
+
+.linkedin:hover {
+    background-color: #007BB6 !important; /* Change background color on hover */
+    border: 2px solid #007BB6;
+}
+
+    .linkedin:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.instagram:hover {
+    background-color: #E90078 !important; /* Change background color on hover */
+    border: 2px solid #E90078;
+}
+
+    .instagram:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.upwork:hover {
+    background-color: #14A800 !important; /* Change background color on hover */
+    border: 2px solid #14A800;
+}
+
+    .upwork:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.X:hover {
+    background-color: #000000 !important; /* Change background color on hover */
+    border: 2px solid #000000;
+}
+
+    .X:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.gmail:hover {
+    background-color: #ffffff !important; /* Change background color on hover */
+}
+
+    .gmail:hover span {
+        color: #000000 !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.fiverr:hover {
+    background-color: #1DBF73 !important; /* Change background color on hover */
+    border: 2px solid #1DBF73;
+}
+
+    .fiverr:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.metricalist:hover {
+    background-color: #323548 !important; /* Change background color on hover */
+    border: 2px solid #323548;
+}
+
+    .metricalist:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing: -2.8px;
+    }
+
+
+.facebook:hover {
+    background-color: #0865FF !important; /* Change background color on hover */
+    border: 2px solid #0865FF;
+}
+
+    .facebook:hover span {
+        color: #ffffff !important; /* Change text color on hover */
+        font-size: 33px !important; /* Increase font size on hover */
+        letter-spacing:-2.8px;
+    }
+
+.linkedin span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: left;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing:-1.2px;
+}
+
+.linkedin:hover span::after {
+    content: '/sanjhaiprakash'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.upwork span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.upwork:hover span::after {
+    content: '/Sanjhai P'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.fiverr span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.fiverr:hover span::after {
+    content: '/sanjhai_18'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.metricalist span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.metricalist:hover span::after {
+    content: '/sanjhai18'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.X span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.X:hover span::after {
+    content: '/Sanjhai_18'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.instagram span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.instagram:hover span::after {
+    content: '/sanjhai_18'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.gmail span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.gmail:hover span::after {
+    content: '/sanjhaiprakash18'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}
+
+.facebook span::after {
+    content: ''; /* Default empty content */
+    display: block;
+    font-size: 21px; /* Adjust as needed */
+    font-weight: 200; /* Adjust as needed */
+    text-align: right;
+    margin-top: 5px; /* Space between main text and hover text */
+    transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
+    opacity: 0; /* Initially hidden */
+    letter-spacing: -1.2px;
+}
+
+.facebook:hover span::after {
+    content: '/sanjhaidomnic'; /* Text to display on hover */
+    opacity: 1; /* Show text */
+}

@@ -3380,10 +3380,10 @@ button {
     margin: 5px;
     background-color: #FFFFFF; /* White background color */
     color: #4BABF9; /* Text color */
-    border-radius: 40px;
+    border-radius: 9px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
+    font-size: 14px;
     border: 0.5px solid #4BABF9;
     transition: background-color 0.3s ease; /* Prompt pill animation */
     letter-spacing: -1.0px;
@@ -3393,14 +3393,14 @@ button {
 
     .prompt-pill.response {
         background-color: #ffffff; /* Light grey background color */
-        border-radius: 20px; /* Rounded corners */
+        border-radius: 9px; /* Rounded corners */
         padding: 8px 15px; /* Padding for content inside the prompt pill */
         margin: 5px; /* Margin between prompt pills */
         color: #4BABF9; /* Text color */
         border: 0.5px solid #4BABF9; /* Border color and width */
         cursor: pointer; /* Cursor style */
         font-family: 'Montserrat', sans-serif; /* Font family */
-        font-size: 15px; /* Font size */
+        font-size: 14px; /* Font size */
         transition: background-color 0.3s ease; /* Prompt pill animation */
     }
 
@@ -3679,3 +3679,55 @@ button {
         opacity: 1;
         transform: translateY(0);
     }
+
+.social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff; /* Set background color to white */
+    border: 2px solid #f0f0f0; /* Set border color to #f0f0f0 */
+    border-radius: 20px;
+    padding: 10px;
+    transition: background-color 0.3s;
+    width: 250px; /* Adjust width as needed */
+}
+
+    .social-link a {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: black;
+        width: 100%;
+    }
+
+    .social-link img.logo-small {
+        width: 60px; /* Ensures all logos fit within the container */
+        height: 60px; /* Ensures all logos fit within the container */
+        border-radius: 50%; /* Makes the image container rounded */
+        object-fit: cover; /* Ensures the image fits well inside the rounded container */
+        margin-right: 10px;
+    }
+
+    .social-link span {
+        font-size: 21px;
+        font-weight: 300;
+        white-space: nowrap; /* Prevents text from wrapping */
+        text-align: left; /* Initially align text to the left */
+        transition: font-size 0.3s, font-weight 0.3s, text-align 0.3s; /* Smooth transition for font changes */
+        letter-spacing:-1.4px;
+    }
+
+    .social-link:hover {
+        background-color: #e0e0e0;
+    }
+
+        .social-link:hover span {
+            font-size: 24px; /* Increase font size on hover */
+            font-weight: bold; /* Make font bold on hover */
+            text-align: right; /* Align text to the right on hover */
+        }

@@ -161,7 +161,7 @@
 
         // Switch statement to determine the message based on the selected section
         switch (section) {
-            case "About Me":
+            case "Can you tell me about yourself?":
                 message = "Hello, I'm Sanjhai.<br><br>" +
                     "With over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics, I bring valuable expertise to the table.<br><br>" +
                     "As a Freelance Business Intelligence Solution Provider at Metricalist, based in the UAE, I've led transformative analytics solutions.<br><br>" +
@@ -170,7 +170,7 @@
                     "I possess technical proficiency in ChatGPT, Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.<br><br>" +
                     "Explore my portfolio for insights into my expertise and how I can add value to your projects.";
                 break;
-            case "Education":
+            case "What is your educational background?":
                 message = "<b>1. Bachelor's Degree in Biotechnology (B.Tech):</b><br><br>" +
                     "- University: Sastra Deemed University, Tanjore<br>" +
                     "- Year of Graduation: 2022<br>" +
@@ -184,25 +184,25 @@
                     "- Year of Completion: 2016<br>" +
                     "- Percentage: <b>87.8%</b>";
                 break;
-            case "Experience":
+            case "What is your professional experience?":
                 message = "I have over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics.";
                 break;
-            case "Portfolio":
+            case "Can I see examples of your work?":
                 message = "My portfolio consists of 16 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
                     "The majority of my projects are created using Microsoft Power BI.<br><br>" +
                     "For a clear view of my projects, please visit the Portfolio section on my website.<br><br>" +
                     "These projects are hosted on the Maven Analytics web platform, where users will be redirected for further exploration.<br>";
                 break;
-            case "Services":
-                message = "Currently, I offer Business Intelligence solutions to clients worldwide, including those in India.<br><br>" +
+            case "What services do you offer?":
+                message = "Currently, I offer Business Intelligence solutions to clients worldwide.<br><br>" +
                     "I am the creator of a product called the Customer Segmentation Dashboard Template, developed using Microsoft Power BI.<br><br>" +
-                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$44</b>.<br><br>" +
+                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$35</b>.<br><br>" +
                     "Users can purchase it through the Services section on my website, which redirects to the Metricalist website.";
                 break;
-            case "Resume":
+            case "Can I view your resume?":
                 message = "Please click on this below link to view or download my resume. Resume Link: <a href='https://drive.google.com/file/d/1cOoCsUIwyNzqVNPDYxGcwnoLtueOnBjC/view' target='_blank'>Resume</a>";
                 break;
-            case "Contact":
+            case "How can I contact you?":
                 message = "Visitors, including recruiters and clients, can contact me through the following methods:<br><br>Email: <a href='mailto:sanjhaiprakash18@gmail.com'>sanjhaiprakash18@gmail.com</a><br><br>Contact Number: <a href='tel:+919003933044'>+91 90039 33044</a><br><br>I also have a contact form available at the bottom of this website for visitors to reach out to me.";
                 break;
             default:
@@ -235,13 +235,13 @@
         var promptPillsContainer = document.createElement('div');
         promptPillsContainer.classList.add('prompt-pills-container');
         promptPillsContainer.innerHTML = `
-<div class="prompt-pill" onclick="displayMessage('About Me')">About Me</div>
-<div class="prompt-pill" onclick="displayMessage('Education')">Education</div>
-<div class="prompt-pill" onclick="displayMessage('Experience')">Experience</div>
-<div class="prompt-pill" onclick="displayMessage('Portfolio')">Portfolio</div>
-<div class="prompt-pill" onclick="displayMessage('Services')">Services</div>
-<div class="prompt-pill" onclick="displayMessage('Contact')">Contact</div>
-<div class="prompt-pill" onclick="displayMessage('Resume')">Resume</div>
+<div class="prompt-pill" onclick="displayMessage('Can you tell me about yourself?')">Can you tell me about yourself?</div>
+<div class="prompt-pill" onclick="displayMessage('What is your educational background?')">What is your educational background?</div>
+<div class="prompt-pill" onclick="displayMessage('What is your professional experience?')">What is your professional experience?</div>
+<div class="prompt-pill" onclick="displayMessage('Can I see examples of your work?')">Can I see examples of your work?</div>
+<div class="prompt-pill" onclick="displayMessage('What services do you offer?')">What services do you offer?</div>
+<div class="prompt-pill" onclick="displayMessage('How can I contact you?')">How can I contact you?</div>
+<div class="prompt-pill" onclick="displayMessage('Can I view your resume?')">Can I view your resume?</div>
 `;
         chatContainer.appendChild(promptPillsContainer);
 

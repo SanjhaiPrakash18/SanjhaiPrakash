@@ -200,7 +200,7 @@
                     "Users can purchase it through the Services section on my website, which redirects to the Metricalist website.";
                 break;
             case "Can I view your resume?":
-                message = "Please click on this below link to view or download my resume. Resume Link: <a href='https://drive.google.com/file/d/1cOoCsUIwyNzqVNPDYxGcwnoLtueOnBjC/view' target='_blank'>Resume</a>";
+                message = "Please click on this below link to view or download my resume. Resume Link: <a href='https://drive.google.com/file/d/1TotwCJhwQ0HIyl8PWZWni3aPub3RL3Xa/view?usp=drive_link' target='_blank'>Resume</a>";
                 break;
             case "How can I contact you?":
                 message = "Visitors, including recruiters and clients, can contact me through the following methods:<br><br>Email: <a href='mailto:sanjhaiprakash18@gmail.com'>sanjhaiprakash18@gmail.com</a><br><br>Contact Number: <a href='tel:+919003933044'>+91 90039 33044</a><br><br>I also have a contact form available at the bottom of this website for visitors to reach out to me.";

@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script>
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out',
+            once: true,
+        });
+    </script>
     <style>
         /* CSS for the navigation links color */
         .nav-link {
@@ -123,7 +130,7 @@
             </div>
         </div>
         <div class="text-overlay">
-            <h2 class="home-text">
+            <h2 class="home-text" style="position:relative;top:280px;">
                 <span id="typewriter-text">
                     <span class="green-text">Hi, I'm Sanjhai<br></span>
                     <span class="black-text">Welcome To My Portfolio!</span>
@@ -131,39 +138,120 @@
                 <span class="cursor">_</span>
             </h2>
             <!-- Add the images here -->
-            <div class="social-links-home">
+            <div class="social-links-home" style="position:relative;top:285px;">
                 <a href="https://www.linkedin.com/in/sanjhaiprakash/" target="_blank"><img src="LinkedIn_Nav_Logo.png" alt="LinkedIn" class="social-logo" width="50" height="50"></a>
-                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank"><img src="Mail_Nav_Logo.png" alt="Mail" class="social-logo" width="50" height="50"></a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sanjhaiprakash18@gmail.com" target="_blank"><img src="Mail_Nav_Logo.png" alt="Mail" class="social-logo" width="50" height="50"></a>
                 <a href="https://www.facebook.com/sanjhaidomnic/" target="_blank"><img src="Facebook_Nav_Logo.png" alt="Facebook" class="social-logo" width="50" height="50"></a>
             </div>
-            <div class="button-container">
+            <div class="button-container" style="position:relative; top:280px;">
                 <a href="#about" class="rounded-button zoom-button reduced-letter-spacing">Get to know me  ➞</a>
                 <span style="margin: 0 20px;"></span>
                 <a href="#projects" class="rounded-button zoom-button reduced-letter-spacing">Check out my work  ➞</a>
             </div>
-            <div class="home-gif-container">
-                <img src="Website Project Scroll.gif" alt="Home Section GIF" style="max-width: 110%; height: auto;">
+
+            <div class="text-container">
+                <div class="text-content">
+                    <p>Let's explore the <span class="portfolio-text">portfolio</span><br>together</p>
+                </div>
+                <div class="text-container-rounded-rectangles">
+                    <div class="text-container-row">
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">EXCEL PROJECT</span>
+                            </div>
+                        </div>
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">POWER BI PROJECT</span>
+                            </div>
+                        </div>
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">SQL PROJECT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-container-row">
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">HTML PROJECT</span>
+                            </div>
+                        </div>
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">CSS PROJECT</span>
+                            </div>
+                        </div>
+                        <div class="text-container-rectangle">
+                            <div class="text-container-small-rectangle"></div>
+                            <div class="project-cont-text-cover">
+                                <span class="project-cont-label">JS PROJECT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-ad-cont-analytics-rectangle">
+                <div class="adrect-wave-shape"></div>
+                <div class="text-ad-content">
+                    <div class="text-ad-number">14 Data</div>
+                    <div class="text-ad-text">Analytics Projects</div>
+                    <div class="text-ad-percentage">Weightage: 87.5%</div>
+                    <div class="text-ad-image-container" style="right:-35px;top:10px;">
+                        <img src="Data Analytics Text Container Logo.png" alt="Data Analytics Logo">
+                    </div>
+                </div>
+            </div>
+            <div class="text-ad-cont-analytics-rectangle" style="position: relative; top: 15px; right: 278px; width: 300px; height: 135px; background: #FCC591;">
+                <div class="adrect-wave-shape" style="height:280px; top:25px;"></div>
+                <div class="text-ad-content">
+                    <div class="text-ad-number" style="right:-75px;">1 Web</div>
+                    <div class="text-ad-text" style="right:-30px;">Development Project</div>
+                    <div class="text-ad-percentage" style="color: #000000;right:20px;top:5px;">Weightage: 6.25%</div>
+                    <div class="text-ad-image-container" style="right:225px;top:-5px;">
+                        <img src="Web Dev Interest.png" alt="Data Analytics Logo">
+                    </div>
+                </div>
+            </div>
+            <div class="text-ad-cont-analytics-rectangle" style="width: 260px; background: #AF99E2; top:-105px; right:610px;">
+                <div class="adrect-wave-shape" style="top:22px;"></div>
+                <div class="text-ad-content">
+                    <div class="text-ad-number" style="right:45px;">1 UI/UX</div>
+                    <div class="text-ad-text" style="right:30px;">Project</div>
+                    <div class="text-ad-percentage" style="right:-5px;color:#ffffff;">Weightage: 6.25%</div>
+                    <div class="text-ad-image-container" style="right: -10px; top: 10px; border: 0.3px solid #E6E6E6;">
+                        <img src="UI Interest Image.png" alt="Data Analytics Logo">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="profile-stats-design-container animate" style="position:relative; top:-370px; right:450px; border-radius:90px;">
-            <div class="tick-circle" style="position:relative; right:-175px; top:-24px; z-index:1;">
+
+        <div class="profile-stats-design-container animate" style="position:relative; top:-370px; right:395px; border-radius:20px;">
+            <div class="tick-circle" style="position:relative; right:-295px; top:-39px; z-index:1;">
                 &#10004; <!-- Unicode checkmark symbol -->
             </div>
-            <div class="profile-stats-design-text" style="font-weight:200;letter-spacing:-1.4px; font-size:22px; text-align:center;position:relative; right:10px;">Profile Stats</div>
+            <div class="profile-stats-design-text" style="font-weight:200;letter-spacing:-1.6px; font-size:23px; text-align:center;position:relative; right:20px;">Discovered my <span style="font-size: 30px; font-weight: 900; letter-spacing: -2.7px; color: #000000;">Story?</span></div>
         </div>
 
-        <div class="profile-stats-design-container animate" style="position:relative; top:-210px; right:610px; box-shadow: 0 0 40px rgba(237, 81, 104, 0.1); z-index:1;">
-            <div class="portfolio-tick-circle" style="position: relative; right: 10px; top: -24px; background-color: #ED5168;">
+        <div class="profile-stats-design-container animate" style="position:relative; top:-210px; right:680px; box-shadow: 0 0 40px rgba(237, 81, 104, 0.1); z-index:1;border-radius:20px;">
+            <div class="portfolio-tick-circle" style="position: relative; right: 10px; top: -44px; background-color: #ED5168;">
                 &#10084; <!-- Unicode heart symbol -->
             </div>
-            <div class="profile-stats-design-text" style="font-weight:200;letter-spacing:-1.4px; font-size:22px; text-align:center; position:relative; right:10px;">Portfolio Projects</div>
+            <div class="profile-stats-design-text" style="font-weight:200;letter-spacing:-1.6px; font-size:23px; text-align:center; position:relative; right:10px;">Explored my <br><span style="font-size: 30px; font-weight: 900; letter-spacing: -2.7px; color: #000000;">Portfolio?</span></div>
         </div>
 
-        <div class="profile-stats-design-container animate" style="position:relative; top:-520px; right:850px; box-shadow: 0 0 40px rgba(119, 221, 134, 0.1); z-index:1;">
-            <div class="service-tick-circle" style="position: relative; right: 10px; top: -24px; color: white;">
+        <div class="profile-stats-design-container animate" style="position: relative; top: -520px; right: 955px; box-shadow: 0 0 40px rgba(119, 221, 134, 0.1); border-radius: 20px; z-index: 1; border: 0.05px solid #E6E6E6; ">
+            <div class="service-tick-circle" style="position: relative; right: 10px; top: -45px; color: white;">
                 <img src="Thumbs_Up.png" alt="Thumbs Up" style="width: 30px; height: 30px;">
             </div>
-            <div class="profile-stats-design-text" style="font-weight:200;letter-spacing:-1.4px; font-size:22px; text-align:center; position:relative; right:10px;">Services Provided</div>
+            <div class="profile-stats-design-text" style="font-weight:200; letter-spacing:-1.6px; font-size:23px; text-align:center; position:relative; right:10px;">
+                Interested <br> in my <span style="font-size: 30px; font-weight: 900; letter-spacing: -2.7px; color: #000000;">Services?</span>
+            </div>
         </div>
         <div class="homedesign-chat-container">
             <!-- Message box 1 -->
@@ -369,7 +457,7 @@
                                 <span style="font-weight: bold;">&#8635;</span> <!-- Forward symbol -->
                             </button>
                         </div>
-                        <p style="letter-spacing:-1.2px;font-size:16px; position:relative; top:-70px;">I specialize in data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation and UI/UX.</p>
+                        <p style="letter-spacing:-1.2px;font-size:16px; position:relative; top:-70px;">I specialize in data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development and ui/ux.</p>
                     </div>
                 </div>
             </div>
@@ -447,7 +535,7 @@
         </div>
     </section>
 
-    <section id="visual-experience-journey" style="padding-bottom:0px;">
+    <section id="visual-experience-journey" style="padding-bottom: 0px;">
         <div class="section-heading" style="font-weight: 900; font-size: 55px; letter-spacing: -4.8px; text-align: center; margin-bottom: 320px; color: #000000; position: relative; top: -550px; right: 340px;">
             Unfolding My <span style="font-weight: 100; color: #61C7C9; z-index: -1;margin-bottom:20px;">Experience</span>
         </div>
@@ -680,66 +768,128 @@
     </section>
 
     <section id="areas-of-interest">
-        <div class="statement" style="font-weight: 900; font-size: 65px; letter-spacing: -4.8px; margin-bottom: 15px;">
-            What Piques My <span style="font-weight: 200; color: #77DD86;">Interest</span> ?
+        <div class="statement" style="font-weight: 900; font-size: 65px; letter-spacing: -4.8px; margin-bottom: 15px; right: 100px;">
+            What Piques My <span style="font-weight: 200; color: #77DD86;">Interest</span>?
         </div>
         <div class="creative-line" style="font-weight: 300; font-size: 24px; letter-spacing: -1.5px; margin-bottom: 60px;">
             Discover the realms of curiosity that fuel my passion and drive.
         </div>
-        <div class="interests-row">
-            <div class="interest">
-                <div class="interest-round-rectangle interest-1"></div>
-                <img src="Data Analysis Logo.jpg" alt="Image 1" style="width: 200px; height: auto; margin-left: 2px; margin-top:10px;">
-                <h3 style="margin-top: 10px; font-size: 22px; letter-spacing: -1.0px; font-weight: 300;">DATA ANALYSIS</h3>
-            </div>
-            <div class="interest">
-                <div class="interest-round-rectangle interest-2"></div>
-                <img src="Data Visualization Logo.png" alt="Image 2" style="width: 170px; height: auto; margin-right: -3px; margin-top:12px;">
-                <h3 style="margin-left: -8px; font-size: 22px; letter-spacing: -1.0px; font-weight: 300;">DATA VISUALIZATION</h3>
-            </div>
-            <div class="interest">
-                <div class="interest-round-rectangle interest-3"></div>
-                <img src="Business Intelligence Logo.jpg" alt="Image 3" style="width: 188px; height: auto; margin-left: 2px;">
-                <h3 style="font-size: 22px; letter-spacing: -1.0px; font-weight: 300;">BUSINESS INTELLIGENCE</h3>
+
+        <!-- Slide Filter -->
+        <div class="SlideFilter" style="display: flex; justify-content: center; margin-bottom: 30px;">
+            <div class="FilterContainer" style="display: flex; background-color: #ffffff; border-radius: 60px; padding: 2px; max-width: 50%; border: 0.5px solid #E6E6E6;">
+                <a href="#analyze" class="AOIFilterOption" data-filter="Analyze" style="padding: 10px 20px; border-radius: 25px; color: #ffffff; background-color: #77DD86; cursor: pointer; font-size: 18px; letter-spacing: -1.5px; text-decoration: none;">Analyze</a>
+                <a href="#automate" class="AOIFilterOption" data-filter="Automate" style="padding: 10px 20px; border-radius: 25px; color: #000000; cursor: pointer; font-size: 18px; letter-spacing: -1.5px; text-decoration: none;">Automate</a>
+                <a href="#designdevelop" class="AOIFilterOption" data-filter="DesignDevelop" style="padding: 10px 20px; border-radius: 25px; color: #000000; cursor: pointer; font-size: 18px; letter-spacing: -1.5px; text-decoration: none;">Design and Develop</a>
             </div>
         </div>
-        <div class="interests-row">
-            <div class="interest">
-                <div class="interest-round-rectangle interest-4"></div>
-                <img src="Data Management Logo.jpg" alt="Image 4" style="width: 128px; height: auto; margin-right: 2px;">
-                <h3 style="font-size: 22px; letter-spacing: -1.0px; font-weight: 300;">DATA MANAGEMENT</h3>
+
+        <!-- Interest Sections -->
+        <section id="analyze" class="InterestSection">
+            <!-- First Row of Rounded Rectangles -->
+            <div class="InterestRectangleContainer">
+                <div class="InterestRoundedRectangle" style="position: relative; right: -190px;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle" style="font-size: 40px; letter-spacing: -3.0px; font-weight: 700;">Data Analysis</div>
+                        <div class="InterestSubStatement">Turning raw data into useful insights through careful examination and interpretation.</div>
+                        <div class="InterestImageContainer">
+                            <img src="Customer Segmentation Image.png" alt="Data Analysis">
+                        </div>
+                    </div>
+                </div>
+                <div class="InterestRoundedRectangle" style="position: relative; right: -180px; top: 115px;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle">Data Visualization</div>
+                        <div class="InterestSubStatement">Presenting complex data in visual formats for clear understanding and insights.</div>
+                        <div class="InterestImageContainer">
+                            <img src="Data Visualization Interest Image.png" alt="Data Visualization">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Row of Rounded Rectangles -->
+                <div class="InterestRectangleContainer">
+                    <div class="InterestRoundedRectangle" style="position: relative; right: -190px; top: 18px;">
+                        <div class="InterestContent">
+                            <div class="InterestTitle">Business Intelligence</div>
+                            <div class="InterestSubStatement">Using data analysis to uncover actionable insights that drive strategic decision-making within organizations.</div>
+                            <div class="InterestImageContainer">
+                                <img src="BI Interest Image.png" alt="Business Intelligence">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="InterestRoundedRectangle" style="position: relative; right: -180px; top: 59px;">
+                        <div class="InterestContent">
+                            <div class="InterestTitle" style="font-size: 40px; letter-spacing: -3.0px; font-weight: 700;">Data Management</div>
+                            <div class="InterestSubStatement">Organizing and controlling data to ensure its accuracy, accessibility, and reliability for effective decision-making and operational efficiency.</div>
+                            <div class="InterestImageContainer">
+                                <img src="Data Management interest Image.png" alt="Data Management">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="interest">
-                <div class="interest-round-rectangle interest-5"></div>
-                <img src="Data Flow Automation Logo.jpg" alt="Image 5" style="width: 180px; height: auto; margin-left: 3px;">
-                <h3 style="font-size: 22px; letter-spacing: -1.0px; font-weight: 300;" margin-left: -8px;">DATA FLOW AUTOMATION</h3>
+        </section>
+
+        <section id="automate" class="InterestSection">
+            <!-- Third Row of Rounded Rectangles -->
+            <div class="InterestRectangleContainer">
+                <div class="InterestRoundedRectangle" style="position: relative; right: -190px; top: -30px;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle" style="font-size: 40px; letter-spacing: -3.0px; font-weight: 700;">Data Flow Automation</div>
+                        <div class="InterestSubStatement">Streamlining the movement and processing of data across systems and workflows to enhance efficiency and accuracy.</div>
+                        <div class="InterestImageContainer">
+                            <img src="Data Flow Automation Interest.png" alt="Data Flow Automation">
+                        </div>
+                    </div>
+                </div>
+                <div class="InterestRoundedRectangle" style="position: relative; right: -180px; top: 79px;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle">Work Flow Automation</div>
+                        <div class="InterestSubStatement">Automating repetitive tasks and processes to improve efficiency and streamline operations within organizations.</div>
+                        <div class="InterestImageContainer">
+                            <img src="Workflow Automation Interest.png" alt="Work Flow Automation">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="interest">
-                <div class="interest-round-rectangle interest-6"></div>
-                <img src="Workflow Automation Logo.jpg" alt="Image 6" style="width: 240px; height: auto; margin-left: -22px;">
-                <h3 style="font-size: 22px; letter-spacing: -1.0px; font-weight: 300;" margin-top: -5px;">WORKFLOW AUTOMATION</h3>
+        </section>
+
+        <section id="designdevelop" class="InterestSection">
+            <!-- Fourth Row of Rounded Rectangles -->
+            <div class="InterestRectangleContainer">
+                <div class="InterestRoundedRectangle" style="position: relative; right: -190px; top: -10px;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle">UI/UX</div>
+                        <div class="InterestSubStatement">Designing intuitive and engaging user interfaces and experiences to enhance usability and satisfaction.</div>
+                        <div class="InterestImageContainer">
+                            <img src="UI Interest Image.png" alt="UI/UX">
+                        </div>
+                    </div>
+                </div>
+                <div class="InterestRoundedRectangle" style="position: relative; right: -180px; top: 42px; max-width: 25%;">
+                    <div class="InterestContent">
+                        <div class="InterestTitle" style="font-size: 40px; letter-spacing: -3.0px; font-weight: 700;">Web Development</div>
+                        <div class="InterestSubStatement">Building and maintaining websites to create functional, user-friendly, and visually appealing online experiences.</div>
+                        <div class="InterestImageContainer" style="position: relative; width: 95%; height: auto;">
+                            <img src="Web Dev Interest.png" alt="Web Development">
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="interests-row">
-            <div class="interest">
-                <div class="interest-round-rectangle interest-7"></div>
-                <img src="UIUX Logo.png" alt="Image 7" style="width: 160px; height: auto; margin-right: 6px; margin-top:-8px;">
-                <h3 style="font-size: 22px; letter-spacing: -1.0px; font-weight: 300;margin-left: -9px; margin-top:-5px;">UI/UX</h3>
-            </div>
-        </div>
+        </section>
     </section>
 
     <section id="projects">
         <div class="project-section">
-            <div style="display: inline-block; padding: 30px; border-radius: 40px; background: #ECFADC; width: 1300px; position: relative; border: 1px solid #E7FFCE; ">
-                <span style="font-weight: 900; font-size: 62px; color: #000000; letter-spacing: -4.8px; line-height: 1.2; display: block; position: relative; right: 10px; text-align: right;">
+            <div style="display: inline-block; padding: 30px; border-radius: 40px; background: #77DD86; width: 1300px; position: relative; border: 1px solid #E7FFCE; ">
+                <span style="font-weight: 900; font-size: 64px; color: #000000; letter-spacing: -4.8px; line-height: 1.2; display: block; position: relative; right: 10px; text-align: right;">
                     Which <span style="font-weight: 200; color: #000000; ">Projects</span> Shape<br>
                     <span style="display: block;">My Story ?</span>
                 </span>
                 <div style="position: absolute; top: 49.95%; left: 25.4%; transform: translate(-50%, -50%); width: 690px; height: 285px; background-color: rgba(119, 221, 134, 0.05); border-top-left-radius: 8%; border-bottom-left-radius: 8%; border-top-right-radius: 45%; border-bottom-right-radius: 45%;"></div>
-                <img src="Proj Tag.png" alt="Project Tag" class="transparent-workingman-image" style="position: absolute; top: 30px; right: 710px; width: 230px; height: auto;">
                 <img src="Wall_Clock_Image-removebg.png" alt="Project Tag" class="transparent-wallclock-image" style="position: absolute; top: 10px; right: 730px; width: 60px; height: auto;">
-                <img src="Workspace Background removebg.png" alt="Project Tag" class="transparent-workspace-image" style="position: absolute; top: 10px; right: 980px; width: 310px; height: auto;">
+                <img src="Workspace Background removebg.png" alt="Project Tag" class="transparent-workspace-image" style="position: absolute; top: 10px; right: 980px; width: 360px; height: auto;">
                 <div class="creative-line" style="font-weight: 300; font-size: 23px; letter-spacing: -1.5px; margin-top: 20px; margin-bottom: 0px; top: -10px; position: relative; right: 10px; text-align: right; color: #000000;">
                     Explore my digital tapestry, where every project <br> is a brushstroke weaving the canvas of my journey.
                 </div>
@@ -844,61 +994,61 @@
                     </div>
                 </a>
             </div>
+        </div>
+        <div class="row">
+            <div class="project-container">
+                <a href="https://www.mavenanalytics.io/project/6279" target="_blank">
+                    <div class="project-img-container">
+                        <img src="Telecom Customer Churn Analysis.png" alt="Project-4" class="project-image">
+                    </div>
+                    <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">TELECOM CUSTOMER CHURN ANALYSIS</h3>
+                    <p class="project-date">Jun 2023</p>
+                    <div class="technology-label">DATA ANALYTICS</div>
+                    <div class="technology-label-two">SQL</div>
+                    <div class="technology-label-two">MICROSOFT POWER BI</div>
+                    <div class="project-desc move-right-telecom">
+                        <p style="letter-spacing: -0.8px; font-size: 17px;">This project involves conducting customer churn analysis within the telecommunication industry.</p>
+                    </div>
+                    <div class="project-arrow-container">
+                        <div class="project-arrow"></div>
+                    </div>
+                </a>
             </div>
-            <div class="row">
-                <div class="project-container">
-                    <a href="https://www.mavenanalytics.io/project/6279" target="_blank">
-                        <div class="project-img-container">
-                            <img src="Telecom Customer Churn Analysis.png" alt="Project-4" class="project-image">
-                        </div>
-                        <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">TELECOM CUSTOMER CHURN ANALYSIS</h3>
-                        <p class="project-date">Jun 2023</p>
-                        <div class="technology-label">DATA ANALYTICS</div>
-                        <div class="technology-label-two">SQL</div>
-                        <div class="technology-label-two">MICROSOFT POWER BI</div>
-                        <div class="project-desc move-right-telecom">
-                            <p style="letter-spacing: -0.8px; font-size: 17px;">This project involves conducting customer churn analysis within the telecommunication industry.</p>
-                        </div>
-                        <div class="project-arrow-container">
-                            <div class="project-arrow"></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-container">
-                    <a href="https://www.mavenanalytics.io/project/5835" target="_blank">
-                        <div class="project-img-container">
-                            <img src="Consumer Goods Logo.png" alt="Project 7" class="project-image">
-                        </div>
-                        <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">CONSUMER GOODS AD-HOC ANALYSIS</h3>
-                        <p class="project-date">Feb 2023</p>
-                        <div class="technology-label">DATA ANALYTICS</div>
-                        <div class="technology-label-two">SQL</div>
-                        <div class="project-desc move-right-consumer">
-                            <p style="letter-spacing: -0.8px; font-size: 17px;">This project primarily focuses on conducting dynamic ad-hoc analysis within the consumer goods industry, employing advanced technical methodologies to extract actionable insights from diverse and real-time datasets.</p>
-                        </div>
-                        <div class="project-arrow-container">
-                            <div class="project-arrow"></div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-container">
-                    <a href="https://www.mavenanalytics.io/project/5804" target="_blank">
-                        <div class="project-img-container">
-                            <img src="E Commerce Image.png" alt="Project-5" class="project-image">
-                        </div>
-                        <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">E-COMMERCE SALES ANALYSIS</h3>
-                        <p class="project-date">Mar 2023</p>
-                        <div class="technology-label">DATA ANALYTICS</div>
-                        <div class="technology-label-two">MICROSOFT POWER BI</div>
-                        <div class="project-desc move-right-ecommercesales">
-                            <p style="letter-spacing: -0.8px; font-size: 17px;">This project revolves around conducting fundamental e-commerce analysis, encompassing a comprehensive examination of key performance indicators (KPIs), customer behavior, market trends, and revenue metrics within the e-commerce domain.</p>
-                        </div>
-                        <div class="project-arrow-container">
-                            <div class="project-arrow"></div>
-                        </div>
-                    </a>
-                </div>
+            <div class="project-container">
+                <a href="https://www.mavenanalytics.io/project/5835" target="_blank">
+                    <div class="project-img-container">
+                        <img src="Consumer Goods Logo.png" alt="Project 7" class="project-image">
+                    </div>
+                    <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">CONSUMER GOODS AD-HOC ANALYSIS</h3>
+                    <p class="project-date">Feb 2023</p>
+                    <div class="technology-label">DATA ANALYTICS</div>
+                    <div class="technology-label-two">SQL</div>
+                    <div class="project-desc move-right-consumer">
+                        <p style="letter-spacing: -0.8px; font-size: 17px;">This project primarily focuses on conducting dynamic ad-hoc analysis within the consumer goods industry, employing advanced technical methodologies to extract actionable insights from diverse and real-time datasets.</p>
+                    </div>
+                    <div class="project-arrow-container">
+                        <div class="project-arrow"></div>
+                    </div>
+                </a>
             </div>
+            <div class="project-container">
+                <a href="https://www.mavenanalytics.io/project/5804" target="_blank">
+                    <div class="project-img-container">
+                        <img src="E Commerce Image.png" alt="Project-5" class="project-image">
+                    </div>
+                    <h3 class="project-title" style="font-weight: 900; font-size: 20px; letter-spacing: -1.0px;">E-COMMERCE SALES ANALYSIS</h3>
+                    <p class="project-date">Mar 2023</p>
+                    <div class="technology-label">DATA ANALYTICS</div>
+                    <div class="technology-label-two">MICROSOFT POWER BI</div>
+                    <div class="project-desc move-right-ecommercesales">
+                        <p style="letter-spacing: -0.8px; font-size: 17px;">This project revolves around conducting fundamental e-commerce analysis, encompassing a comprehensive examination of key performance indicators (KPIs), customer behavior, market trends, and revenue metrics within the e-commerce domain.</p>
+                    </div>
+                    <div class="project-arrow-container">
+                        <div class="project-arrow"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
         <div class="row">
             <div class="project-container">
                 <a href="https://www.mavenanalytics.io/project/5824" target="_blank">
@@ -1130,7 +1280,7 @@
                     </p>
                     <div>
                         <a href="https://app.powerbi.com/view?r=eyJrIjoiN2IwNjgyZWYtNGMyNC00MTZhLTg3NGEtY2VkZGI5NDc1YWIwIiwidCI6ImY0ZGU2ZjdiLTAxNmYtNGZkOC05NmU0LWU3MDNiZDhiYjUyMSJ9" class="view-demo-button" title="Click here to view demo" target="_blank">Demo</a>
-                        <a href="https://metricalist.com/powerbi-solutions/customer-segmentation-analysis-dashboard-template/" class="buy-now-button" title="Click here to buy now" target="_blank">$35 →</a>
+                        <a href="https://metricalist.com/powerbi-solutions/customer-segmentation-analysis-dashboard-template/" class="buy-now-button" title="Click here to buy now" target="_blank">$10 →</a>
                     </div>
                     <div class="rounded-rectangle-service">
                         <span style="color: #77DD86; font-size: 14px;">DATA  ANALYTICS</span>
@@ -1236,7 +1386,7 @@
             <div style="font-weight: 900; font-size: 55px; color: #000000; letter-spacing: -4.8px; text-align: left; margin-bottom: 20px;">
                 Ready to <span style="font-weight: 200; color: #77DD86;">Collaborate</span> on Your Success? 🤝
             </div>
-            <div style="font-size: 23px; color: #777; text-align: left; margin-left:6px; letter-spacing: -1.0px; font-weight: 300; margin-bottom: 60px;">Let's shape your success journey together. 🌟</div>
+            <div style="font-size: 23px; color: #777; text-align: left; margin-left:6px; letter-spacing: -1.0px; font-weight: 300; margin-bottom: 60px;">Let's shape your success journey together.</div>
         </div>
         <div class="form-overlay">
             <form action="https://api.web3forms.com/submit" method="POST">
@@ -1274,7 +1424,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d979.7332665714313!2d78.66739526953471!3d10.816434316611762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTDCsDQ4JzU5LjIiTiA3OMKwNDAnMDQuOSJF!5e0!3m2!1sen!2sin!4v1718094509250!5m2!1sen!2sin" width="1350" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
             </div>
         </div>
         <div style="margin-bottom: 25px;"></div>
@@ -1361,7 +1511,8 @@
             <div class="prompt-pill response" onclick="displayMessage('Can you tell me about yourself?')">Can you tell me about yourself?</div>
             <div class="prompt-pill response" onclick="displayMessage('What is your educational background?')">What is your educational background?</div>
             <div class="prompt-pill response" onclick="displayMessage('What is your professional experience?')">What is your professional experience?</div>
-            <div class="prompt-pill response" onclick="displayMessage('Can I see examples of your work?')">Can I see examples of your work?</div>
+            <div class="prompt-pill response" onclick="displayMessage('What are your key skills and areas of specialization?')">What are your key skills and areas of specialization?</div>
+            <div class="prompt-pill response" onclick="displayMessage('Can I see samples of your work?')">Can I see samples of your work?</div>
             <div class="prompt-pill response" onclick="displayMessage('What services do you offer?')">What services do you offer?</div>
             <div class="prompt-pill response" onclick="displayMessage('How can I contact you?')">How can I contact you?</div>
             <div class="prompt-pill response" onclick="displayMessage('Can I view your resume?')">Can I view your resume?</div>

@@ -17,7 +17,7 @@ header {
     width: 99%;
     overflow-x: hidden;
     transition: background-color 0.3s;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Adjust shadow opacity */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.025); /* Adjust shadow opacity */
 }
 
     header h1 {
@@ -169,7 +169,7 @@ footer {
         top: 0; /* Position the pseudo-element vertically at 50% from the top */
         left: 0; /* Position the pseudo-element at the left edge */
         width: 100%; /* Make the line span the entire width of the footer */
-        height: 1px; /* Set the height of the line */
+        height: 0.8px; /* Set the height of the line */
         background-color: #B5B6BA; /* Set the color of the line */
         opacity: 0.5; /* Adjust the opacity as needed */
     }
@@ -255,7 +255,7 @@ button[type="submit"] {
 /* Home section styles */
 #home {
     position: relative;
-    height: 140vh;
+    height: 170vh;
     width: 100%;
     overflow: hidden;
     background-color: #FFFFFF; /* Change background color to white */
@@ -702,8 +702,8 @@ h2.home-text {
 }
 
 .tick-circle {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: linear-gradient(to right, #49ABF9, #68D3E7);
     display: flex;
@@ -716,8 +716,8 @@ h2.home-text {
 }
 
 .portfolio-tick-circle {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: #ED5168;
     display: flex;
@@ -729,8 +729,8 @@ h2.home-text {
 }
 
 .service-tick-circle {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     background: #77DD86;
     display: flex;
@@ -742,8 +742,8 @@ h2.home-text {
 }
 
 .tick {
-    width: 10px;
-    height: 10px;
+    width: 14px;
+    height: 14px;
     background-color: #FFFFFF; /* Change border to background-color */
     border-radius: 50%;
 }
@@ -2302,7 +2302,7 @@ button {
     bottom: 20px;
     right: 20px;
     width: 300px;
-    height: 400px;
+    height: 450px;
     background-color: #77DD86;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -2392,44 +2392,9 @@ button {
 
 /* CSS for Areas of Interest section */
 #areas-of-interest {
-    padding: 50px 0;
+    padding: 20px 0;
     text-align: center;
-}
-
-.interests-row {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    margin-bottom: 20px; /* Add margin between rows */
-    flex-wrap: wrap; /* Allow items to wrap to the next line if necessary */
-}
-
-.interest {
-    flex: 0 0 calc(33.33% - 20px); /* Each interest takes up one-third of the row with spacing */
-    margin-bottom: 20px;
-    max-width: 200px; /* Set a maximum width for each item */
-}
-
-    .interest img {
-        width: 100%; /* Make the image width fill its container */
-        height: auto; /* Maintain the aspect ratio */
-        border-radius: 8px;
-        margin-bottom: 10px;
-    }
-
-    .interest h3 {
-        font-size: 20px;
-        margin: 0;
-    }
-
-/* Common styles for all elements */
-.interests-row {
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    margin-bottom: 160px; /* Add space below the section */
 }
 
 /* Styles for the statement and creative line */
@@ -2461,9 +2426,10 @@ button {
 }
 
     .interest h3 {
-        font-size: 22px;
-        letter-spacing: -1.0px;
-        font-weight: 300;
+        font-size: 30px;
+        letter-spacing: -3.0px;
+        font-weight: 700;
+        text-align: left;
     }
 
 /* Revealed class for interests */
@@ -2551,7 +2517,7 @@ button {
     padding: 5px 10px;
     background-color: #1DBF73;
     color: #FFFFFF;
-    border-radius: 20px;
+    border-radius: 8px;
     border: 1px solid #1DBF73;
     margin-bottom: 10px; /* Adjust margin as needed */
     font-size: 12px; /* Adjust the font size as needed */
@@ -2562,7 +2528,7 @@ button {
     padding: 5px 10px;
     background-color: #FFFFFF;
     color: #1DBF73;
-    border-radius: 20px;
+    border-radius: 8px;
     border: 1px solid #77DD86;
     margin-bottom: 10px; /* Adjust margin as needed */
     font-size: 12px; /* Adjust the font size as needed */
@@ -2632,7 +2598,7 @@ button {
     box-sizing: border-box;
     visibility: visible; /* Default to visible */
     position: relative; /* Ensure the position is relative */
-    border-radius: 20px; /* Adjust the border-radius as needed for the desired roundness */
+    border-radius: 40px; /* Adjust the border-radius as needed for the desired roundness */
     background-color: white;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); /* Adjust the box-shadow values for the desired drop shadow effect */
     overflow: hidden; /* Ensures that the shadow is applied to the rounded container */
@@ -3227,17 +3193,45 @@ button {
     opacity: 1; /* Show the element */
 }
 
+/* Chatbox container */
 .chatbox {
     position: fixed;
-    bottom: 20px;
+    bottom: 40px;
     right: 20px;
     width: 300px;
-    height: 250px;
-    background-color: #FFFFFF;
-    border-radius: 140px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
-    font-family: 'Montserrat', sans-serif;
-    padding-bottom: 0;
+    height: 0; /* Start with height 0 */
+    background-color: #77DD86;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+    display: none; /* Hidden by default */
+    transition: all 0.3s ease;
+    overflow: hidden; /* Prevent content overflow */
+    opacity: 0; /* Start with opacity 0 */
+}
+
+    /* Chatbox open state */
+    .chatbox.open {
+        display: block; /* Display the chatbox */
+        height: 450px; /* Full height */
+        opacity: 1; /* Full opacity */
+        animation: openChatbox 0.5s ease-in-out forwards; /* Apply the keyframe animation */
+        bottom: 40px;
+    }
+
+/* Keyframe animations */
+@keyframes openChatbox {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .chat-header {
@@ -3452,7 +3446,7 @@ button {
 .scroll-to-bottom {
     position: fixed;
     bottom: 40px; /* Adjust the bottom position */
-    right: 186px; /* Adjust the right position */
+    right: 170px; /* Adjust the right position */
     width: 30px; /* Set equal width and height for a circular shape */
     height: 30px;
     background-color: #FFFFFF; /* Button background color */
@@ -3719,7 +3713,7 @@ button {
         white-space: nowrap; /* Prevents text from wrapping */
         text-align: left; /* Initially align text to the left */
         transition: font-size 0.3s, font-weight 0.3s, text-align 0.3s; /* Smooth transition for font changes */
-        letter-spacing:-1.4px;
+        letter-spacing: -1.4px;
     }
 
     .social-link:hover {
@@ -3824,7 +3818,7 @@ button {
     .facebook:hover span {
         color: #ffffff !important; /* Change text color on hover */
         font-size: 33px !important; /* Increase font size on hover */
-        letter-spacing:-2.8px;
+        letter-spacing: -2.8px;
     }
 
 .linkedin span::after {
@@ -3836,7 +3830,7 @@ button {
     margin-top: 5px; /* Space between main text and hover text */
     transition: content 0.3s, opacity 0.3s; /* Smooth transition for content and opacity */
     opacity: 0; /* Initially hidden */
-    letter-spacing:-1.2px;
+    letter-spacing: -1.2px;
 }
 
 .linkedin:hover span::after {
@@ -3961,4 +3955,351 @@ button {
 .facebook:hover span::after {
     content: '/sanjhaidomnic'; /* Text to display on hover */
     opacity: 1; /* Show text */
+}
+
+.InterestRoundedRectangle {
+    border-radius: 40px;
+    border: 1px solid #E6E6E6;
+    padding: 20px;
+    text-align: left;
+    flex: 1;
+    margin: 0 10px;
+    max-width: 25%;
+    box-sizing: border-box;
+    background: #ffffff;
+    position: relative;
+}
+
+.InterestContent .InterestTitle {
+    font-size: 30px;
+    letter-spacing: -3.0px;
+    font-weight: 300;
+    color: #000000;
+}
+
+.InterestContent .InterestSubStatement {
+    color: #C5C5C5;
+    font-size: 19.5px;
+    letter-spacing: -1.4px;
+    font-weight: 300;
+}
+
+.InterestImageContainer {
+    margin-top: 15px;
+    width: 90%; /* Width less than the rounded rectangle's width */
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+    margin-left: auto; /* Center the container within the parent */
+    margin-right: auto; /* Center the container within the parent */
+}
+
+    .InterestImageContainer img {
+        width: 110%;
+        height: auto;
+        display: block;
+        border-radius: 30px; /* Optional: Add some border radius to images */
+    }
+
+.InterestRectangleContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.InterestSection.active {
+    display: block; /* Show active section */
+}
+
+.AOIFilterOption.active {
+    background-color: #77DD86;
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.AOIFilterOption:hover {
+    background-color: #77DD86;
+    color: #ffffff;
+    font-weight: 900;
+}
+
+/* Ensure the SlideFilter is sticky and positioned correctly */
+.SlideFilter {
+    position: sticky;
+    top: 95px; /* Adjust based on your design */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.text-container {
+    background-color: #0D1117;
+    border-radius: 60px;
+    padding: 50px 70px;
+    margin: 20px auto;
+    max-width: 73%;
+    text-align: left;
+    position: relative;
+    right: 96px;
+    top: 370px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+    .text-container::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 330px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0));
+        border-radius: 0 0 60px 60px;
+        pointer-events: none;
+    }
+
+.text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .text-content p {
+        color: #FFFFFF;
+        font-weight: 800;
+        letter-spacing: -3.8px;
+        margin: 0;
+        font-size: 72px;
+        max-width: 100%;
+        word-wrap: break-word;
+        top: -20px;
+    }
+
+.portfolio-text {
+    font-weight: 200;
+}
+
+.text-container-rounded-rectangles {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.text-container-row {
+    display: flex;
+    gap: 40px;
+}
+
+.text-container-rectangle {
+    width: 186px;
+    height: 190px;
+    border: 0.8px solid #ffffff;
+    border-radius: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform: rotate(-25deg);
+    animation: slide-loop 18.2s linear infinite; /* Adjust the timing as per your requirement */
+    animation-fill-mode: both; /* Ensures the element stays in its final state after animation */
+}
+
+@keyframes slide-loop {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%) rotate(-25deg); /* Start off-screen from the top */
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(0) rotate(-25deg); /* Slide to the original position */
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(450px) rotate(-25deg); /* Move further down and fade out */
+    }
+}
+
+.text-container-rectangle:nth-child(1) {
+    animation-delay: 0s; /* Delay for the first rectangle */
+}
+
+.text-container-rectangle:nth-child(2) {
+    animation-delay: 3.2s; /* Delay for the second rectangle (3.2s includes 2s slide down + 1.2s gap) */
+}
+
+.text-container-rectangle:nth-child(3) {
+    animation-delay: 6.4s; /* Delay for the third rectangle */
+}
+
+.text-container-rectangle:nth-child(4) {
+    animation-delay: 9.6s; /* Delay for the fourth rectangle */
+}
+
+.text-container-rectangle:nth-child(5) {
+    animation-delay: 12.8s; /* Delay for the fifth rectangle */
+}
+
+.text-container-rectangle:nth-child(6) {
+    animation-delay: 16s; /* Delay for the sixth rectangle */
+}
+
+.text-container-small-rectangle {
+    width: 140px;
+    height: 135px;
+    border: 0.8px solid #ffffff;
+    border-radius: 20px;
+    background-color: transparent;
+    position: relative;
+    top: 6px;
+}
+
+.text-ad-cont-analytics-rectangle {
+    border-radius: 40px;
+    padding: 20px;
+    margin: 20px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 310px;
+    height: 110px;
+    background-color: #77DD86;
+    top: 130px;
+    right: 670px;
+    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.08);
+    opacity: 0; /* Initially set opacity to 0 */
+    animation: slideAndFade 10s ease-in-out infinite;
+    overflow: hidden; /* Ensure the wavy shape stays within the rectangle */
+}
+
+.adrect-wave-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255, 255, 255, 0.5)" fill-opacity="1" d="M0,96L30,120C60,144,120,192,180,186.7C240,181,300,139,360,106.7C420,75,480,53,540,80C600,107,660,181,720,192C780,203,840,149,900,128C960,107,1020,117,1080,160C1140,203,1200,277,1260,256C1320,235,1380,117,1410,58.7L1440,0L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>') repeat-x;
+    background-size: contain;
+    animation: moveWave 4s linear infinite;
+    opacity: 0.5; /* Adjust opacity as needed */
+}
+
+@keyframes moveWave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes slideAndFade {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    5% {
+        transform: translateX(-100%);
+        opacity: 0.1; /* Adjust opacity gradually */
+    }
+
+    20%, 60% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    60.01%, 70% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    80%, 100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.text-ad-cont-analytics-rectangle:nth-child(1) {
+    animation-delay: 0s; /* Delay for the first rectangle */
+}
+
+.text-ad-cont-analytics-rectangle:nth-child(2) {
+    animation-delay: 3s; /* Delay for the second rectangle */
+}
+
+.text-ad-cont-analytics-rectangle:nth-child(3) {
+    animation-delay: 6s; /* Delay for the third rectangle */
+}
+
+.text-ad-content {
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Ensure text content is above the wave */
+}
+
+.text-ad-number {
+    font-size: 50px;
+    font-weight: 900;
+    letter-spacing: -3.8px;
+    position: relative;
+    right: 75px;
+}
+
+.text-ad-text {
+    letter-spacing: -2.0px;
+    font-size: 28px;
+    position: relative;
+    right: 17px;
+    font-weight: 300;
+    top: -4px;
+}
+
+.text-ad-percentage {
+    margin-top: 10px;
+    font-size: 32px;
+    font-weight:300;
+    color: #ffffff;
+    letter-spacing: -2.5px;
+    position: relative;
+    right: -25px;
+    top: -5px;
+}
+
+.text-ad-image-container {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    top: -15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
+}
+
+    .text-ad-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.project-cont-text-cover {
+    border: 0.8px solid #ffffff; /* Outline color */
+    border-radius: 10px; /* Rounded corners */
+    padding: 5px 10px; /* Padding around the text */
+    margin-top: 10px; /* Space between the small rectangle and the text label */
+}
+
+.project-cont-label {
+    font-weight: 300; /* Font weight */
+    letter-spacing: -1.8px; /* Letter spacing */
+    font-size: 16px; /* Font size */
+    color: #ffffff; /* Text color */
 }

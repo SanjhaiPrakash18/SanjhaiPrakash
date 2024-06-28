@@ -166,7 +166,7 @@
                     "With over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics, I bring valuable expertise to the table.<br><br>" +
                     "As a Freelance Business Intelligence Solution Provider at Metricalist, based in the UAE, I've led transformative analytics solutions.<br><br>" +
                     "Notably, I innovated the Customer Segmentation Dashboard, revolutionizing CRM analytics, and delivered solutions without active marketing efforts.<br><br>" +
-                    "My specialties include data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, and UI/UX.<br><br>" +
+                    "My specialties include data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development and ui/ux.<br><br>" +
                     "I possess technical proficiency in ChatGPT, Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.<br><br>" +
                     "Explore my portfolio for insights into my expertise and how I can add value to your projects.";
                 break;
@@ -187,11 +187,15 @@
             case "What is your professional experience?":
                 message = "I have over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics.";
                 break;
-            case "Can I see examples of your work?":
-                message = "My portfolio consists of 16 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
-                    "The majority of my projects are created using Microsoft Power BI.<br><br>" +
+            case "What are your key skills and areas of specialization?":
+                message = "I specialize in data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development, and UI/UX. <br><br>My key skills include proficiency in ChatGPT, Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.";
+                break;
+            case "Can I see samples of your work?":
+                message = "Yes, you can see my work samples in the portfolio section of my website.<br><br>" +
+                    "My portfolio consists of 16 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
+                    "The majority of my projects were created using Microsoft Power BI.<br><br>" +
                     "For a clear view of my projects, please visit the Portfolio section on my website.<br><br>" +
-                    "These projects are hosted on the Maven Analytics web platform, where users will be redirected for further exploration.<br>";
+                    "These projects are hosted on the Maven Analytics web platform, where users are redirected for further exploration.<br>";
                 break;
             case "What services do you offer?":
                 message = "Currently, I offer Business Intelligence solutions to clients worldwide.<br><br>" +
@@ -206,7 +210,7 @@
                 message = "Visitors, including recruiters and clients, can contact me through the following methods:<br><br>Email: <a href='mailto:sanjhaiprakash18@gmail.com'>sanjhaiprakash18@gmail.com</a><br><br>Contact Number: <a href='tel:+919003933044'>+91 90039 33044</a><br><br>I also have a contact form available at the bottom of this website for visitors to reach out to me.";
                 break;
             default:
-                message = "Invalid selection.";
+                message = "Sorry, I don’t have an answer for that question.";
                 break;
         }
         // Create a new message container
@@ -238,7 +242,8 @@
 <div class="prompt-pill" onclick="displayMessage('Can you tell me about yourself?')">Can you tell me about yourself?</div>
 <div class="prompt-pill" onclick="displayMessage('What is your educational background?')">What is your educational background?</div>
 <div class="prompt-pill" onclick="displayMessage('What is your professional experience?')">What is your professional experience?</div>
-<div class="prompt-pill" onclick="displayMessage('Can I see examples of your work?')">Can I see examples of your work?</div>
+<div class="prompt-pill" onclick="displayMessage('What are your key skills and areas of specialization?')">What are your key skills and areas of specialization?</div>
+<div class="prompt-pill" onclick="displayMessage('Can I see samples of your work?')">Can I see samples of your work?</div>
 <div class="prompt-pill" onclick="displayMessage('What services do you offer?')">What services do you offer?</div>
 <div class="prompt-pill" onclick="displayMessage('How can I contact you?')">How can I contact you?</div>
 <div class="prompt-pill" onclick="displayMessage('Can I view your resume?')">Can I view your resume?</div>
@@ -986,5 +991,87 @@ filterButtons.forEach(button => {
         filterButtons.forEach(btn => btn.classList.remove('active'));
         this.classList.add('active');
     });
+});
+
+// Select the section that contains the ad rectangles
+const section = document.querySelector('.section');
+
+// Options for the intersection observer
+const options = {
+    root: null, // viewport
+    rootMargin: '0px', // no margin
+    threshold: 0.5 // when 50% of the section is visible
+};
+
+// Create a new intersection observer
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // If section is intersecting (i.e., at least 50% visible)
+            entry.target.classList.add('show'); // Add class to show ad rectangles
+        } else {
+            // If section is not intersecting
+            entry.target.classList.remove('show'); // Remove class to hide ad rectangles
+        }
+    });
+}, options);
+
+// Observe the section
+observer.observe(section);
+
+document.addEventListener('DOMContentLoaded', function () {
+    const filterOptions = document.querySelectorAll('.AOIFilterOption');
+    const sections = document.querySelectorAll('.InterestSection');
+
+    // Function to update the active filter based on scroll position
+    function updateActiveFilter() {
+        let scrollPos = window.scrollY + 150; // Adjust offset as needed
+        sections.forEach(section => {
+            if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
+                filterOptions.forEach(option => {
+                    option.classList.remove('active');
+                    if (section.getAttribute('id') === option.getAttribute('href').substring(1)) {
+                        option.classList.add('active');
+                        console.log(`Active section: ${section.getAttribute('id')}`);
+                    }
+                });
+            }
+        });
+    }
+
+    // Attach the scroll event listener
+    document.addEventListener('scroll', updateActiveFilter);
+
+    // Function to smoothly scroll to a section
+    function scrollToSection(targetSection) {
+        window.scrollTo({
+            top: targetSection.offsetTop - 90, // Adjust offset as needed
+            behavior: 'smooth'
+        });
+
+        // Call updateActiveFilter after scrolling is complete
+        setTimeout(updateActiveFilter, 800); // Adjust the timeout to match the smooth scroll duration
+        console.log(`Scrolling to section: ${targetSection.getAttribute('id')}`);
+    }
+
+    // Attach click event listeners to filter options
+    filterOptions.forEach(option => {
+        option.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = e.target.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+
+            // Scroll to the target section
+            scrollToSection(targetSection);
+
+            // Remove 'active' class from all options and add to the clicked one
+            filterOptions.forEach(opt => opt.classList.remove('active'));
+            e.target.classList.add('active');
+            console.log(`Clicked on filter option: ${targetId}`);
+        });
+    });
+
+    // Initial check to set the active filter option on page load
+    updateActiveFilter();
 });
 

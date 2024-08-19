@@ -1,13 +1,13 @@
 ﻿body {
-    font-family: Montserrat, sans-serif; /* Specify the Inter font as primary and generic sans-serif as fallback */
-    overflow-x: hidden
+    font-family: Montserrat, sans-serif;
+    overflow-x: hidden;
+    /*cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wLDBMMjQsMTJMMCwyNCBRNiwxMiAwLDBaIiBmaWxsPSIjNzdERDg2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHRyYW5zZm9ybT0icm90YXRlIC00NSwgMTIsIDEyKSIvPjwvc3ZnPg=='), auto;*/
 }
 
 /* Header styles */
 header {
     top: 0;
     z-index: 100;
-    background-color: rgba(255, 255, 255, 0.9); /* Add opacity to the white color */
     color: #fff;
     padding: 10px;
     text-align: left;
@@ -15,9 +15,10 @@ header {
     align-items: center;
     justify-content: space-between;
     width: 99%;
+    overflow-y: hidden;
     overflow-x: hidden;
-    transition: background-color 0.3s;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.025); /* Adjust shadow opacity */
+    transition: background-color 0.3s, backdrop-filter 0.3s;
+    backdrop-filter: blur(0px); /* Initial backdrop blur */
 }
 
     header h1 {
@@ -65,16 +66,6 @@ header {
         border-radius: 20px; /* Added border-radius for rounded rectangle effect */
     }
 
-        header nav ul li a:hover {
-            color: #ffffff; /* Apply the desired text color on hover */
-            background-color: #77DD86; /* Apply the desired background color on hover */
-        }
-
-        header nav ul li a.active {
-            color: #ffffff; /* Apply the desired text color to the active navigation item */
-            background-color: #77DD86; /* Apply the desired background color to the active navigation item */
-        }
-
         header nav ul li a.nav-link {
             text-decoration: none;
             color: #000000; /* Set the initial text color to black */
@@ -83,11 +74,23 @@ header {
             border-radius: 20px; /* Added border-radius for rounded rectangle effect */
         }
 
-            header nav ul li a.nav-link:hover,
-            header nav ul li a.nav-link.active {
-                color: #ffffff; /* Apply the desired text color */
-                background-color: #77DD86; /* Apply the desired background color */
+        header nav ul li a.nav-link {
+            position: relative; /* Ensure the pseudo-element is positioned relative to the link */
+        }
+
+            header nav ul li a.nav-link:hover::after,
+            header nav ul li a.nav-link.active::after {
+                content: '';
+                position: absolute;
+                bottom: 0px; /* Position the circle below the text */
+                left: 50%;
+                transform: translateX(-50%);
+                width: 12px; /* Set the width of the circle */
+                height: 12px; /* Set the height of the circle */
+                background-color: #77DD86; /* Set the color of the circle */
+                border-radius: 50%; /* Make it a circle */
             }
+
 
 .nav-link {
     letter-spacing: -1.0px; /* Add letter spacing of -1.0px */
@@ -96,6 +99,230 @@ header {
 .resume-pill a {
     letter-spacing: -1.0px; /* Add letter spacing of -1.0px */
 }
+
+.main-nav {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 60px;
+    width: 955px;
+    background: #ffffff;
+    text-align: center; /* Aligns content (ul and div) center horizontally */
+    height: 40px;
+    position: relative;
+    right: 272px;
+}
+
+    .main-nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+        .main-nav ul li {
+            display: inline-block; /* Display list items horizontally */
+            margin-right: 20px; /* Adjust margin between list items */
+        }
+
+            .main-nav ul li:last-child {
+                margin-right: 0; /* Remove margin from the last list item */
+            }
+
+    .main-nav .nav-link {
+        text-decoration: none;
+        color: #000000;
+        font-weight: 400;
+        font-size: 14.3px;
+        padding: 10px 20px;
+        display: block;
+    }
+
+        .main-nav .nav-link:hover {
+            color: #555;
+        }
+
+    .main-nav .resume-pill {
+        display: inline-block; /* Ensure the resume link is displayed inline */
+        margin-left: 20px; /* Adjust margin as needed */
+    }
+
+        .main-nav .resume-pill a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 300;
+            font-size: 15.5px;
+            padding: 10px 20px;
+        }
+
+            .main-nav .resume-pill a:hover {
+                color: #555;
+            }
+
+    /* Styles when scrolled */
+    .main-nav.scrolled {
+        background: #000000;
+        box-shadow: rgba(0, 0, 0, 0.15) 8px 10px 15px 0px;
+    }
+
+        .main-nav.scrolled .nav-link,
+        .main-nav.scrolled .resume-pill a {
+            color: #ffffff;
+        }
+
+@keyframes expandFromLeft {
+    0% {
+        width: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    100% {
+        width: 955px; /* Match the final width of your nav */
+        padding-left: 1px;
+        padding-right: 1px;
+    }
+}
+
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.main-nav {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border-radius: 60px;
+    width: 970px; /* Ensure this matches the width used in the animation */
+    background: #ffffff;
+    text-align: center;
+    height: 40px;
+    position: relative;
+    right: -35px; /* Initial position */
+    overflow: hidden; /* Ensure content doesn't overflow during animation */
+    transition: none; /* Disable default transition to only use keyframe animations */
+}
+
+    .main-nav ul {
+        padding-left: 20px; /* Add padding to move the links to the right */
+        display: inline-block; /* Ensure the list items are aligned properly */
+    }
+
+    .main-nav.scrolled {
+        background: #000000;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.04);
+        right: 60px; /* Reduced right position when scrolled */
+    }
+
+        .main-nav.scrolled .nav-link {
+            animation: slideInFromRight 0.8s ease-out forwards;
+        }
+
+    .main-nav .resume-pill {
+        display: inline-block; /* Ensure resume pill is always visible */
+        margin-left: 15px; /* Adjust margin as needed */
+    }
+
+        .main-nav .resume-pill a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 300;
+            font-size: 15.5px;
+            padding: 10px 20px;
+        }
+
+            .main-nav .resume-pill a:hover {
+                color: #555;
+            }
+
+.get-bi-solution-link {
+    text-decoration: none;
+}
+
+.get-bi-solution-rect {
+    background-color: #FCFCFC;
+    border: 1px solid #e6e6e6;
+    border-radius: 12px; /* Adjust the radius as needed */
+    padding: 8px 8px; /* Adjust the padding as needed */
+    display: inline-flex;
+    align-items: center;
+    color: #9D9DA4;
+    font-family: Montserrat, sans-serif; /* Adjust the font as needed */
+    position: relative;
+    right: 40px;
+    overflow: hidden; /* Ensures the text doesn’t overflow the container */
+}
+
+    .get-bi-solution-rect:hover {
+        transform: scale(1.05); /* Enlarge the rectangle by 5% on hover */
+    }
+
+.get-bi-solution-text {
+    margin: 0;
+    font-size: 15px; /* Adjust the font size as needed */
+    display: flex;
+    align-items: center;
+    position: relative;
+    animation: none; /* No animation by default */
+    font-weight: 500;
+}
+
+.get-bi-solution-rect:hover .get-bi-solution-text {
+    animation: slideUpHide 0.2s forwards, slideDownShow 0.2s 0.2s forwards; /* Faster animations */
+}
+
+@keyframes slideUpHide {
+    0% {
+        transform: translateY(0); /* Initial position */
+        opacity: 1; /* Ensure the text is visible */
+    }
+
+    100% {
+        transform: translateY(-100%); /* Move up and hide */
+        opacity: 0; /* Ensure the text is hidden */
+    }
+}
+
+@keyframes slideDownShow {
+    0% {
+        transform: translateY(100%); /* Start from below the view */
+        opacity: 0; /* Ensure the text is hidden */
+    }
+
+    100% {
+        transform: translateY(0); /* Return to original position */
+        opacity: 1; /* Ensure the text is visible */
+    }
+}
+
+.get-bi-solution-text svg {
+    width: 16px; /* Adjust the width to reduce the SVG size */
+    height: 16px; /* Adjust the height to reduce the SVG size */
+    margin-left: 8px; /* Adjust the spacing between text and icon */
+    fill: #9D9DA4; /* Ensure the SVG color matches the text */
+}
+
+.hide-on-scroll {
+    display: none !important; /* Hide the element when this class is applied */
+}
+
 
 p {
     font-size: 18px;
@@ -252,13 +479,17 @@ button[type="submit"] {
         margin-left: 5px;
     }
 
-/* Home section styles */
 #home {
     position: relative;
-    height: 170vh;
+    height: 205vh;
     width: 100%;
     overflow: hidden;
     background-color: #FFFFFF; /* Change background color to white */
+    background-image: linear-gradient(to top, #FFFFFF 0%, transparent 65%, #FFFFFF 100%), linear-gradient(to bottom, #FFFFFF 0%, transparent 0%, #FFFFFF 0%), linear-gradient(rgba(230, 230, 230, 0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(230, 230, 230, 0.8) 1px, transparent 1px);
+    background-size: 100% 50%, 100% 50%, 40px 40px, /* Increased grid tile size */
+    40px 40px; /* Increased grid tile size */
+    background-repeat: no-repeat, no-repeat, repeat, repeat;
+    background-position: top, bottom, 0 0, 0 0;
 }
 
 .home-gif-container {
@@ -303,15 +534,17 @@ h2.home-text {
 }
 
 .black-text {
-    font-weight: 200;
-    font-size: 65px;
-    letter-spacing: -4.5px;
+    font-weight: 900;
+    font-size: 63px;
+    letter-spacing: -6.5px;
 }
 
 .green-text {
     font-weight: 900;
-    font-size: 65px;
-    letter-spacing: -4.5px;
+    font-size: 72px;
+    letter-spacing: -7.1px;
+    position: relative;
+    top: 45px;
 }
 
 .button-container {
@@ -347,20 +580,28 @@ h2.home-text {
     color: white;
 }
 
+.north-east-arrow-img {
+    width: 25px; /* Adjust the size as needed */
+    height: auto; /* Maintains the aspect ratio */
+    vertical-align: middle; /* Aligns the image with the text */
+    margin-left: 3px;
+}
+
 .music-player {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #FFFFFF;
     padding: 10px 20px;
-    border-radius: 65px;
+    border-radius: 20px;
     margin-top: 120px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
     width: 560px;
-    height: 90px;
+    height: 80px;
     left: 360px;
     position: relative;
-    border: 1px solid #D3D3D3; /* Light grey border */
+    border: 1px solid #E6E6E6; /* Light grey border */
+    top: 18px;
 }
 
 .music-info {
@@ -374,7 +615,7 @@ h2.home-text {
     border-radius: 50%;
     overflow: hidden;
     margin-right: 15px;
-    border: 1px solid #D3D3D3; /* Light grey border */
+    border: 1px solid #E6E6E6; /* Light grey border */
 }
 
 .music-image {
@@ -389,10 +630,11 @@ h2.home-text {
 
 .music-title {
     margin: 0;
-    font-size: 18px; /* Adjust the font size as needed */
+    font-size: 22px; /* Adjust the font size as needed */
     font-weight: bold;
-    color: #1DBF73; /* Change text color */
+    color: #000000; /* Change text color */
     margin-top: -15px;
+    letter-spacing: -2.2px;
 }
 
 .music-subtitle {
@@ -411,7 +653,7 @@ h2.home-text {
     font-size: 17px;
     font-weight: 400;
     letter-spacing: -1.0px;
-    margin-top: -30px;
+    margin-top: -20px;
     white-space: nowrap;
     color: #000000;
 }
@@ -422,8 +664,27 @@ h2.home-text {
     font-size: 20px;
     cursor: pointer;
     outline: none;
-    color: #77DD86; /* Change icon color */
+    color: #003F3C; /* Change icon color */
+    position: relative;
+    z-index: 1;
 }
+
+    .control-button.pause-button {
+        color: white; /* White color for the pause icon */
+    }
+
+        .control-button.pause-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 32px;
+            height: 32px;
+            background-color: #003F3C; /* Circle color */
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1; /* Place the circle behind the icon */
+        }
 
 .progress-container {
     width: 75%; /* Same width as the progress bar */
@@ -432,15 +693,31 @@ h2.home-text {
     border-radius: 10px; /* Same border radius as the progress bar */
     margin-top: 30px;
     position: absolute;
-    bottom: 25px; /* Adjust as needed */
+    bottom: 15px; /* Adjust as needed */
     left: 90px;
+    overflow: hidden; /* Ensures the progress bar does not overflow */
 }
 
 .progress-bar {
     height: 100%; /* Change to 100% to fill the container */
     background-color: #77DD86; /* Change progress bar color */
     border-radius: 10px; /* Same border radius as the container */
-    width: 60%; /* Adjust width as needed */
+    width: 0%; /* Start with 0% width */
+    animation: progress-animation 26s linear infinite; /* Animation for the progress bar */
+}
+
+@keyframes progress-animation {
+    0% {
+        width: 0%;
+    }
+
+    50% {
+        width: 100%; /* Fill up to 100% halfway through */
+    }
+
+    100% {
+        width: 100%; /* Reset back to 0% */
+    }
 }
 
 .browser-window {
@@ -450,7 +727,7 @@ h2.home-text {
     border: 1px solid #D8F3D8; /* Window outline color */
     border-radius: 20px;
     overflow: hidden;
-    margin-top: -445px; /* Move window up */
+    margin-top: -420px; /* Move window up */
     margin-left: 60px; /* Move window right */
     z-index: -1;
 }
@@ -489,6 +766,186 @@ h2.home-text {
     padding: 20px;
 }
 
+/* Animation keyframes */
+@keyframes fadeInOut {
+    0%, 20% {
+        opacity: 0;
+    }
+
+    30%, 70% {
+        opacity: 1;
+    }
+
+    80%, 100% {
+        opacity: 0;
+    }
+}
+
+/* Apply the animation to both rectangles 
+.animated-fade {
+    animation: fadeInOut 20s ease-in-out infinite;
+}*/
+
+.popping-circle-container {
+    position: relative;
+    display: inline-block;
+    transform: translate(-40px, 10px); /* Adjust the position as needed */
+}
+
+.popping-circle {
+    width: 17px; /* Adjust the size as needed */
+    height: 17px; /* Adjust the size as needed */
+    background-color: #77DD86; /* Adjust the color as needed */
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 45px;
+}
+
+.blinking-circle {
+    width: 18px; /* Adjust the size as needed */
+    height: 18px; /* Adjust the size as needed */
+    background-color: #77DD86; /* Adjust the color as needed */
+    border-radius: 50%;
+    position: absolute;
+    top: -25px; /* Center the circle around the popping circle */
+    left: 44px; /* Center the circle around the popping circle */
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Livspace */
+.livspace-text-home-ad-rect {
+    display: flex;
+    align-items: center;
+    background-color: #000000; /* Reduced transparency */
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    position: relative;
+    top: -236px;
+    right: -580px;
+    transform: rotate(15deg);
+    z-index: -1;
+    box-shadow: 0 8px 16px rgba(219, 74, 95, 0);
+}
+
+.livspace-homead-logo-container {
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 53px;
+    height: 53px;
+    margin-right: 15px;
+    border: 0.01px solid #E6E6E6; /* Reduced transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -1px;
+    right: 2px;
+}
+
+.livspace-homead-logo {
+    width: 200%;
+    height: 200%;
+    object-fit: contain;
+    transform: scale(0.5);
+    transform-origin: center;
+}
+
+.livspace-homead-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.livspace-homead-title {
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    margin: 0;
+    text-align: left;
+    color: #ffffff; /* Reduced transparency */
+}
+
+.livspace-homead-subtitle {
+    font-size: 15px;
+    color: #ffffff; /* Reduced transparency */
+    font-weight: 300;
+    margin: 0;
+}
+
+/* NamaSYS */
+.NamaSYS-text-home-ad-rect {
+    display: flex;
+    align-items: center;
+    background-color: #000000; /* Reduced transparency */
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: 1px solid #003F3C; /* Reduced transparency */
+    position: relative;
+    top: 170px;
+    right: 775px;
+    transform: rotate(-10deg);
+    z-index: -1;
+    box-shadow: 0 8px 16px rgba(21, 171, 255, 0);
+}
+
+.NamaSYS-homead-logo-container {
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 53px;
+    height: 53px;
+    margin-right: 15px;
+    border: 0.01px solid #E6E6E6; /* Reduced transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -1px;
+    right: -25px;
+}
+
+.NamaSYS-homead-logo {
+    width: 200%;
+    height: 200%;
+    object-fit: contain;
+    transform: scale(0.5);
+    transform-origin: center;
+}
+
+.NamaSYS-homead-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.NamaSYS-homead-title {
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    margin: 0;
+    text-align: left;
+    color: #ffffff; /* Reduced transparency */
+}
+
+.NamaSYS-homead-subtitle {
+    font-size: 15px;
+    color: #ffffff; /* Reduced transparency */
+    font-weight: 300;
+    margin: 0;
+}
+
 .Home-stats {
     margin-top: -25px; /* Adjust as needed */
 }
@@ -520,10 +977,10 @@ h2.home-text {
 /* Chat container */
 .homedesign-chat-container {
     position: relative;
-    top: -580px;
-    right: -1050px;
+    top: -910px;
+    right: -1080px;
     width: 280px; /* Adjust width as needed */
-    height: 340px; /* Adjust height as needed */
+    height: 390px; /* Adjust height as needed */
     background-color: none; /* Background color of the chat container */
     border-radius: 20px; /* Border radius of the chat container */
     overflow-y: auto; /* Enable vertical scrolling if content exceeds container height */
@@ -535,7 +992,7 @@ h2.home-text {
     background-color: #ffffff; /* Background color of the message box */
     padding: 10px; /* Padding inside the message box */
     margin-bottom: 10px; /* Margin between message boxes */
-    border-radius: 40px; /* Border radius of the message box */
+    border-radius: 20px; /* Border radius of the message box */
     max-width: 80%; /* Maximum width of the message box */
     font-size: 15px;
     box-shadow: 0 0 40px rgba(82, 182, 244, 0.1); /* Updated box shadow color */
@@ -599,7 +1056,7 @@ h2.home-text {
     left: 60%; /* Center horizontally */
     transform: translateX(-50%);
     font-size: 20px; /* Adjust font size as needed */
-    font-weight: 300;
+    font-weight: 900;
 }
 
 .hr-message-sender {
@@ -608,7 +1065,7 @@ h2.home-text {
     left: 39%; /* Center horizontally */
     transform: translateX(-50%);
     font-size: 20px; /* Adjust font size as needed */
-    font-weight: 300;
+    font-weight: 900;
 }
 
 .client-circle {
@@ -619,7 +1076,7 @@ h2.home-text {
     position: absolute;
     top: -15%;
     transform: translateY(-50%);
-    right: 57px; /* Adjust this value according to your preference */
+    right: 54px; /* Adjust this value according to your preference */
 }
 
 .hr-circle {
@@ -630,7 +1087,7 @@ h2.home-text {
     position: absolute;
     top: -19%;
     transform: translateY(-50%);
-    right: 95px; /* Adjust this value according to your preference */
+    right: 91px; /* Adjust this value according to your preference */
 }
 
 /* Animation for message boxes */
@@ -650,6 +1107,46 @@ h2.home-text {
 /* Delay for the second message box */
 .project-message {
     transition-delay: 0.5s; /* Delay the transition for the second message box */
+}
+
+.lat-statement {
+    font-weight: 900;
+    font-size: 65px;
+    letter-spacing: -4.8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+    background-color: white; /* Ensure visibility */
+    right: 100px;
+}
+
+    .lat-statement #dynamicWord {
+        font-weight: 300;
+        color: #000000;
+        position: absolute;
+        top: 0;
+        left: 850px;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        transform: translateY(100%); /* Start off the screen */
+        letter-spacing:-6.8px;
+    }
+
+    .lat-statement span {
+        display: inline; /* or remove if there's no need for custom display */
+    } 
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .stats-content {
@@ -681,25 +1178,98 @@ h2.home-text {
         white-space: nowrap; /* Prevent line breaks within words */
     }
 
-.profile-stats-design-container {
+.profile-stats-design-container-twitter {
     display: inline-flex;
     align-items: center;
     border: 0.5px solid #E6E6E6;
     border-radius: 160px;
-    box-shadow: 0 0 40px rgba(82, 182, 244, 0.1); /* Updated box shadow color */
+    box-shadow: 0 0 40px rgba(82, 182, 244, 0); /* Updated box shadow color */
+    background-color: #ffffff;
 }
+
+.profile-stats-design-container-twitter {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .profile-stats-design-container-twitter:hover {
+        box-shadow: 0 6px 20px 0 rgba(0, 63, 60, 0.03), 0 6px 20px 0 rgba(0, 63, 60, 0.03);
+        transform: scaleY(1.05) rotate(45deg); /* Ensure rotation is maintained */
+    }
 
 .thumbs-up {
     color: white;
 }
 
-.profile-stats-design-text {
-    background-color: #FFFFFF;
+.profile-stats-design-text-twitter {
     color: #000000;
     border-radius: 20px;
     padding: 15px 20px;
     margin-right: 10px;
 }
+
+.profile-stats-design-container-youtube {
+    display: inline-flex;
+    align-items: center;
+    border: 0.5px solid #E6E6E6;
+    border-radius: 160px;
+    box-shadow: 0 0 40px rgba(82, 182, 244, 0); /* Updated box shadow color */
+    background-color: #ffffff;
+}
+
+.profile-stats-design-container-youtube {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .profile-stats-design-container-youtube:hover {
+        box-shadow: 0 6px 20px 0 rgba(0, 63, 60, 0.03), 0 6px 20px 0 rgba(0, 63, 60, 0.03);
+        transform: scaleY(1.05) rotate(45deg); /* Ensure rotation is maintained */
+    }
+
+.thumbs-up {
+    color: white;
+}
+
+.profile-stats-design-text-youtube {
+    color: #000000;
+    border-radius: 20px;
+    padding: 15px 20px;
+    margin-right: 10px;
+}
+
+@keyframes cardSwap {
+    0% {
+        transform: translateX(0) scale(0.8);
+        opacity: 1;
+        z-index: 2;
+    }
+
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+        z-index: 2;
+    }
+}
+
+.card-wrapper {
+    position: relative;
+    width: 300px; /* Adjust as needed */
+    height: 370px; /* Adjust as needed */
+}
+
+.card-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    transform-origin: center;
+    z-index: 1; /* Default z-index */
+}
+
+    .card-container.active {
+        animation: cardSwap 1s forwards; /* Faster animation */
+    }
 
 .tick-circle {
     width: 55px;
@@ -779,12 +1349,12 @@ h2.home-text {
     margin: auto;
     width: 50%; /* Adjust width as needed */
     padding: 30px;
-    border-radius: 20px;
+    border-radius: 17px;
     background-color: #ffffff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.09);
     left: 35%; /* Move the form overlay 50% to the left */
     top: -30px; /* Move the form overlay up by 50px */
     transform: translateX(-105%); /* Center the form overlay */
+    border: 0.08px solid #e6e6e6;
 }
 
 /* Move the name, email, and message container to the left */
@@ -828,7 +1398,7 @@ button[type="submit"] {
     margin-top: 20px;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #333;
+    background-color: #000000;
     color: #fff;
     border: none;
     border-radius: 25px;
@@ -875,6 +1445,7 @@ button[type="submit"] {
     align-items: center;
     opacity: 0; /* Initially hidden */
     transition: opacity 0.3s ease;
+    box-shadow: none;
 }
 
 /* Play button for the overlay */
@@ -901,7 +1472,7 @@ button[type="submit"] {
     font-weight: 200; /* Keep the existing font weight */
     padding: 100px; /* Adjust padding as needed */
     text-align: center;
-    padding-bottom: 370px; /* Adjust the value as needed */
+    padding-bottom: 680px; /* Adjust the value as needed */
 }
 
     #about p {
@@ -954,18 +1525,48 @@ button[type="submit"] {
 }
 
 .rounded-content {
-    background-color: #FFFFFF; /* Apply background color to the content only */
+    background-color: #FFFFFF;
     border-radius: 20px;
     padding: 20px;
     height: 90px;
     border: 1px solid #E6E6E6;
     width: 380px;
     text-align: left;
+    position: relative;
+    overflow: hidden; /* Ensures the wave is confined within the rounded content */
+    transition: color 0.5s ease, transform 0.5s ease;
 }
 
-    .rounded-content:hover {
-        background-color: #FAFAFF;
+    .rounded-content::before {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 200%;
+        height: 200%;
+        background-color: #fafaff;
+        border-radius: 40%;
+        transition: transform 0.5s ease;
+        transform: translateY(-200%);
     }
+
+    .rounded-content:hover::before {
+        transform: translateY(0);
+    }
+
+    .rounded-content:hover {
+        color: #5379F6;
+        transform: scale(1.05); /* Slightly enlarges the text */
+    }
+
+.about-text {
+    transition: color 0.5s ease, transform 0.5s ease;
+}
+
+.rounded-content:hover ~ .about-text {
+    color: #000000;
+    transform: scale(1.05); /* Slightly enlarges the text */
+}
 
 .message-symbol {
     position: absolute; /* Change to absolute positioning */
@@ -1314,16 +1915,18 @@ section#contact h2 {
 }
 
 .project-img-container {
-    width: 100%;
-    height: 200px;
+    width: 90%; /* Reduced width */
+    height: 180px; /* Reduced height */
     overflow: hidden;
+    margin: 0 auto; /* Center the container if needed */
+    background-color: #ffffff;
 }
 
     .project-img-container img {
-        width: 100%;
-        height: 100%;
+        width: 120%;
+        height: 120%;
         object-fit: cover;
-        margin-top: 20px;
+        margin-top: 0px; /* Reduced margin-top */
     }
 
 .project-desc {
@@ -1340,40 +1943,63 @@ section#contact h2 {
     margin-top: 20px;
 }
 
-/* Styles for the navigation header and links while scrolling */
-header.scrolled {
-    background-color: #ffffff;
-    color: #000000;
+/* Styles for the first button */
+.zoom-button.first-button {
+    background-color: #000000;
+    color: #ffffff;
+    border: 1.5px solid #000000;
 }
 
-    header.scrolled nav ul li a {
-        color: #000000; /* Set the font color to black in the scrolled state */
+    .zoom-button.first-button .north-east-arrow-img {
+        filter: brightness(0) invert(1); /* Arrow is white by default */
     }
 
-/* Add these styles to your CSS */
-.zoom-button {
-    display: inline-block;
-    padding: 15px 30px;
+    .zoom-button.first-button:hover {
+        background-color: #ffffff; /* Keep background color black */
+        color: #000000; /* Change text to black */
+        transform: scale(1.1); /* Expand on hover */
+        border-color: #e6e6e6; /* Change border color to #e6e6e6 */
+    }
+
+        .zoom-button.first-button:hover .north-east-arrow-img {
+            filter: brightness(0); /* Change arrow to black on hover */
+        }
+
+/* Styles for the second button */
+.zoom-button.second-button {
     background-color: #ffffff;
     color: #000000;
-    border-radius: 15px;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.3s;
-    border: 1.8px solid #1DBF73; /* Add a 2px solid green border */
+    border: 1.5px solid #e6e6e6;
 }
 
-    .zoom-button:hover {
-        background-color: #1DBF73;
-        transform: scale(1.1);
-        border-color: #ffffff; /* Change border color on hover */
+    .zoom-button.second-button .north-east-arrow-img {
+        filter: brightness(0); /* Default black arrow */
     }
+
+    .zoom-button.second-button:hover .north-east-arrow-img {
+        filter: brightness(0) invert(1); /* Change arrow to white on hover */
+    }
+
+    .zoom-button.second-button:hover {
+        background-color: #000000; /* Change background to black */
+        color: #ffffff; /* Change text to white */
+        transform: scale(1.1); /* Expand on hover */
+        border-color: #000000; /* Change border to black */
+    }
+
+
 
 .green-text {
-    color: #1DBF73;
+    color: #000000;
 }
 
 .black-text {
-    color: black;
+    color: #003F3C;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: -4.8px;
+    position: relative;
+    top: 40px;
 }
 
 .cursor {
@@ -1396,14 +2022,7 @@ header.scrolled {
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: #ffffff;
     z-index: 1000;
-}
-
-/* Add this style for the header when scrolled */
-header.scrolled {
-    background-color: #ffffff;
-    color: #ffffff;
 }
 
 .project-img-container {
@@ -1432,7 +2051,7 @@ header.scrolled {
     bottom: 20px; /* Adjust as needed */
     right: 20px; /* Adjust as needed */
     background-color: #FFFFFF;
-    border: 1px solid #77DD86;
+    border: 1px solid #003F3C;
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -1449,7 +2068,7 @@ header.scrolled {
         transform: scale(1.1) translate(5px, -5px); /* Enlarge and move on hover */
         width: 40px;
         height: 40px;
-        background-color: #77DD86; /* Change background color on hover */
+        background-color: #003F3C; /* Change background color on hover */
     }
 
         .project-arrow-container:hover .project-arrow {
@@ -1459,8 +2078,8 @@ header.scrolled {
 .project-arrow {
     width: 10px;
     height: 10px;
-    border-top: 2px solid #77DD86; /* Added 'solid' as the border style */
-    border-right: 2px solid #77DD86; /* Added 'solid' as the border style */
+    border-top: 2px solid #003F3C; /* Added 'solid' as the border style */
+    border-right: 2px solid #003F3C; /* Added 'solid' as the border style */
     transform: rotate(45deg);
     transition: border-color 0.3s ease; /* Smooth transition for arrow color */
 }
@@ -1470,7 +2089,6 @@ header.scrolled {
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: #ffffff;
     z-index: 1000;
 }
 
@@ -1480,7 +2098,7 @@ header.scrolled {
 
 #services {
     padding: 200px;
-    padding-bottom: 2850px; /* Adjust this value to increase bottom padding */
+    padding-bottom: 3124px; /* Adjust this value to increase bottom padding */
     text-align: center;
     background-color: #FFFFFF;
 }
@@ -1498,23 +2116,40 @@ header.scrolled {
 .service-image-row {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px; /* Adjust as needed */
+    margin-bottom: 400px; /* Add margin below the row */
+}
+
+.service-rectangle {
+    width: 400px; /* Adjust the width according to your layout */
+    height: 400px; /* Set height as needed */
+    background-color: #FFFFFF; /* Background color of the rectangles */
+    border: 1px solid #e6e6e6;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 70px; /* Adjust as needed to move the row up */
-    margin-bottom: 140px;
-    width: 100%; /* Adjust the width as needed */
+    text-align: center;
+    transition: transform 0.3s ease-out; /* Smooth transition for scaling effect */
+    position:relative;
 }
 
-.service-image-container {
-    flex: 1;
-    text-align: center; /* Center the image horizontally */
-    overflow: hidden; /* Hide any overflowing content */
-    position: relative; /* Position the text relative to the container */
-}
-
-    .service-image-container img {
-        width: 100%;
-        height: auto; /* Maintain aspect ratio */
+    /* Diagonal enlargement effect on hover */
+    .service-rectangle.enlarged {
+        transform: scale(1.05); /* Scale up on hover */
     }
+
+.parent-container {
+    perspective: 1000px; /* Adjust the perspective to control the depth effect */
+}
+
+.service-new-title {
+    font-size: 35px;
+    font-weight: 900;
+    letter-spacing: -3.4px;
+    color: #000000; /* Text color */
+    padding: 10px; /* Padding inside the rectangle */
+}
 
 .service-title {
     position: absolute;
@@ -1566,13 +2201,78 @@ header.scrolled {
     z-index: 3; /* Ensure the text appears on top of the blur */
 }
 
-.rounded-rectangle {
+.gif-container {
+    position: relative;
+}
+
+.navigation-arrows {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+#prev-button, #next-button {
+    position: relative;
+    width: 24px; /* Adjust width to accommodate arrow size */
+    height: 24px; /* Adjust height to accommodate arrow size */
+    background: none; /* Remove any background */
+    border: none; /* Remove any border */
+    outline: none; /* Remove any outline */
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size for arrow */
+}
+
+    #prev-button::before, #next-button::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-left: 2px solid black; /* Adjust border properties for arrow shape */
+        border-bottom: 2px solid black; /* Adjust border properties for arrow shape */
+        width: 10px; /* Adjust arrow width */
+        height: 10px; /* Adjust arrow height */
+        transition: border-color 0.3s;
+    }
+
+    #prev-button::before {
+        left: 8px; /* Adjust position for the left arrow */
+        transform: rotate(-315deg);
+    }
+
+    #next-button::before {
+        right: 8px; /* Adjust position for the right arrow */
+        transform: rotate(225deg);
+    }
+
+    #prev-button:hover::before, #next-button:hover::before {
+        border-color: darkgrey;
+    }
+
+.newservice-rounded-rectangle {
     width: 380px;
-    height: 650px;
+    height: 390px;
+    background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), url('Interest Pattern.png');
+    margin: -160px 45px 0;
+    border-radius: 35px;
+    border: 1px solid #E6E6E6;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth effect */
+}
+
+    .newservice-rounded-rectangle:hover {
+        box-shadow: 0 6px 20px 0 rgba(0, 63, 60, 0.03), 0 6px 20px 0 rgba(0, 63, 60, 0.03);
+    }
+
+rounded-rectangle {
+    width: 380px;
+    height: 390px;
     background-color: #FFFFFF;
     margin: -160px 45px 0;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.05);
     border-radius: 35px;
+    border: 1px solid #E6E6E6;
+    transition: box-shadow 0.3s ease; /* Add transition for smooth effect */
 }
 
 .left {
@@ -1590,11 +2290,11 @@ header.scrolled {
     position: relative;
     top: 20px;
     transform-origin: bottom right; /* Rotate from the bottom right corner */
-    transform: rotate(90deg); /* Rotate rectangle to the right */
+    transform: rotate(180deg); /* Rotate rectangle to the right */
     width: 120px;
     border-radius: 5px;
-    right: -252px;
-    top: -240px;
+    right: -52px;
+    top: -50px;
     color: #77DD86;
 }
 
@@ -1732,30 +2432,31 @@ header.scrolled {
 }
 
 .dotted-rectangle {
-    border: 1px dashed #77DD86;
-    border-radius: 10px;
-    padding: 10px;
-    color: #77DD86;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 8px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
     letter-spacing: -1.5px;
-    font-size: 18px;
+    font-size: 16px;
     width: 100px;
-    font-weight: 900;
+    font-weight: 800;
     opacity: 0;
 }
 
 .data-dashboard-outline {
-    border: 0.6px solid #77DD86;
+    border: 0.6px solid #e6e6e6;
     padding: 10px;
     margin-top: 20px;
     border-radius: 20px;
     position: relative;
     left: -480px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color:#fcfcfc;
 }
 
 .datadb-title-bar {
-    border: 0.6px solid #77DD86;
-    background-color: #77DD86;
+    border: 0.6px solid #e6e6e6;
+    background-color: #e6e6e6;
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
@@ -1764,8 +2465,8 @@ header.scrolled {
 }
 
 .datadb-title-bar {
-    border: 0.6px solid #77DD86;
-    background-color: #77DD86;
+    border: 0.6px solid #e6e6e6;
+    background-color: #e6e6e6;
     color: white;
     padding: 10px 20px; /* Adjust padding for enlarged size */
     border-radius: 20px;
@@ -1806,7 +2507,7 @@ header.scrolled {
 
     .mock-service-dashboard.small,
     .mock-service-dashboard.large {
-        border: 0.6px solid #77DD86;
+        border: 0.6px solid #e6e6e6;
         background-color: #FFFFFF;
         margin-right: 10px;
         border-radius: 20px;
@@ -1871,7 +2572,7 @@ header.scrolled {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
     position: relative;
-    left: -600px;
+    left: -580px;
     top: -10px;
     letter-spacing: -0.2px;
     text-decoration: none; /* Remove underline */
@@ -1941,12 +2642,10 @@ header.scrolled {
     padding: 40px 40px 60px;
     text-align: left;
     position: relative;
-    background-color: #FAFAFF;
-    border-top-left-radius: 50% 20%; /* Adjusted percentage values */
-    border-top-right-radius: 50% 20%; /* Adjusted percentage values */
-    border-bottom-left-radius: 50% 20%; /* Adjusted percentage values */
-    border-bottom-right-radius: 50% 20%; /* Adjusted percentage values */
+    background-color: #fcfcfc;
+    border-radius: 60px;
     overflow: hidden;
+    border: 1px solid #e6e6e6;
 }
 
 .line {
@@ -1976,10 +2675,13 @@ header.scrolled {
 }
 
 .background-text {
-    background-color: #77DD86;
-    border-radius: 60px;
+    background-color: #f2f2f2;
+    border-radius: 40px;
     padding: 10px;
     display: inline-block;
+    border: 1px solid #000000;
+    border-bottom:8px solid;
+    font-weight: 300;
 }
 
 .bold-text:first-child {
@@ -2006,9 +2708,9 @@ header.scrolled {
     margin-right: 80px;
     width: 250px;
     height: 200px;
-    border-radius: 20px;
+    border-radius: 40px;
     background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #E6E6E6;
     transition: transform 0.3s ease;
 }
 
@@ -2068,6 +2770,101 @@ header.scrolled {
     margin: 0 auto;
 }
 
+.company-cartoon {
+    background-color: #fcfcfc;
+    border: 1px solid #000000;
+    border-radius: 15px;
+    padding: 45px;
+    width: 300px;
+    padding-top: 5px;
+    padding-left: 5px;
+    position: relative; /* Ensure that the hover effect is applied */
+    opacity: 0.3;
+    transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+}
+
+    .company-cartoon:hover {
+        opacity: 1;
+    }
+
+    /* Ensure your other styles are retained and correctly scoped */
+    .company-cartoon .company-cartoon-text {
+        font-weight: 400;
+        font-size: 35px;
+        letter-spacing: -3.1px;
+        margin: 0; /* Removes default margin */
+        color: #000000;
+        position: relative; /* Positioning context for the pseudo-element */
+    }
+
+        .company-cartoon .company-cartoon-text::after {
+            content: '';
+            display: block;
+            width: 22px;
+            height: 22px;
+            background-color: #000000;
+            border-radius: 50%;
+            position: absolute;
+            right: 73px;
+            top: 58%;
+            transform: translateY(-50%);
+        }
+
+    .company-cartoon .company-cartoon-subtext {
+        font-weight: 300;
+        font-size: 28px;
+        letter-spacing: -2.0px;
+        margin: 0; /* Removes default margin */
+        margin-top: 10px; /* Adds space between Livspace and Business, adjust as needed */
+        display: inline-flex; /* Ensures the line and text align properly */
+        position: relative; /* Positioning context for the pseudo-element */
+    }
+
+        .company-cartoon .company-cartoon-subtext::after {
+            content: '';
+            display: block;
+            width: 150px; /* Adjust width of the line */
+            height: 0.1px; /* Thickness of the line */
+            background-color: #000000; /* Color of the line */
+            position: absolute;
+            right: -160px; /* Adjust space from text to line */
+            top: 60%; /* Centers the line vertically with the text */
+            transform: translateY(-50%); /* Centers the line vertically */
+        }
+
+    .company-cartoon .company-cartoon-exp {
+        font-weight: 300;
+        font-size: 22px; /* Adjust font size as needed */
+        letter-spacing: -1.3px; /* Adjust letter-spacing as needed */
+        margin: 0;
+        margin-top: 10px; /* Adds space between Business Ana and 0.6 year of */
+        display: inline-flex;
+        position: relative;
+    }
+
+        .company-cartoon .company-cartoon-exp::after {
+            content: '';
+            display: block;
+            width: 170px; /* Adjust width of the line */
+            height: 0.2px; /* Thickness of the line */
+            background-color: #000000;
+            position: absolute;
+            right: -180px; /* Adjust space from text to line */
+            top: 70%; /* Centers the line vertically with the text */
+            transform: translateY(-50%);
+        }
+
+.company-cartoon-rounded-rectangle {
+    background-color: #000000; /* Color of the rectangle */
+    border-radius: 40px; /* Rounding of the corners */
+    height: 10px; /* Height of the rectangle */
+    width: 100%; /* Adjust width as needed */
+    margin-top: 10px; /* Space between the text and the rectangle */
+    position: relative;
+    top: 20px;
+    right: -5px;
+}
+
 /* Styles for the left rectangle content */
 .left {
     margin-right: 30px;
@@ -2124,7 +2921,7 @@ header.scrolled {
     border-radius: 20px;
     transition: all 0.3s ease-in-out;
     font-size: 18px;
-    left: -10px; /* Adjust the left position as needed */
+    left: 125px; /* Adjust the left position as needed */
     border: 1px solid #77DD86;
     font-weight: 400;
     letter-spacing: -1.0px;
@@ -2148,10 +2945,10 @@ header.scrolled {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    width: 350px;
+    width: 360px;
     height: 500px; /* Adjust height as needed */
     background-color: #FAFAFF;
-    border: 1px solid #ccc;
+    border: 1px solid #e6e6e6;
     border-radius: 40px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -2304,7 +3101,7 @@ button {
     width: 300px;
     height: 450px;
     background-color: #77DD86;
-    border: 1px solid #ccc;
+    border: 1px solid #e6e6e6;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -2394,7 +3191,8 @@ button {
 #areas-of-interest {
     padding: 20px 0;
     text-align: center;
-    margin-bottom: 160px; /* Add space below the section */
+    margin-bottom: 0px; /* Add space below the section */
+    height:1250px;
 }
 
 /* Styles for the statement and creative line */
@@ -2459,10 +3257,10 @@ button {
 
 /* Styles for the resume pill */
 .resume-pill {
-    background-color: #ffffff; /* Set background color to white */
+    background-color: #77DD86; /* Set background color to white */
     color: #1DBF73; /* Set text color to green */
-    padding: 2px 8px; /* Reduced padding for narrower width and reduced height */
-    border: 1.4px solid #1DBF73; /* Set border to green */
+    padding: 3px 8px; /* Reduced padding for narrower width and reduced height */
+    border: 0.08px solid #77DD86; /* Set border to green */
     border-radius: 20px;
     cursor: pointer;
     font-size: 20px; /* Reduce font size */
@@ -2471,6 +3269,7 @@ button {
     margin-left: auto; /* Move the resume pill to the complete right */
     margin-right: 0; /* Remove margin-right to align with the right edge */
     transition: transform 0.3s; /* Add transition for smooth scale effect */
+    height: 28px;
 }
 
     /* Style the text inside the pill */
@@ -2515,10 +3314,10 @@ button {
 .technology-label {
     display: inline-block;
     padding: 5px 10px;
-    background-color: #1DBF73;
-    color: #FFFFFF;
+    background-color: #77DD86;
+    color: #000000;
     border-radius: 8px;
-    border: 1px solid #1DBF73;
+    border: 1px solid #77DD86;
     margin-bottom: 10px; /* Adjust margin as needed */
     font-size: 12px; /* Adjust the font size as needed */
 }
@@ -2527,9 +3326,9 @@ button {
     display: inline-block;
     padding: 5px 10px;
     background-color: #FFFFFF;
-    color: #1DBF73;
+    color: #003F3C;
     border-radius: 8px;
-    border: 1px solid #77DD86;
+    border: 1px solid #003F3C;
     margin-bottom: 10px; /* Adjust margin as needed */
     font-size: 12px; /* Adjust the font size as needed */
 }
@@ -2594,19 +3393,27 @@ button {
 }
 
 .project-container {
-    flex: 1 1 540px; /* Ensure the project containers maintain the fixed width */
+    flex: 1 1 540px;
     box-sizing: border-box;
-    visibility: visible; /* Default to visible */
-    position: relative; /* Ensure the position is relative */
-    border-radius: 40px; /* Adjust the border-radius as needed for the desired roundness */
-    background-color: white;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08); /* Adjust the box-shadow values for the desired drop shadow effect */
-    overflow: hidden; /* Ensures that the shadow is applied to the rounded container */
-    width: 400px; /* Set a fixed width for all project containers */
-    height: 540px; /* Set a fixed height for all project containers */
-    margin: 20px; /* Adjust margin as needed for spacing between project containers */
-    transition: opacity 0.3s ease-in-out; /* Add transition for opacity */
+    visibility: visible;
+    position: relative;
+    border-radius: 30px;
+    border: 0.05px solid #E6E6E6;
+    overflow: hidden;
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), url('Interest Pattern.png');
+    background-size: cover;
+    background-position: center;
 }
+
+
+    .project-container:hover {
+        box-shadow: 0 6px 20px 0 rgba(0, 63, 60, 0.03), 0 6px 20px 0 rgba(0, 63, 60, 0.03); /* Apply the box shadow on hover */
+        transform: scaleY(1.05); /* Increase the height a bit on hover */
+    }
 
     .project-container.hidden {
         opacity: 0; /* Fade out hidden projects */
@@ -2676,14 +3483,13 @@ button {
 }
 
 .mac-window {
-    background-color: #FAFAFF;
-    border: 1px solid #E6E6E6;
+    background-color: #FCFCFC;
     border-radius: 20px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
-    padding: 16px;
-    width: 400px; /* Adjust the width as needed */
-    max-width: 100%; /* Ensure the window does not exceed the viewport width */
-    margin: 0 auto; /* Center the window horizontally */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    padding: 10px;
+    width: 455px;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 /* CSS for search bar */
@@ -2693,11 +3499,10 @@ button {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 20px;
-    width: 350px;
+    width: 395px;
     overflow: hidden;
     background-color: #fff;
     margin: 20px auto; /* Center the search bar horizontally */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Drop shadow */
 }
 
 .search-icon {
@@ -2790,7 +3595,7 @@ button {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding-bottom: 2220px; /* Adjust bottom padding as needed */
+    padding-bottom: 0px; /* Adjust bottom padding as needed */
     background-color: #FFFFFF; /* Adjust the alpha value to reduce transparency */
     border-radius: 120px;
 }
@@ -2820,10 +3625,10 @@ button {
 
 .experience-item {
     position: relative;
-    width: 300px;
-    height: 330px; /* Adjust height as needed */
+    width: 500px; /* Increased width */
+    height: 280px; /* Reduced height */
     padding: 20px;
-    border-radius: 40px;
+    border-radius: 30px;
     background-color: #ffffff;
     margin-bottom: 20px; /* Added for spacing */
     transform-style: preserve-3d;
@@ -2867,7 +3672,7 @@ button {
     bottom: 0; /* Adjusted to remove the bottom part */
     left: 50%;
     transform: translateX(-50%);
-    width: 4px; /* Adjusted width for the line */
+    width: 2px; /* Adjusted width for the line */
     height: 0px; /* Reduced height of the line */
     background-color: rgba(119, 221, 134, 0.4); /* Adjusted transparency of the line */
     transition: height 0.5s ease; /* Transition effect for height changes */
@@ -2876,7 +3681,7 @@ button {
 
 #exp1 {
     top: 5px; /* Move it down by adjusting the top position */
-    left: calc(50% - 585px); /* Move it right by adjusting the left position */
+    left: calc(50% - 985px); /* Move it right by adjusting the left position */
 }
 
 #exp2 {
@@ -2974,10 +3779,6 @@ button {
     }
 }
 
-.blink-animation {
-    animation: blink 1s infinite;
-}
-
 .experience-info {
     display: none;
     position: absolute;
@@ -2992,28 +3793,492 @@ button {
 }
 
 #exp-info1 {
-    top: 255px;
+    top: 283px;
     left: calc(50% + 12px);
 }
 
 #exp-info2 {
-    top: 820px;
+    top: 907px;
     right: calc(50% + 12px);
 }
 
 #exp-info3 {
-    top: 1340px;
+    top: 1484px;
     left: calc(50% + 12px);
 }
 
 #exp-info4 {
-    top: 1860px;
+    top: 2062px;
     right: calc(50% + 12px);
 }
 
 #exp-info5 {
-    top: 2400px;
+    top: 2660px;
     left: calc(50% + 12px);
+}
+
+.livspace-exp-new-cont {
+    width: 80px;
+    height: 80px;
+    border: 0.1px solid #000000;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative; /* Ensure position relative for centering */
+    right: -12px;
+    top: 10px;
+    z-index: 1
+}
+
+    .livspace-exp-new-cont img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover; /* Adjust object-fit as needed */
+        position: absolute; /* Position the image absolutely */
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center the image */
+    }
+
+.livspace-new-exp-rect {
+    width: 420px;
+    height: 380px;
+    border: 1px solid #E6E6E6;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative; /* Required for positioning the pseudo-element */
+    background: rgba(255, 255, 255, 0.5); /* Optional: background color in case the image isn't visible */
+}
+
+    .livspace-new-exp-rect::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color:#ffffff;
+        opacity: 0.12; /* Adjust the opacity value to control transparency */
+        z-index: -1; /* Ensures the image is behind the content */
+    }
+
+
+
+.livspace-new-expe-container {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    top: -300px;
+    right: -10px;
+}
+
+.livspace-new-expe-arrow-circle {
+    background-color: #E86362;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.livspace-new-expe-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.livspace-new-expe-container:hover .livspace-new-expe-arrow-circle {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: #E86362;
+}
+
+.livspace-new-expe-container:hover .livspace-new-expe-arrow-svg {
+    transform: scale(1.2);
+}
+
+.livspace-new-expe-liquid {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #E86362;
+    z-index: 1;
+    transition: width 2s;
+}
+
+.livspace-new-expe-text-top {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 3;
+}
+
+.livspace-new-expe-container.clicked .livspace-new-expe-liquid {
+    width: 100%;
+}
+
+.livspace-new-expe-container.clicked .livspace-new-expe-text-top {
+    opacity: 1;
+}
+
+.livspace-new-expe-container.reset .livspace-new-expe-liquid {
+    width: 0%;
+}
+
+.livspace-new-expe-container.reset .livspace-new-expe-text-top {
+    opacity: 0;
+}
+
+.namasys-new-expe-container {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    top: -248px;
+    right: -10px;
+}
+
+.namasys-new-expe-arrow-circle {
+    background-color: #A0DEFF;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.namasys-new-expe-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.namasys-new-expe-container:hover .namasys-new-expe-arrow-circle {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: #A0DEFF;
+}
+
+.namasys-new-expe-container:hover .namasys-new-expe-arrow-svg {
+    transform: scale(1.2);
+}
+
+.namasys-new-expe-liquid {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #A0DEFF;
+    z-index: 1;
+    transition: width 2s;
+}
+
+.namasys-new-expe-text-top {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 3;
+}
+
+.namasys-new-expe-container.clicked .namasys-new-expe-liquid {
+    width: 100%;
+}
+
+.namasys-new-expe-container.clicked .namasys-new-expe-text-top {
+    opacity: 1;
+}
+
+.namasys-new-expe-container.reset .namasys-new-expe-liquid {
+    width: 0%;
+}
+
+.namasys-new-expe-container.reset .namasys-new-expe-text-top {
+    opacity: 0;
+}
+
+.yoshops-new-expe-container {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    top: -248px;
+    right: -10px;
+}
+
+.yoshops-new-expe-arrow-circle {
+    background-color: #EF231C;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.yoshops-new-expe-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.yoshops-new-expe-container:hover .yoshops-new-expe-arrow-circle {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: #EF231C;
+}
+
+.yoshops-new-expe-container:hover .yoshops-new-expe-arrow-svg {
+    transform: scale(1.2);
+}
+
+.yoshops-new-expe-liquid {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #EF231C;
+    z-index: 1;
+    transition: width 2s;
+}
+
+.yoshops-new-expe-text-top {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 3;
+}
+
+.yoshops-new-expe-container.clicked .yoshops-new-expe-liquid {
+    width: 100%;
+}
+
+.yoshops-new-expe-container.clicked .yoshops-new-expe-text-top {
+    opacity: 1;
+}
+
+.yoshops-new-expe-container.reset .yoshops-new-expe-liquid {
+    width: 0%;
+}
+
+.yoshops-new-expe-container.reset .yoshops-new-expe-text-top {
+    opacity: 0;
+}
+
+.sparks-new-expe-container {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    top: -248px;
+    right: -10px;
+}
+
+.sparks-new-expe-arrow-circle {
+    background-color: #000000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.sparks-new-expe-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.sparks-new-expe-container:hover .sparks-new-expe-arrow-circle {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: #000000;
+}
+
+.sparks-new-expe-container:hover .sparks-new-expe-arrow-svg {
+    transform: scale(1.2);
+}
+
+.sparks-new-expe-liquid {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 1;
+    transition: width 2s;
+}
+
+.sparks-new-expe-text-top {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 3;
+}
+
+.sparks-new-expe-container.clicked .sparks-new-expe-liquid {
+    width: 100%;
+}
+
+.sparks-new-expe-container.clicked .sparks-new-expe-text-top {
+    opacity: 1;
+}
+
+.sparks-new-expe-container.reset .sparks-new-expe-liquid {
+    width: 0%;
+}
+
+.sparks-new-expe-container.reset .sparks-new-expe-text-top {
+    opacity: 0;
+}
+
+.biolim-new-expe-container {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 40px;
+    border-radius: 30px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    top: -238px;
+    right: -10px;
+}
+
+.biolim-new-expe-arrow-circle {
+    background-color: #1A75F0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.biolim-new-expe-arrow-svg {
+    transition: transform 0.3s ease;
+}
+
+.biolim-new-expe-container:hover .biolim-new-expe-arrow-circle {
+    transform: translate(-50%, -50%) scale(1.2);
+    background-color: #1A75F0;
+}
+
+.biolim-new-expe-container:hover .biolim-new-expe-arrow-svg {
+    transform: scale(1.2);
+}
+
+.biolim-new-expe-liquid {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #1A75F0;
+    z-index: 1;
+    transition: width 2s;
+}
+
+.biolim-new-expe-text-top {
+    color: #FFFFFF;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -1.4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: 3;
+}
+
+.biolim-new-expe-container.clicked .biolim-new-expe-liquid {
+    width: 100%;
+}
+
+.biolim-new-expe-container.clicked .biolim-new-expe-text-top {
+    opacity: 1;
+}
+
+.biolim-new-expe-container.reset .biolim-new-expe-liquid {
+    width: 0%;
+}
+
+.biolim-new-expe-container.reset .biolim-new-expe-text-top {
+    opacity: 0;
 }
 
 .greystyle-rounded-container {
@@ -3201,15 +4466,15 @@ button {
     width: 300px;
     height: 0; /* Start with height 0 */
     background-color: #77DD86;
-    border: 1px solid #ccc;
+    border: 1px solid #e6e6e6;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 9999;
     display: none; /* Hidden by default */
-    transition: all 0.3s ease;
-    overflow: hidden; /* Prevent content overflow */
+    transition: all 0.3s ease; /* Smooth transition */
     opacity: 0; /* Start with opacity 0 */
+    transform: scale(0.8); /* Start scaled down */
 }
 
     /* Chatbox open state */
@@ -3217,21 +4482,35 @@ button {
         display: block; /* Display the chatbox */
         height: 450px; /* Full height */
         opacity: 1; /* Full opacity */
-        animation: openChatbox 0.5s ease-in-out forwards; /* Apply the keyframe animation */
+        transform: scale(1); /* Scale to normal size */
+        animation: openChatbox 0.5s ease-out forwards; /* Modern animation with easing */
         bottom: 40px;
     }
 
 /* Keyframe animations */
 @keyframes openChatbox {
     0% {
-        transform: translateY(100px);
+        transform: translateY(100px) scale(0.8); /* Start with offset and scaled down */
         opacity: 0;
     }
 
     100% {
-        transform: translateY(0);
+        transform: translateY(0) scale(1); /* End with normal position and size */
         opacity: 1;
     }
+}
+
+/* Curvy shape at the bottom of the chatbox */
+.chatbox::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px; /* Adjust height as needed */
+    background-color: #fafaff;
+    border-radius: 0 0 20px 20px; /* Adjust border-radius for the curve */
+    transform: translateY(100%);
 }
 
 .chat-header {
@@ -3249,7 +4528,7 @@ button {
     position: relative;
     left: -9.8px;
     top: -10px;
-    height: 25px;
+    height: 44px;
 }
 
 .chat-title {
@@ -3295,15 +4574,29 @@ button {
     }
 
 .chat-container {
+    position: relative; /* Needed to position the pseudo-element */
     max-height: 350px;
     overflow-y: auto;
-    padding: 20px;
-    background: linear-gradient(to bottom, #FFFFFF, #FAFAFA); /* Gradient background */
+    padding: 40px;
     border-radius: 20px;
     animation: fadeIn ease 0.5s;
     scroll-behavior: smooth; /* Smooth scrolling */
     animation: gradientBackground 10s ease infinite alternate; /* Gradient background animation */
 }
+
+    .chat-container::before {
+        content: ""; /* Required for pseudo-element */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover; /* Ensure the image covers the container */
+        background-repeat: repeat; /* Repeat the image as needed */
+        opacity: 0.04; /* Adjust this value to reduce the opacity of the background image */
+        z-index: -1; /* Place behind the content */
+    }
+
 
     .chat-container::-webkit-scrollbar {
         width: 6px; /* Width of the scrollbar */
@@ -3336,10 +4629,10 @@ button {
 }
 
 .chat-message {
-    background-color: #FFFFFF;
+    background-color: #FAFAFF;
     border: 0.5px solid #EEEEEE;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     padding: 10px;
     border-radius: 20px;
     font-family: 'Montserrat', sans-serif;
@@ -3348,6 +4641,8 @@ button {
     letter-spacing: -1.0px;
     position: relative;
     right: -15px;
+    border-bottom-right-radius: 0px;
+    top: -12px;
 }
 
     .chat-message.response {
@@ -3359,6 +4654,7 @@ button {
         position: relative;
         right: 18px;
         top: -30px;
+        border-top-left-radius: 0px;
     }
 
 .message-timestamp {
@@ -3446,7 +4742,7 @@ button {
 .scroll-to-bottom {
     position: fixed;
     bottom: 40px; /* Adjust the bottom position */
-    right: 170px; /* Adjust the right position */
+    right: 175px; /* Adjust the right position */
     width: 30px; /* Set equal width and height for a circular shape */
     height: 30px;
     background-color: #FFFFFF; /* Button background color */
@@ -3473,21 +4769,38 @@ button {
 }
 
 .notification-box {
-    background: linear-gradient(135deg, rgba(0, 120, 255, 0.8) 40%, rgba(0, 255, 255, 0.8));
-    /* Adjust the angle (135deg) and color stops to control the slant and color transition */
-    color: #fff;
-    border-radius: 15px;
+    background: #fcfcfc;
+    color: #000000;
+    border-radius: 40px;
     padding: 15px;
     max-width: 300px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(8px); /* Apply a blur effect behind the element */
+    box-shadow: 0 9px 18px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
     transform: translateY(100%);
     opacity: 0;
     transition: transform 0.5s ease, opacity 0.5s ease;
+    border: 1px solid #e6e6e6;
+    position: relative; /* Ensure the pseudo-element is positioned relative to this container */
+    overflow: hidden; /* Hide any overflow from the pseudo-element */
 }
+
+    .notification-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('Chatbot Vector.jpg') no-repeat center center;
+        background-size: cover;
+        opacity: 0.03; /* Adjust the opacity to your preference */
+        z-index: -1; /* Ensure the image is behind the content */
+        border-radius: 40px; /* Match the border-radius of the container */
+    }
+
 
     .notification-box.active {
         transform: translateY(0);
@@ -3514,10 +4827,16 @@ button {
 .notification-close-btn {
     background: none;
     border: none;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
     font-size: 24px;
+    transition: transform 0.2s ease; /* Smooth transition for hover effect */
 }
+
+    .notification-close-btn:hover {
+        transform: scale(1.2); /* Enlarges the button by 20% on hover */
+    }
+
 
 @keyframes waving {
     0% {
@@ -3968,7 +5287,11 @@ button {
     box-sizing: border-box;
     background: #ffffff;
     position: relative;
+    background-color: #ffffff;
+    background-size: 20px 20px;
+    background-position: 0 0, 10px 10px;
 }
+
 
 .InterestContent .InterestTitle {
     font-size: 30px;
@@ -3977,8 +5300,26 @@ button {
     color: #000000;
 }
 
+/* Style for InterestCircle */
+.InterestCircle {
+    width: 36px;
+    height: 36px;
+    background-color: #144D4A;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle; /* Align circle with the text */
+}
+
+/* Adjust InterestTitle to accommodate the circle */
+.InterestTitle {
+    display: inline-block;
+    vertical-align: middle; /* Align text with the circle */
+}
+
+
 .InterestContent .InterestSubStatement {
-    color: #C5C5C5;
+    color: #43716E;
     font-size: 19.5px;
     letter-spacing: -1.4px;
     font-weight: 300;
@@ -4007,31 +5348,35 @@ button {
     gap: 20px;
 }
 
-.InterestSection.active {
-    display: block; /* Show active section */
+.InterestSection {
+    padding-bottom: 100px; /* Adjust this value as needed */
+}
+
+.InterestSectiondd {
+    padding-bottom: 50px; /* Adjust this value as needed */
 }
 
 .AOIFilterOption.active {
     background-color: #77DD86;
-    color: #ffffff;
+    color: #000000 !important;
     font-weight: 900;
 }
 
 .AOIFilterOption:hover {
     background-color: #77DD86;
-    color: #ffffff;
+    color: #000000 !important;
     font-weight: 900;
 }
 
-/* Ensure the SlideFilter is sticky and positioned correctly */
 .SlideFilter {
     position: sticky;
-    top: 95px; /* Adjust based on your design */
-    z-index: 1000; /* Ensure it's above other content */
+    top: 80px;
+    z-index: 1000;
+    opacity: 0.9;
 }
 
 .text-container {
-    background-color: #0D1117;
+    background-color: #ffffff;
     border-radius: 60px;
     padding: 50px 70px;
     margin: 20px auto;
@@ -4043,7 +5388,45 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    overflow: hidden;
+    border: 1px solid #e6e6e6;
+    /* Tile grid background */
+    background-image: linear-gradient(to right, #eeeeee 1px, transparent 1px), linear-gradient(to bottom, #eeeeee 1px, transparent 1px);
+    background-size: 30px 30px; /* Size of each tile */
+    background-position: 0 0, 0 0; /* Position of the lines */
 }
+
+.box {
+    width: 64px; /* Adjust size as needed */
+    height: 32px; /* Adjust size as needed */
+    border: 1px solid #e6e6e6;
+    position: relative;
+    background-color: #ffffff; /* Default background color */
+    transition: background-color 0.2s; /* Smooth color transition */
+}
+
+    .box:hover {
+        background-color: var(--random-color); /* Custom color on hover */
+    }
+
+    /* Example of adding SVG icons */
+    .box:nth-child(odd) {
+        /* Adjust styling for odd boxes */
+    }
+
+/* Customize colors in CSS variables if needed */
+:root {
+    --sky-300: #a0d2f0;
+    --pink-300: #f6c1c1;
+    --green-300: #a2d9a3;
+    --yellow-300: #f9e4a4;
+    --red-300: #fcb6b6;
+    --purple-300: #d4a5d9;
+    --blue-300: #a2c2e6;
+    --indigo-300: #b5a6d9;
+    --violet-300: #c4a3d9;
+}
+
 
     .text-container::before {
         content: '';
@@ -4051,32 +5434,61 @@ button {
         bottom: 0;
         left: 0;
         right: 0;
-        height: 330px;
-        background: linear-gradient(to top, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0));
+        height: 360px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
         border-radius: 0 0 60px 60px;
         pointer-events: none;
     }
 
-.text-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.text-content p {
+    color: #FFFFFF;
+    font-weight: 800;
+    letter-spacing: -3.8px;
+    margin: 0;
+    font-size: 72px;
+    max-width: 100%;
+    word-wrap: break-word;
+    top: -20px;
 }
 
-    .text-content p {
-        color: #FFFFFF;
-        font-weight: 800;
-        letter-spacing: -3.8px;
-        margin: 0;
-        font-size: 72px;
-        max-width: 100%;
-        word-wrap: break-word;
-        top: -20px;
-    }
+.text-content {
+    flex: 1; /* Allows the element to grow and fill the available space */
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Arranges children elements in a column */
+    justify-content: center; /* Centers children elements vertically */
+    font-weight: 900; /* Sets a very bold font weight */
+    font-size: 55px; /* Sets the font size */
+    letter-spacing: -4.8px; /* Adjusts the spacing between letters */
+    margin-bottom: 15px; /* Adds margin below the element */
+    overflow: hidden; /* Hides any overflow content */
+    position: relative; /* Positions the element relative to its normal position */
+    height: 270px; /* Sets the height of the element */
+    right: 20px;
+    width: 660px;
+    top: -10px;
+}
 
 .portfolio-text {
     font-weight: 200;
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+    color: #77DD86;
+    left: 0; /* Adjust as necessary */
+    top: 96px;
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 .text-container-rounded-rectangles {
@@ -4094,7 +5506,7 @@ button {
 .text-container-rectangle {
     width: 186px;
     height: 190px;
-    border: 0.8px solid #ffffff;
+    border: 0.8px solid #000000;
     border-radius: 20px;
     position: relative;
     display: flex;
@@ -4150,7 +5562,7 @@ button {
 .text-container-small-rectangle {
     width: 140px;
     height: 135px;
-    border: 0.8px solid #ffffff;
+    border: 0.8px solid #000000;
     border-radius: 20px;
     background-color: transparent;
     position: relative;
@@ -4168,14 +5580,20 @@ button {
     align-items: center;
     width: 310px;
     height: 110px;
-    background-color: #77DD86;
+    background-color: #FFFFFF;
     top: 130px;
     right: 670px;
-    box-shadow: 0 7px 16px rgba(0, 0, 0, 0.08);
     opacity: 0; /* Initially set opacity to 0 */
     animation: slideAndFade 10s ease-in-out infinite;
     overflow: hidden; /* Ensure the wavy shape stays within the rectangle */
+    border: 1px solid #E6E6E6;
 }
+
+.text-ad-content {
+    position: relative;
+    z-index: 1; /* Ensure this content is above the background text */
+}
+
 
 .adrect-wave-shape {
     position: absolute;
@@ -4183,11 +5601,12 @@ button {
     left: 0;
     width: 200%;
     height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255, 255, 255, 0.5)" fill-opacity="1" d="M0,96L30,120C60,144,120,192,180,186.7C240,181,300,139,360,106.7C420,75,480,53,540,80C600,107,660,181,720,192C780,203,840,149,900,128C960,107,1020,117,1080,160C1140,203,1200,277,1260,256C1320,235,1380,117,1410,58.7L1440,0L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>') repeat-x;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(193, 193, 193, 0.2)" fill-opacity="1" d="M0,96L30,120C60,144,120,192,180,186.7C240,181,300,139,360,106.7C420,75,480,53,540,80C600,107,660,181,720,192C780,203,840,149,900,128C960,107,1020,117,1080,160C1140,203,1200,277,1260,256C1320,235,1380,117,1410,58.7L1440,0L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>') repeat-x;
     background-size: contain;
     animation: moveWave 4s linear infinite;
     opacity: 0.5; /* Adjust opacity as needed */
 }
+
 
 @keyframes moveWave {
     0% {
@@ -4254,7 +5673,7 @@ button {
 
 .text-ad-text {
     letter-spacing: -2.0px;
-    font-size: 28px;
+    font-size: 24px;
     position: relative;
     right: 17px;
     font-weight: 300;
@@ -4263,25 +5682,27 @@ button {
 
 .text-ad-percentage {
     margin-top: 10px;
-    font-size: 32px;
-    font-weight:300;
-    color: #ffffff;
-    letter-spacing: -2.5px;
+    font-size: 22px;
+    font-weight: 300;
+    color: #000000;
+    letter-spacing: -1.5px;
     position: relative;
     right: -25px;
     top: -5px;
+    background: #77DD86;
+    border-radius: 20px;
 }
 
 .text-ad-image-container {
     position: absolute;
     bottom: 20px;
     right: 10px;
-    width: 60px;
-    height: 60px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     overflow: hidden;
     top: -15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adjust the values as needed */
+    border: 1px solid #E6E6E6;
 }
 
     .text-ad-image-container img {
@@ -4291,10 +5712,11 @@ button {
     }
 
 .project-cont-text-cover {
-    border: 0.8px solid #ffffff; /* Outline color */
-    border-radius: 10px; /* Rounded corners */
+    border: 0.8px solid #000000; /* Outline color */
+    border-radius: 12px; /* Rounded corners */
     padding: 5px 10px; /* Padding around the text */
     margin-top: 10px; /* Space between the small rectangle and the text label */
+    background:#000000;
 }
 
 .project-cont-label {
@@ -4303,3 +5725,3326 @@ button {
     font-size: 16px; /* Font size */
     color: #ffffff; /* Text color */
 }
+
+.video-container {
+    position: relative;
+    width: fit-content;
+    margin: auto;
+}
+
+.VC-circle-animation {
+    position: absolute;
+    top: 49.7%; /* Adjusted top position */
+    left: 50%; /* Adjusted left position */
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.4); /* Black circle with opacity */
+    border-radius: 50%;
+    width: 73px;
+    height: 73px;
+    display: none; /* Initially hidden */
+    animation: vccircleAnimation 1.5s linear infinite; /* Adjusted animation properties */
+}
+
+@keyframes vccircleAnimation {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5); /* Start small */
+        opacity: 0.8; /* Initial opacity */
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1.5); /* Enlarge quickly */
+        opacity: 0; /* Invisible when enlarged */
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5); /* Stay enlarged */
+        opacity: 0; /* Remain invisible */
+    }
+}
+
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #77DD86;
+    border-radius: 50%;
+    border: 3px solid #ffffff;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1; /* Ensure the play button is above the circle animation */
+}
+
+    .play-button .play-icon {
+        font-size: 30px;
+        color: white;
+    }
+
+video.playing {
+    display: block;
+}
+
+/* Show circle animation when video is paused or ended */
+video:not(.playing) + .VC-circle-animation {
+    display: block;
+}
+
+.parent {
+    width: 1000px; /* Ensure parent is wide enough */
+    overflow: visible; /* Make sure overflow does not clip the child */
+    position: relative;
+}
+
+.new-journey-stats {
+    width: 1410px; /* Reduced width */
+    height: 540px; /* Adjust the height as needed */
+    background-color: #Ffffff;
+    border-radius: 40px;
+    margin-bottom: 20px; /* Adjust the space between the rectangle and the vertical line */
+    position: relative;
+    top: -700px;
+    right: 400.2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    justify-content: center; /* Center items vertically */
+}
+
+.new-journey-title {
+    font-size: 58px;
+    font-weight: 900;
+    letter-spacing: -4.8px;
+    text-align: right;
+    color: #000000; /* Adjust the color as needed */
+    margin-bottom: 20px; /* Adjust spacing between title and image */
+}
+
+.new-journey-light {
+    font-weight: 200; /* Font weight 300 for "Insights on my" */
+    font-size: 48px;
+}
+
+.journey-image {
+    display: block;
+    max-width: 65%; /* Ensure the image does not exceed its container width */
+    margin-top: 20px; /* Adjust the spacing between title and image */
+    margin-bottom: 20px; /* Adjust spacing between image and rounded rectangles */
+}
+
+.new-journey-sub-rounded-rectangles {
+    display: flex;
+    justify-content: space-around;
+    width: 80%; /* Adjust width as needed */
+}
+
+.newj-rounded-rectangle {
+    width: 300px;
+    height: 240px;
+    background-color: #003F3C; /* Adjust background color */
+    border-radius: 40px; /* Adjust border radius to make it rounded */
+}
+
+#dynamicCareerWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicStoryWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicExperienceWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicInterestWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicProjectsWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%);
+    border: 1px solid #e6e6e6;
+    background-image: repeating-linear-gradient( 0deg, #e6e6e6, #e6e6e6 1px, transparent 1px, transparent 20px ), repeating-linear-gradient( 90deg, #e6e6e6, #e6e6e6 1px, transparent 1px, transparent 20px );
+    /* background-size: 30px 30px; */
+    /* background-position: 0 0, 0 0; */
+    border-radius: 20px;
+    padding-right: 10px;
+    padding-left: 5px;
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicMagicWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#magicSymbol {
+    transition: opacity 1s ease-in-out;
+}
+
+#dynamicCollaborateWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#dynamicConnectWord {
+    display: inline-block;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateY(100%); /* Start off the screen */
+}
+
+@keyframes moveFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.flow-chart-contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 40px 50px; /* Reduced bottom padding */
+}
+
+    .flow-chart-contact::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient( 0deg, #F5F5F5, #F5F5F5 1px, transparent 1px, transparent 20px ), repeating-linear-gradient( 90deg, #F5F5F5, #F5F5F5 1px, transparent 1px, transparent 20px );
+        background-size: 20px 20px; /* Larger tiles */
+        z-index: -2;
+    }
+
+    .flow-chart-contact::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient( to bottom, rgba(250, 250, 255, 0) 0%, /* Gradient at the top */
+        rgba(250, 250, 255, 0) 30%, /* Transition to transparent */
+        rgba(250, 250, 255, 0) 70%, /* Transition from transparent */
+        rgba(250, 250, 255, 0) 100% /* Gradient at the bottom */
+        ), linear-gradient( to bottom, rgba(250, 250, 255, 0) 0%, rgba(250, 250, 255, 0) 30%, rgba(250, 250, 255, 0) 70%, rgba(250, 250, 255, 0) 100% );
+        z-index: -1;
+    }
+
+.flow-chart-contact-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.flow-chart-contact-step {
+    border: 0.5px solid #e6e6e6;
+    background-color: #ffffff;
+    border-radius: 40px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    margin: 0 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 63, 60, 0.01), 0 6px 20px 0 rgba(0, 63, 60, 0.01);
+}
+
+.flow-chart-contact-arrow {
+    width: 100px;
+    height: 30px;
+}
+
+.flow-chart-contact-special-arrow {
+    width: 400px;
+    height: 150px;
+    margin-top: -20px;
+    margin-bottom: -20px;
+    position: relative;
+    right: -440px;
+    transform: rotate(-8deg);
+    top: -80px;
+}
+
+.flow-chart-contact-return-arrow {
+    width: 400px;
+    height: 150px;
+    position: relative;
+    right: 510px;
+    transform: rotate(8deg);
+    top: -276px;
+}
+
+.flow-chart-contact-title {
+    font-weight: 900;
+    font-size: 55px;
+    letter-spacing: -4.8px;
+    color: #000000; /* Initial text color */
+    margin-bottom: 80px;
+}
+
+
+@keyframes drawPath {
+    from {
+        stroke-dashoffset: 100;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillCircle {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        fill: #E8F4EA;
+    }
+}
+
+.flow-chart-contact-arrow path {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: drawPath 10s linear infinite;
+    stroke: #000000;
+}
+
+.flow-chart-contact-arrow circle {
+    animation: fillCircle 10s infinite;
+}
+
+@keyframes drawReturnArrow {
+    from {
+        stroke-dasharray: 1000; /* Adjust this value based on the length of the path */
+        stroke-dashoffset: 1000; /* Same as stroke-dasharray */
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillReturnCircle {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        fill: #E8F4EA;
+    }
+}
+
+.flow-chart-contact-return-arrow path {
+    stroke-dasharray: 1000; /* Adjust this value based on the length of the path */
+    stroke-dashoffset: 1000; /* Same as stroke-dasharray */
+    animation: drawReturnArrow 10s linear infinite;
+    stroke: #000000;
+}
+
+.flow-chart-contact-return-arrow circle {
+    animation: fillReturnCircle 10s infinite;
+}
+
+@keyframes drawSpecialArrow {
+    from {
+        stroke-dasharray: 1000; /* Adjust this value based on the length of the path */
+        stroke-dashoffset: 1000; /* Same as stroke-dasharray */
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillSpecialCircle {
+    0% {
+        fill: transparent;
+    }
+
+    100% {
+        fill: #E8F4EA;
+    }
+}
+
+.flow-chart-contact-special-arrow path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: drawSpecialArrow 10s linear infinite;
+    stroke: #000000;
+}
+
+.flow-chart-contact-special-arrow circle {
+    animation: fillSpecialCircle 10s infinite;
+}
+
+.aboutme-fill-animation-container {
+    width: 85%;
+    height: 5px;
+    background-color: #C0C0C0; /* Container color */
+    border-radius: 20px;
+    position: relative;
+    top: -50px;
+    right: -17px;
+    overflow: hidden; /* Ensures the filling animation stays within the container */
+}
+
+@keyframes fillAnimation {
+    0% {
+        background-size: 0% 100%;
+    }
+
+    100% {
+        background-size: 100% 100%;
+    }
+}
+
+.about-me-fill-animation {
+    width: 100%; /* Match the container width */
+    height: 100%; /* Match the container height */
+    background: linear-gradient(to right, #5379F6 100%, transparent 50%);
+    background-size: 0% 100%; /* Start with no visible background */
+    background-repeat: no-repeat;
+    position: absolute; /* Ensure it is positioned within the container */
+    top: 0;
+    left: 0;
+    border-radius: 20px;
+    animation: fillAnimation 15s ease-out forwards; /* Adjust the duration as needed */
+}
+
+#designdevelop {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+    #designdevelop::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px) center/15px 15px;
+        background-size: 20px 20px; /* Size of the dot grid */
+        z-index: -1;
+    }
+
+.animation-container {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+}
+
+#android-layout {
+    width: 100px;
+    height: 200px;
+    stroke: #77dd86;
+    stroke-width: 1;
+    fill: none;
+}
+
+.outline {
+    stroke-dasharray: 400;
+    stroke-dashoffset: 400;
+    animation: draw 5s linear infinite;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+#analyze-video {
+    border-radius: 20px; /* Ensure the border radius matches the container for a seamless look */
+}
+
+/* Base styling for the span */
+.submits-highlight {
+    position: relative;
+    display: inline-block;
+    color: #000000; /* Initial text color */
+    font-weight: 300;
+    overflow: hidden; /* Hide overflow to keep border clean */
+    padding: 10px 20px; /* Padding to accommodate the border */
+    border-radius: 40px; /* Match the border radius of the rectangle */
+    transition: color 0.5s ease; /* Smooth transition for color */
+    animation: highlightAnimation 14s infinite; /* Highlight animation */
+    top: 22px;
+    border-bottom: 5px solid #000000;
+}
+
+    .submits-highlight::before {
+        content: '';
+        position: absolute;
+        top: 0; /* Adjusted to align properly with padding */
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 2px solid #77dd86; /* Border color */
+        border-radius: 40px; /* Rounded corners */
+        background-color: #77dd86; /* Background color */
+        z-index: -1; /* Behind the text */
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.5s ease;
+        border-bottom: 8px solid #000000;
+    }
+
+/* Keyframes for highlight animation */
+@keyframes highlightAnimation {
+    0% {
+        color: #000000;
+        background-color: transparent; /* No background color initially */
+        opacity: 0; /* Rectangle hidden initially */
+    }
+
+    20% {
+        color: #ffffff; /* Change text color */
+        background-color: #77dd86; /* Background color */
+        opacity: 1; /* Show rectangle */
+    }
+
+    80% {
+        color: #ffffff; /* Keep text color */
+        background-color: #77dd86; /* Keep background color */
+        opacity: 1; /* Keep rectangle visible */
+    }
+
+    100% {
+        color: #000000; /* Return text color */
+        background-color: transparent; /* Remove background color */
+        opacity: 0; /* Hide rectangle */
+    }
+}
+
+/* Keyframes for button press effect */
+@keyframes buttonPressEffect {
+    0% {
+        transform: scale(1); /* Normal size */
+        box-shadow: none; /* No shadow */
+    }
+
+    50% {
+        transform: scale(0.95); /* Slightly compressed */
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2); /* Add inner shadow for pressed effect */
+    }
+
+    100% {
+        transform: scale(1); /* Return to normal size */
+        box-shadow: none; /* Remove shadow */
+    }
+}
+
+/* Double press effect on hover */
+.submits-highlight:hover {
+    background-color:#77dd86;
+    color:#ffffff;
+    animation: buttonPressEffect 0.4s ease-in-out 2; /* Apply double press effect */
+}
+
+
+/* Define the animation for moving from bottom */
+@keyframes moveFromBottom {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Apply the animation to dynamicHomePortfolioWord */
+#dynamicHomePortfolioWord {
+    display: inline-block; /* Ensure the element is inline-block for animations */
+    color: #003F3C;
+    font-weight: 900;
+    font-size: 64px;
+    letter-spacing: -4.8px;
+}
+
+.cursor {
+    display: inline-block;
+    width: 1px;
+    height: 1em;
+    background-color: black;
+    vertical-align: text-bottom;
+    visibility: hidden; /* Initially hidden */
+}
+
+/* Animation class for dynamic words */
+.animate {
+    animation: moveFromBottom 0.5s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cycling-word {
+    animation: slideUp 0.5s ease-out; /* Adjust duration if needed */
+}
+
+.twitter-profile-pic {
+    width: 50px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px; /* Space between image and text */
+}
+
+    .twitter-profile-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.option {
+    background-color: #FAFAFF;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    text-align: left;
+    width: 200px;
+    cursor: pointer;
+    position: relative;
+}
+
+.filled {
+    background-color: #77dd86;
+}
+
+    .filled::after {
+        content: attr(data-percent);
+        font-size: 22px;
+        font-weight: 900;
+        color: #000000;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+.chatbot-active-symbol {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-color: #77dd86;
+    border-radius: 50%;
+    animation: blink 1.5s infinite; /* Adjust the duration for slower or faster blinking */
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1; /* Fully visible */
+    }
+
+    50% {
+        opacity: 0; /* Fully transparent */
+    }
+}
+
+
+/* Keyframes for typing dots animation */
+@keyframes typingDots {
+    0%, 20% {
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0;
+    }
+
+    80%, 100% {
+        opacity: 1;
+    }
+}
+
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust spacing as needed */
+}
+
+.typing-dots {
+    display: flex;
+    align-items: center;
+}
+
+    .typing-dots div {
+        width: 8px;
+        height: 8px;
+        margin: 0 2px;
+        background-color: #000;
+        border-radius: 50%;
+        animation: typingDots 1.5s infinite;
+        position: relative;
+        right: -10px;
+    }
+
+        .typing-dots div:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .typing-dots div:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .typing-dots div:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+/* Define the slide-up animation */
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Initial state of prompt pills */
+.prompt-pill {
+    opacity: 0;
+    transform: translateY(50px); /* Start position off-screen */
+    transition: opacity 0.5s ease-in-out; /* Smooth opacity transition */
+}
+
+    /* Apply the sliding animation when pills become visible */
+    .prompt-pill.visible {
+        animation: slideUp 0.5s ease-out forwards;
+    }
+
+.chat-message-prerequisite {
+    color: white;
+    background: linear-gradient(to right, #49ABF9, #68D3E7);
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    display: inline-block;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+    top: -5px;
+    letter-spacing: -1.0px;
+}
+
+/* Styling for chat messages */
+.chat-message {
+    margin-bottom: 10px; /* Space below each message */
+}
+
+/* Hide elements initially */
+#typing-indicator1, #typing-indicator2 {
+    display: none;
+}
+
+#message1, #message2 {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#robot-logo1, #robot-logo2 {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.prompt-pill {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+    .prompt-pill.visible {
+        transform: translateY(0);
+    }
+
+#chatbox {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+    #chatbox.show {
+        opacity: 1;
+    }
+
+.service-icon {
+    width: 50px; /* Adjust the width as needed */
+    height: 50px; /* Adjust the height as needed */
+    margin-right: 20px; /* Space between the icon and the text */
+}
+
+#sticky-section {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.sticky {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* Add any other styles you want for the sticky state */
+}
+
+/* Existing CSS */
+.new-highlight-professional {
+    color: #ffffff; /* Default color */
+    background-color: #003F3C; /* Default background for highlighted words */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+/* Existing CSS */
+.new-highlight-practical {
+    color: #000000; /* Default color */
+    background-color: #77dd86; /* Default background for highlighted words */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+
+/* Existing CSS */
+.newj-word {
+    color: #000000; /* Default color */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+    .newj-word.revealed {
+        color: #000000; /* Color when revealed */
+    }
+
+.new-highlight-professional {
+    background-color: #ffffff;
+}
+
+.new-highlight-practical {
+    background-color: #ffffff;
+}
+
+.new-highlight-professional.revealed {
+    color: #ffffff;
+    background-color: #003F3C;
+    border-radius: 30px;
+    padding-right: 13px;
+    padding-left: 10px;
+}
+
+.new-highlight-practical.revealed {
+    color: #000000;
+    background-color: #77dd86;
+    border-radius: 30px;
+    padding-right: 13px;
+    padding-left: 10px;
+}
+
+/* Add this to your existing CSS */
+.newj-sentence {
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+}
+
+    .newj-sentence.revealed {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+.company-dec-rects {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    top: 100px; /* Adjust as needed */
+}
+
+.company-dec-rounded-rect {
+    background-color: #FCFCFC;
+    color: #9D9DA4;
+    font-size: 16px; /* Adjust as needed */
+    font-weight: 500;
+    text-align: center;
+    padding: 8px 16px; /* Adjust padding to reduce width */
+    border-radius: 15px;
+    border: 1px solid #E0E0E0; /* Light border to match background color */
+    max-width: 200px; /* Adjust max-width as needed */
+    margin: 0 auto; /* Center rectangles if desired */
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+    letter-spacing: -1.0px;
+    animation: float-diagonal 5s ease-in-out infinite; /* Default floating animation */
+}
+
+    .company-dec-rounded-rect::before {
+        content: "";
+        position: absolute;
+        left: -30px; /* Position outside to the left of the rectangle */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px; /* Adjust width to fit your image */
+        height: 22px; /* Adjust height to fit your image */
+        background-image: url('Mac_Modern_Cursor-removebg-preview.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity:0.8;
+    }
+
+/* Floating animations for diagonal directions */
+@keyframes float-diagonal-up-right {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -20px);
+    }
+    /* Adjust horizontal and vertical float distance */
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes float-diagonal-down-left {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-20px, 20px);
+    }
+    /* Adjust horizontal and vertical float distance */
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes float-diagonal-up-left {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-20px, -20px);
+    }
+    /* Adjust horizontal and vertical float distance */
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes float-diagonal-down-right {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, 20px);
+    }
+    /* Adjust horizontal and vertical float distance */
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.float-diagonal-up-right {
+    animation: float-diagonal-up-right 5s ease-in-out infinite;
+}
+
+.float-diagonal-down-left {
+    animation: float-diagonal-down-left 5s ease-in-out infinite;
+}
+
+.float-diagonal-up-left {
+    animation: float-diagonal-up-left 5s ease-in-out infinite;
+}
+
+.float-diagonal-down-right {
+    animation: float-diagonal-down-right 5s ease-in-out infinite;
+}
+
+.new-journey-sub-rounded-rectangles {
+    position: relative;
+    background: repeating-linear-gradient(0deg, transparent, transparent 96px, rgba(0, 0, 0, 0.03) 100px), repeating-linear-gradient(90deg, transparent, transparent 96px, rgba(0, 0, 0, 0.03) 100px);
+}
+
+.journey-container {
+    position: relative;
+    width: fit-content; /* Adjust as needed */
+    height: fit-content; /* Adjust as needed */
+}
+
+    .journey-container::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 500px;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(250, 250, 250, 0.05) 60%, rgba(250, 250, 250, 0.05) 40%), /* Reduced transparency */
+        repeating-linear-gradient(0deg, transparent, transparent 96px, rgba(0, 0, 0, 0.02) 100px), /* Reduced transparency */
+        repeating-linear-gradient(90deg, transparent, transparent 96px, rgba(0, 0, 0, 0.02) 100px); /* Reduced transparency */
+        z-index: 0; /* Ensure grid lines are behind the image */
+    }
+
+.journey-image {
+    position: relative;
+    top: 73px;
+    right: -630px;
+    z-index: 1; /* Ensure the image is above the grid lines */
+    opacity: 0; /* Make sure opacity is set correctly */
+}
+
+.floating-rectangles {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.floating-rectangle {
+    position: absolute;
+    width: 100px;
+    height: 30px;
+    background-color: #fcfcfc;
+    border-radius: 40px;
+    border: 1px solid #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 300;
+    color: #333;
+    text-align: center;
+    pointer-events: auto;
+    padding-left: 0px; /* Adjust to create space for the arrow */
+    transition: background-color 1s, color 1s; /* Smooth color transitions */
+}
+
+    .floating-rectangle.recruiter {
+        animation: floatDiagonalRightUp 10s ease-in-out infinite;
+    }
+
+    .floating-rectangle.client {
+        animation: floatDiagonalLeftDown 10s ease-in-out infinite;
+    }
+
+    .floating-rectangle .arrow-wrapper {
+        position: absolute;
+        left: 0; /* Position the arrow outside the rectangle */
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .floating-rectangle.recruiter .arrow-wrapper {
+        top: 50%;
+        left: -30px; /* Adjust as needed */
+        transform: translateY(-50%);
+    }
+
+    .floating-rectangle.client .arrow-wrapper {
+        top: 50%;
+        left: -30px; /* Adjust as needed */
+        transform: translateY(-50%);
+    }
+
+.mac-arrow {
+    width: 20px; /* Adjust the size of the arrow as needed */
+    height: 20px;
+}
+
+@keyframes floatDiagonalRightUp {
+    0% {
+        transform: translate(0, 0);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+
+    25% {
+        transform: translate(10px, -10px);
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    50% {
+        transform: translate(26px, -26px);
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    75% {
+        transform: translate(10px, -10px);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+}
+
+@keyframes floatDiagonalLeftDown {
+    0% {
+        transform: translate(0, 0);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+
+    25% {
+        transform: translate(-10px, 10px);
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    50% {
+        transform: translate(-26px, 26px);
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    75% {
+        transform: translate(-10px, 10px);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+
+    100% {
+        transform: translate(0, 0);
+        background-color: #fcfcfc;
+        color: #333;
+    }
+}
+
+@keyframes colorChange {
+    0% {
+        color: #ffffff;
+    }
+
+    50% {
+        color: #9D9DA4; /* Original color */
+    }
+
+    100% {
+        color: #9D9DA4; /* Original color */
+    }
+}
+
+.Y-highlight {
+    display: inline-block; /* Required for animation to work */
+    animation: colorChange 20s ease-in-out infinite;
+}
+
+.servui-words-container {
+    position: absolute;
+    bottom: 363px; /* Adjust to fit within the service-rectangle */
+    left: 20px;
+    width: calc(100% - 40px); /* Adjust width to ensure all items are visible */
+    height: 200px; /* Increase height as needed */
+    text-align: left;
+    z-index: 100; /* Ensure container is above other content */
+    overflow: hidden; /* Ensure no overflow outside the container */
+    background: rgba(255, 255, 255, 0); /* Optional: Add a semi-transparent background */
+    padding: 3px; /* Optional: Add padding to provide space inside the container */
+    box-sizing: border-box; /* Ensure padding is included in the height calculation */
+}
+
+/* Ensure rows are wide enough to cover animation */
+.servui-words-row {
+    display: flex;
+    white-space: nowrap;
+    position: relative; /* Position relative to manage z-index */
+    z-index: 101; /* Ensure rows are above container */
+    width: calc(180px * 6 * 2 + 20px * 12); /* Width to cover two sets of six items and margins */
+}
+
+/* Word items with sufficient width and spacing */
+.servui-word-item {
+    display: flex;
+    align-items: center;
+    background-color: #fcfcfc;
+    color: #000000;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin: 0 10px; /* Spacing between items */
+    opacity: 1; /* Ensure words are visible */
+    border: 1px solid #e6e6e6;
+    letter-spacing: -1.0px;
+    width: 180px; /* Width to fit content */
+    height: 12px;
+    position: relative; /* To ensure items stack correctly */
+    z-index: 102; /* Ensure items are above rows and container */
+}
+
+/* Slower animation for left sliding */
+.row-left {
+    animation: slideLeftLoop 45s linear infinite; /* Adjusted duration */
+}
+
+/* Slower animation for right sliding */
+.row-right {
+    animation: slideRightLoop 35s linear infinite; /* Adjusted duration for slower movement */
+}
+
+/* Keyframes for animations */
+@keyframes slideLeftLoop {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes slideRightLoop {
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%); /* Move by the width of the row */
+    }
+}
+
+/* Pause animation class */
+.pause-animation {
+    animation-play-state: paused;
+}
+
+/* Apply pause on hover */
+.servui-words-row:hover {
+    animation-play-state: paused;
+}
+
+.servweb-search-bar {
+    position: absolute;
+    bottom: 120px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+}
+
+.servweb-search-icon {
+    color: #333;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.servweb-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 4px;
+    font-size: 16px;
+    color: #ffffff;
+    border-radius: 5px;
+    letter-spacing: -1.0px;
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+}
+
+.new-typewrite-effect-web-serv {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.15em solid #333;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing:-0.6px;
+    color:#000000;
+}
+
+.typewrite-text {
+    display: inline;
+}
+
+.code-container {
+    display: flex;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 4px;
+    font-family: monospace;
+    position: relative;
+    top: -5px;
+}
+
+.line-numbers {
+    text-align: right;
+    padding-right: 5px;
+    color: #999;
+    user-select: none;
+    border-right: 1px solid #ddd;
+    font-size:12px;
+    position:relative;
+    right:12px;
+    top:-18px;
+}
+
+.code-content {
+    flex: 1;
+}
+
+.code-line {
+    margin: 0;
+    white-space: pre;
+    font-size:12px;
+    color:#000000;
+    font-family:montserrat;
+}
+
+    .code-line span {
+        color: #000000;
+    }
+
+.servwebdev-mac-window.halfmoon-active {
+    background-color: #292F3B !important;
+    box-shadow: 0 0 10px rgba(252, 252, 252, 0.3) !important;
+}
+
+    /* Background color for code content when halfmoon-active is applied */
+    .servwebdev-mac-window.halfmoon-active .code-content {
+        background-color: #292F3B !important; /* Background color when halfmoon-active is applied */
+    }
+
+    /* Background color for code content when halfmoon-active is applied */
+    .servwebdev-mac-window.halfmoon-active .code-container {
+        background-color: #292F3B !important; /* Background color when halfmoon-active is applied */
+    }
+
+    .servwebdev-mac-window.halfmoon-active .servwebdev-mac-title-bar {
+        background-color: #232730 !important;
+    }
+
+    .servwebdev-mac-window.halfmoon-active .line-numbers,
+    .servwebdev-mac-window.halfmoon-active .code-line span,
+    .servwebdev-mac-window.halfmoon-active .servwebdev-mac-title{
+        color: #ffffff !important;
+    }
+
+#lightmode-icon {
+    color: #ffffff; /* Light mode icon color */
+}
+
+.servwebdev-mac-window {
+    transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+    .servwebdev-mac-window:hover {
+        transform: scale(1.05); /* Enlarge the element by 5% */
+    }
+
+.projects-preface {
+    padding: 100px;
+    background-color: #ffffff;
+    padding-bottom: 140px;
+}
+
+.preface-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.projects-preface p {
+    font-size: 65px;
+    color: #000000;
+    letter-spacing: -4.8px;
+    font-weight: 900;
+}
+
+.projects-preface .impact {
+    font-weight: 300;
+    letter-spacing:-6.5px;
+}
+
+.proj-pref-img-containers {
+    display: flex;
+    overflow: hidden; /* Hide horizontal overflow */
+    margin-top: 40px;
+    padding-bottom: 10px; /* Add some padding to the bottom if needed */
+    position: relative; /* Needed for the sliding effect */
+    width: 100%;
+}
+
+/* Wrapper for animation */
+.proj-pref-img-wrapper {
+    display: flex;
+    flex-direction: row;
+    animation: slide-left 30s linear infinite; /* Adjust duration for slower effect */
+    animation-play-state: running; /* Ensure animation runs by default */
+    transition: animation-play-state 0.3s; /* Smooth transition for play/pause */
+}
+
+    /* Pause animation on hover */
+    .proj-pref-img-wrapper:hover {
+        animation-play-state: paused; /* Pause animation */
+    }
+
+/* Image container styling */
+.proj-pref-img-item {
+    display: flex;
+    flex-direction: column; /* Stack text above image */
+    align-items: center; /* Center text and image */
+    margin-right: 35px; /* Space between containers */
+}
+
+.proj-pref-img-text {
+    color: #9D9DA4;
+    font-size: 18px; /* Adjust text size as needed */
+    margin-bottom: 20px; /* Space between text and image */
+    letter-spacing:-1.0px;
+    font-weight:500;
+}
+
+.proj-pref-img-cont {
+    width: 300px;
+    height: 400px;
+    border-radius: 20px;
+    background-color: #ffffff; /* Placeholder color */
+    border: 1px solid #e6e6e6;
+    background-size: cover; /* Cover the entire container */
+    background-position: center; /* Center the image */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+/* Duplicate the containers to maintain order and seamless scrolling */
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(7) .proj-pref-img-cont {
+    background-image: url('Proj Pref Web.png');
+}
+
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(8) .proj-pref-img-cont {
+    background-image: url('Proj Pref Analytics.png');
+}
+
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(9) .proj-pref-img-cont {
+    background-image: url('Proj Pref UI_UX.png');
+}
+
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(10) .proj-pref-img-cont {
+    background-image: url('Proj Pref Anal Exc.png');
+}
+
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(11) .proj-pref-img-cont {
+    background-image: url('Proj Pref Analy Excel.png');
+}
+
+.proj-pref-img-wrapper .proj-pref-img-item:nth-child(12) .proj-pref-img-cont {
+    background-image: url('Consumer Goods Logo.png');
+}
+
+/* Animation to slide the images */
+@keyframes slide-left {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%); /* Adjust this to match the width of the images */
+    }
+}
+
+/* Responsive Design for Android Mobile Screens */
+@media (max-width: 600px) {
+    .proj-pref-img-cont {
+        width: 150px; /* Adjust size for mobile */
+        height: 200px; /* Adjust height proportionally */
+        margin-right: 10px; /* Adjust spacing for mobile */
+    }
+
+    .proj-pref-img-text {
+        font-size: 12px; /* Adjust text size for mobile */
+        margin-bottom: 5px; /* Space between text and image on mobile */
+    }
+}
+
+.enlarge-on-hover:hover {
+    transform: scale(1.05); /* Adjust the scale value as needed */
+}
+
+.get-started-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #ffffff;
+    color: #000000;
+    letter-spacing:-1.0px;
+    text-decoration: none;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    text-align: center;
+    margin-top: 20px;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Include transform in transition */
+}
+
+    .get-started-btn:hover {
+        background-color: #000000;
+        color: #ffffff;
+        transform: scale(1.10);
+    }
+
+    .get-started-btn span {
+        font-size: 1.2em;
+        font-weight: 900;
+        border: 2px solid #000000;
+        border-radius: 50%;
+        padding: 0 6px;
+        margin-left: 5px;
+        background-color: #e6e6e6; /* Default background color of the arrow */
+        color: #000000; /* Default color of the arrow */
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .get-started-btn:hover span {
+        background-color: #000000; /* Background color of the arrow on hover */
+        color: #ffffff; /* Color of the arrow on hover */
+        border-color: #ffffff; /* Optional: changes the border color of the arrow */
+        border:2px solid #ffffff;
+    }
+
+.pricing-card {
+    flex: 1;
+    max-width: 300px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+    padding: 20px;
+    margin: 10px;
+    height: 688px;
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for box-shadow */
+}
+
+    .pricing-card:hover {
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust the shadow as needed */
+    }
+
+.floating-rectangle-own {
+    position: absolute;
+    background-color: #fcfcfc;
+    color: #9D9DA4;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    padding: 20px; /* Increased padding */
+    font-size: 14px;
+    font-weight: 300;
+    text-align: center;
+    width: 190px; /* Adjust width as needed */
+    height: 20px; /* Increased height */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 1s ease-in-out;
+    overflow: hidden; /* Ensure text stays within bounds */
+    padding-top:0px;
+}
+
+    /* Floating effects */
+    .floating-rectangle-own:nth-of-type(1) {
+        animation: float-diagonal-tb 6s infinite alternate;
+    }
+
+    .floating-rectangle-own:nth-of-type(2) {
+        animation: float-diagonal-rtl 6s infinite alternate;
+    }
+
+    .floating-rectangle-own:nth-of-type(3) {
+        animation: float-left-right 6s infinite alternate;
+    }
+
+    .floating-rectangle-own:nth-of-type(4) {
+        animation: float-all-diagonal 6s infinite alternate;
+    }
+
+@keyframes float-diagonal-tb {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(20px);
+    }
+}
+
+@keyframes float-diagonal-rtl {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(20px);
+    }
+}
+
+@keyframes float-left-right {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-20px);
+    }
+}
+
+@keyframes float-all-diagonal {
+    0% {
+        transform: translate(-10px, -10px);
+    }
+
+    100% {
+        transform: translate(10px, 10px);
+    }
+}
+
+@keyframes expandFade {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0;
+    }
+}
+
+.own-web-circ::before,
+.own-web-circ::after,
+.own-web-circ .third-circle {
+    content: "";
+    position: absolute;
+    border: 1px dashed #ffffff; /* Changed to dashed line */
+    border-radius: 50%;
+    animation: expandFade 5s infinite;
+}
+
+.own-web-circ::before {
+    width: 600px; /* Adjust size as needed */
+    height: 600px; /* Adjust size as needed */
+    top: 0%; /* Adjust position as needed */
+    left: 30%; /* Adjust position as needed */
+    z-index: -2;
+}
+
+.own-web-circ::after {
+    width: 800px; /* Adjust size as needed */
+    height: 800px; /* Adjust size as needed */
+    top: -5%; /* Adjust position as needed */
+    left: 24%; /* Adjust position as needed */
+    z-index: -2;
+}
+
+.own-web-circ .third-circle {
+    width: 1000px; /* Adjust size as needed */
+    height: 1000px; /* Adjust size as needed */
+    top: -11%; /* Adjust position as needed */
+    left: 17%; /* Adjust position as needed */
+    z-index: -2;
+}
+
+.nav-bar-anima {
+    background-color: #fcfcfc;
+    border: 0.5px solid #000000;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-align: center;
+    width: 30px; /* Initially narrow */
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden; /* Hide overflow during transition */
+    transition: width 0.4s ease; /* Smooth width transition */
+}
+
+.nav-bar-text {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -1.0px;
+    display: flex;
+    justify-content: center; /* Center items horizontally */
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+.nav-item {
+    opacity: 0; /* Initially hide items */
+    transition: opacity 0.4s ease; /* Smooth opacity transition */
+}
+
+.nav-bar-anima:hover {
+    width: 650px; /* Expand width on hover */
+}
+
+    .nav-bar-anima:hover .nav-item {
+        opacity: 1; /* Show items on hover */
+    }
+
+.nav-item:first-child {
+    opacity: 1; /* Always show the first item */
+}
+
+
+.mock-dashboard {
+    position: absolute;
+    bottom: 120px; /* Adjust as needed */
+    left: 11px;
+    width: calc(100% - 23px); /* Adjust based on the width of the parent container */
+    height: 265px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; /* Ensure it's above other elements */
+    transition: transform 0.3s ease; /* Smooth transition effect */
+}
+
+    /* Hover effect */
+    .mock-dashboard:hover {
+        transform: scale(1.05); /* Slightly enlarge the dashboard */
+    }
+
+
+.inner-square {
+    width: 112px; /* Adjust as needed */
+    height: 140px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    z-index: 2; /* Ensure it's above the mock-dashboard */
+    position: relative;
+    top: 465px;
+    border-radius: 10px;
+    right: -18px;
+    overflow: hidden; /* Ensure circles don't overflow */
+    background: repeating-linear-gradient( 0deg, #e6e6e6, #e6e6e6 1px, transparent 1px, transparent 20px ), repeating-linear-gradient( 90deg, #e6e6e6, #e6e6e6 1px, transparent 1px, transparent 20px );
+}
+
+.inner-horizontal-line {
+    width: 100%; /* Full width of the inner-square */
+    height: 0.1px; /* Thickness of the line */
+    background-color: #9d9da4; /* Color of the line */
+    position: absolute;
+    top: 50%; /* Center the line vertically */
+    left: 0;
+    transform: translateY(-50%); /* Adjust vertical alignment */
+    opacity: 0;
+}
+
+.inner-vertical-line {
+    height: 100%; /* Full height of the inner-square */
+    width: 0.1px; /* Thickness of the line */
+    background-color: #9d9da4; /* Color of the line */
+    position: absolute;
+    left: 50%; /* Center the line horizontally */
+    top: 0;
+    transform: translateX(-50%); /* Adjust horizontal alignment */
+    opacity: 0;
+}
+
+.cluster-circle {
+    width: 10px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border-radius: 50%;
+    position: absolute;
+    animation: moveCluster 5s infinite linear; /* Apply animation */
+}
+
+.cluster-circle-green {
+    background-color: #009B72;
+}
+
+.cluster-circle-cyan {
+    background-color: #01BEBE;
+}
+
+.cluster-circle-blue {
+    background-color: #A0D1FF;
+}
+
+.cluster-circle-red {
+    background-color: #D64550;
+}
+
+/* Keyframes for the animation */
+@keyframes moveCluster {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, 20px); /* Move to a new position */
+    }
+
+    100% {
+        transform: translate(0, 0); /* Return to the original position */
+    }
+}
+/* Additional positioning for more circles can be added as needed */
+
+
+.inner-square-1 {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    z-index: 2; /* Ensure it's above the mock-dashboard */
+    position: relative;
+    top: 100px;
+    border-radius: 10px;
+    right:-245px;
+}
+
+.inner-square-2 {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    z-index: 2; /* Ensure it's above the mock-dashboard */
+    position: relative;
+    top: 86px;
+    border-radius: 10px;
+    right: -245px;
+}
+
+.inner-square-3 {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    z-index: 2; /* Ensure it's above the mock-dashboard */
+    position: relative;
+    top: -16px;
+    border-radius: 10px;
+    right: -138px;
+}
+
+.inner-square-4 {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #ffffff; /* Optional: Add a background color if desired */
+    z-index: 2; /* Ensure it's above the mock-dashboard */
+    position: relative;
+    top: 214px;
+    border-radius: 10px;
+    right: -138px;
+}
+
+.mock-dashboard-text {
+    font-size: 15px; /* Adjust as needed */
+    font-weight: 300;
+    color: #333333; /* Adjust color as needed */
+    letter-spacing:-1.2px;
+    position:relative;
+    top:460px;
+    text-align:center;
+    white-space:nowrap;
+    z-index:2;
+    right:170px;
+}
+
+.insq1-circle {
+    width: 13px; /* Adjust size as needed */
+    height: 13px; /* Adjust size as needed */
+    background-color: #009B72;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px; /* Adjust font size as needed */
+    font-weight: bold;
+    z-index:3;
+    position:relative;
+    right:-147px;
+    top:120px;
+}
+
+.insq2-circle {
+    width: 15px; /* Adjust size as needed */
+    height: 15px; /* Adjust size as needed */
+    background-color: #01BEBE;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px; /* Adjust font size as needed */
+    font-weight: bold;
+    z-index: 3;
+    position: relative;
+    right: -250px;
+    top: -114px;
+}
+
+.insq3-circle {
+    width: 15px; /* Adjust size as needed */
+    height: 15px; /* Adjust size as needed */
+    background-color: #A0D1FF;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px; /* Adjust font size as needed */
+    font-weight: bold;
+    z-index: 3;
+    position: relative;
+    right: -145px;
+    top: -114px;
+}
+
+.insq4-circle {
+    width: 15px; /* Adjust size as needed */
+    height: 15px; /* Adjust size as needed */
+    background-color: #D64550;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px; /* Adjust font size as needed */
+    font-weight: bold;
+    z-index: 3;
+    position: relative;
+    right: -250px;
+    top: -280px;
+}
+
+.insql1-rounded-rect {
+    width: 15px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    background-color: #009B72;
+    border-radius: 0px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:3;
+    position:relative;
+    right:-224px;
+    top:109.5px;
+}
+
+.insql1-black-rect {
+    width: 80px; /* Adjust size as needed */
+    height: 8px; /* Adjust size as needed */
+    background-color: #000000;
+    border-radius: 0px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -149px;
+    top: 116px;
+}
+
+.insql1-rounded-recta {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    background-color: #009B72;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -150px;
+    top: 120px;
+}
+
+.insql1-rounded-recta-black {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    background-color: #000000;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -190px;
+    top: 110px;
+}
+
+.insql1-rounded-rectan {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    background-color: #000000;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -150px;
+    top: 117px;
+}
+
+.insql1-rounded-rectan-black {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    background-color: #009B72;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -190px;
+    top: 107px;
+}
+
+.insql1-rounded-rectang {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border: 1px solid #e6e6e6;
+    background-color: #fcfcfc;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -150px;
+    top: 116px;
+}
+
+.insql1-rounded-rectang-black {
+    width: 36px; /* Adjust size as needed */
+    height: 10px; /* Adjust size as needed */
+    border:1px solid #e6e6e6;
+    background-color: #fcfcfc;
+    border-radius: 20px; /* Rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    position: relative;
+    right: -190px;
+    top: 104.5px;
+}
+
+.insql1line1 {
+    width: 10%; /* Full width or adjust as needed */
+    height: 2px; /* Adjust height for line thickness */
+    background-color: #000000;
+    position: relative;
+    left: 100px;
+
+}
+
+/* Styles for the new circles */
+.new-circle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: none; /* Default color, change as needed */
+}
+
+/* Large circle */
+.circle-large {
+    width: 350px;
+    height: 350px;
+    border:1px solid #e6e6e6;/* Red color */
+    top: 290px; /* Adjust positioning */
+    left: 6px; /* Adjust positioning */
+}
+
+    /* Thin arrowhead top */
+    .circle-large::before {
+        content: '';
+        position: absolute;
+        width: 30px; /* Width of the image */
+        height: 15px; /* Height of the image */
+        background-image: url('Thin_Arrow_Head-removebg-preview.png');
+        background-size: contain; /* Ensure the image fits */
+        background-repeat: no-repeat; /* Prevent image from repeating */
+        background-position: center; /* Center the image */
+        top: -8px; /* Position above the circle */
+        left: 50%;
+        transform: translateX(-50%); /* Center the image horizontally */
+    }
+
+    /* Thin arrowhead bottom */
+    .circle-large::after {
+        content: '';
+        position: absolute;
+        width: 30px; /* Width of the image */
+        height: 15px; /* Height of the image */
+        background-image: url('Thin_Arrow_Head-removebg-preview.png');
+        background-size: contain; /* Ensure the image fits */
+        background-repeat: no-repeat; /* Prevent image from repeating */
+        background-position: center; /* Center the image */
+        bottom: -8px; /* Position below the circle */
+        left: 50%;
+        transform: translateX(-50%) rotate(180deg); /* Center and flip the image */
+    }
+
+/* Medium circle */
+.circle-medium {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #e6e6e6; /* Red color *
+    bottom: -40px; /* Adjust positioning */
+    left: 30px; /* Adjust positioning */
+}
+
+/* Small circle */
+.circle-small {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e6e6e6; /* Red color *
+    bottom: 10px; /* Adjust positioning */
+    right: -20px; /* Adjust positioning */
+}
+
+.dummy-get-started-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 300;
+    color: #000000;
+    background-color: #ffffff;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    border-radius: 40px;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+    .dummy-get-started-button:hover {
+        color: #ffffff; /* Text color on hover */
+        background-color: #000000; /* Background color on hover */
+        border: 1px solid #ffffff; /* Border color on hover */
+    }
+
+.dummy-arrow-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    border-radius: 50%;
+    border: 2px solid #000000; /* Initial circle border color */
+    color: #000000; /* Initial arrow color */
+    font-size: 16px; /* Adjust font size as needed */
+    margin-left: 8px; /* Space between text and circle */
+    line-height: 1; /* Adjust to align the arrow vertically */
+    transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.dummy-get-started-button:hover .dummy-arrow-circle {
+    background-color: #000000; /* Circle background color on hover */
+    border: 2px solid #ffffff; /* Circle border color on hover */
+    color: #ffffff; /* Arrow color on hover */
+}
+
+.try-now-btn-pred span {
+    display: inline-block;
+    width:22px;
+    height:22px;
+    font-size:1.2em;
+    border: 2px solid #000; /* Initial border color */
+    border-radius: 50%; /* Circular border for the icon */
+    transition: border-color 0.3s ease; /* Smooth transition for hover effect */
+    background:#e6e6e6;
+}
+
+.try-now-btn-pred:hover span {
+    border-color: #fff; /* Border color on hover */
+    background:#000000;
+}
+
+.try-now-btn-pred .text {
+    vertical-align: middle; /* Align text vertically */
+    position:relative;
+    top:-5px;
+}
+
+.try-now-btn-geo span {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    font-size: 1.2em;
+    border: 2px solid #000; /* Initial border color */
+    border-radius: 50%; /* Circular border for the icon */
+    transition: border-color 0.3s ease; /* Smooth transition for hover effect */
+    background:#e6e6e6;
+}
+
+.try-now-btn-geo:hover span {
+    border-color: #fff; /* Border color on hover */
+    background:#000000;
+}
+
+.try-now-btn span {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    font-size: 1.2em;
+    border: 2px solid #ffffff; /* Initial border color */
+    border-radius: 50%; /* Circular border for the icon */
+    transition: border-color 0.3s ease; /* Smooth transition for hover effect */
+    background: none;
+    position:relative;
+    top:2px;
+}
+
+.try-now-btn:hover span {
+    border-color: #fff; /* Border color on hover */
+    background: #000000;
+}
+
+.socials-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.0px;
+    margin-bottom: 25px;
+    position: relative;
+    top: 10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 90px;
+    border: 1px solid #e6e6e6;
+    right: 0px;
+    white-space: nowrap;
+    padding-left: 12px; /* Adjust to make space for the circle */
+    padding-right:0px;
+}
+
+    .socials-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Adjust distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.contact-tag-cont {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.0px;
+    margin-bottom: 25px;
+    position: relative;
+    top: 10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 90px;
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+}
+
+    .contact-tag-cont::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.pricing-tag-cont {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.0px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 90px;
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-570px;
+}
+
+    .pricing-tag-cont::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.service-tag-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 90px;
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-525px;
+
+}
+
+    .service-tag-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.portfolio-tag-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 90px;
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-630px;
+}
+
+    .portfolio-tag-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.aoi-tag-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 150px; /* Adjusted width */
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-670px;
+}
+
+    .aoi-tag-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.about-me-tag-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 120px; /* Adjusted width */
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-600px;
+}
+
+    .about-me-tag-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+.profile-stats-tag-container {
+    font-weight: 400;
+    font-size: 19px;
+    letter-spacing: -1.5px;
+    margin-bottom: 25px;
+    position: relative;
+    top: -10px;
+    color: #9d9da4;
+    background-color: #fcfcfc;
+    border-radius: 20px;
+    padding-right: 0px;
+    width: 120px; /* Adjusted width */
+    border: 1px solid #e6e6e6;
+    white-space: nowrap;
+    padding-left: 12px; /* Space for the circle */
+    right:-600px;
+}
+
+    .profile-stats-tag-container::before {
+        content: '';
+        display: block;
+        width: 12px; /* Diameter of the circle */
+        height: 12px; /* Diameter of the circle */
+        background-color: #9d9da4; /* Color of the circle */
+        border-radius: 50%; /* Makes it a circle */
+        position: absolute;
+        left: 8px; /* Distance from the left edge */
+        top: 50%; /* Centers the circle vertically with the text */
+        transform: translateY(-50%); /* Centers the circle vertically */
+    }
+
+/* Hide the hover-text by default */
+.hover-text {
+    display: none;
+    position: absolute; /* Or fixed if you want it to stay in a fixed position on the viewport */
+    background-color: white;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    padding: 10px;
+    top: 100%; /* Adjust as needed */
+    left: 0;
+    z-index: 9999;
+    white-space: nowrap;
+    margin-top: 10px; /* Adjust spacing from the nav item */
+}
+
+/* Show the hover-text when hovering over the parent li */
+.about-link:hover .hover-text {
+    display: block;
+}
+
+/* Style the additional text */
+.hover-text p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333; /* Adjust text color if needed */
+}
+
+/* Ensure the nav-link has relative positioning */
+.about-link {
+    position: relative;
+}
+
+/* Optional: Add some padding to the nav link to make space for the additional text */
+.nav-link {
+    padding: 10px;
+    display: block;
+}
+
+/* Ensure the nav does not clip the hover text */
+.main-nav {
+    overflow: visible; /* Ensure overflow is visible so the hover text is not clipped */
+}
+
+.innov-aoi-outer-rect {
+    width: 80%; /* Adjust width as needed */
+    height: 780px;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    box-sizing: border-box; /* Ensures padding/border are included in the width/height */
+    position:relative;
+    right:-150px;
+}
+
+.innov-search-bar-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    width: 800px;
+    right: -368px;
+    top: -795px;
+}
+
+.innov-search-bar {
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+    border: 1px solid #e6e6e6;
+    border-radius: 40px; /* Updated to match rounded style */
+    background-color: #ffffff;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+    position: relative;
+    letter-spacing: -0.5px;
+}
+
+    .innov-search-bar::placeholder {
+        color: #a0a0a0; /* Adjust color if needed */
+        font-family: 'Montserrat', sans-serif; /* Apply Montserrat font to placeholder */
+    }
+
+.innov-search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 18px; /* Adjust as needed */
+    color: #a0a0a0; /* Adjust as needed */
+}
+
+.suggested-search-prompts {
+    display: flex;
+    align-items: center;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 40px;
+    padding: 10px 10px;
+    width: 224px;
+    margin-top: 20px;
+    padding-right: 0px;
+    letter-spacing: -1.0px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+    font-size: 15px;
+    position: relative;
+    right: -260px;
+    top: -780px;
+    overflow: hidden; /* Ensure the glow effect is contained within the element */
+}
+
+    .suggested-search-prompts::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -200%;
+        width: 200%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+        transition: all 0.4s ease;
+    }
+
+    .suggested-search-prompts:hover::before {
+        left: 100%;
+        transition: all 0.4s ease;
+    }
+
+
+.search-prompts-aoi-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    gap: 10px; /* Space between the prompts */
+    margin-top: 20px; /* Adjust spacing as needed */
+    position:relative;
+    right:-515px;
+    top:-832px;
+}
+
+.search-prompts-aoi {
+    background-color: #fcfcfc;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px; /* Adjust as needed for rounding */
+    padding: 6px 10px; /* Adjust padding as needed */
+    width: 224px; /* Same width as suggested search prompts */
+    font-size: 15px; /* Same font size as suggested search prompts */
+    font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+    letter-spacing: -1.0px; /* Same letter-spacing as suggested search prompts */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+    .search-prompts-aoi:hover {
+        background-color: #000000;
+        color: #ffffff;
+        border: 1px solid #000000;
+        border-radius: 10px; /* Adjust as needed for rounding */
+    }
+
+.innov-rectangle-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows the rectangles to wrap onto multiple lines if needed */
+    gap: 20px; /* Adjust space between rectangles */
+    justify-content: center; /* Center rectangles horizontally */
+    padding-bottom:5px;
+}
+
+.innov-rectangle {
+    background-color: #fcfcfc;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 10px; /* Rounded corners */
+    width: 250px; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center text and rectangles horizontally */
+    justify-content: center; /* Center text and rectangles vertically */
+    position: relative; /* For positioning inner elements */
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -2.6px;
+    text-align: left; /* Center text inside the rectangle */
+}
+
+.inner-innov-rectangle {
+    background-color: #e6e6e6;
+    border-radius: 40px;
+    height: 10px;
+    width: 100%; /* Full width of the parent .innov-rectangle */
+    margin-bottom: 5px; /* Space between rectangles */
+}
+
+.innov-label {
+    background-color: #000000; /* Background color */
+    color: #ffffff; /* Text color */
+    border: 1px solid #000000; /* Border color */
+    border-radius: 20px; /* Rounded corners */
+    padding: 5px 10px; /* Padding for the label */
+    font-size: 16px; /* Font size for the label */
+    font-weight: 300; /* Bold font weight */
+    position: absolute; /* Absolute positioning */
+    top: 5px; /* Position above the text */
+    left: 165px; /* Adjust position relative to the parent */
+    letter-spacing:-1.0px;
+    padding-bottom:1px;
+    padding-top:1px;
+}
+
+.innov-rectangle {
+    position: relative;
+    overflow: hidden;
+}
+
+.inner-innov-rectangle {
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.innov-rectangle:hover .inner-innov-rectangle {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.innov-rectangle-text {
+    display: none;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: -1px;
+    position: absolute;
+    top: 80px;
+    text-align: center;
+    width: 100%;
+}
+
+.innov-rectangle:hover .innov-rectangle-text {
+    display: block;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.thin-line-back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    position:relative;
+    top:-735px;
+    right:-320px;
+    z-index:3;
+
+}
+
+    .thin-line-back-button:hover {
+        background-color: #f0f0f0;
+    }
+
+    .thin-line-back-button svg {
+        stroke: #333;
+    }
+
+@keyframes searchFocus {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.innov-rectangle.animate-search {
+    animation: searchFocus 0.4s ease-in-out;
+}
+
+@keyframes earthquake {
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    10% {
+        transform: translate(-2px, 2px) rotate(-2deg);
+    }
+
+    20% {
+        transform: translate(2px, -2px) rotate(2deg);
+    }
+
+    30% {
+        transform: translate(-2px, 2px) rotate(-1deg);
+    }
+
+    40% {
+        transform: translate(2px, -2px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 1px) rotate(0);
+    }
+
+    60% {
+        transform: translate(1px, -1px) rotate(-1deg);
+    }
+
+    70% {
+        transform: translate(-1px, 1px) rotate(1deg);
+    }
+
+    80% {
+        transform: translate(1px, -1px) rotate(0);
+    }
+
+    90% {
+        transform: translate(-1px, 1px) rotate(-1deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0);
+    }
+}
+
+.excel-logo:hover {
+    animation: earthquake 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.innov-circles-container {
+    position: absolute;
+    top: 350px; /* Adjust the positioning as needed */
+    left: 170px; /* Adjust the positioning as needed */
+    display: flex;
+    gap: 8px; /* Space between circles */
+}
+
+.innov-small-circle {
+    width: 15px;
+    height: 15px;
+    background-color: #000000;
+    border-radius: 50%;
+}
+
+.heading-with-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .heading-with-icon svg {
+        margin-right: 10px; /* Adjust spacing between icon and heading */
+    }
+
+    .heading-with-icon p {
+        margin: 0; /* Remove default margin from <p> element */
+    }
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.toggle-text {
+    color: #9d9da4;
+    margin: 0 20px;
+    font-size: 30px;
+    font-weight: 300;
+    letter-spacing: -2.5px;
+}
+
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px; /* Adjust width as needed */
+    height: 30px; /* Adjust height as needed */
+    position: relative;
+    border: 1px solid #000000;
+    border-radius: 40px;
+}
+
+.toggle-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #000000;
+    border-radius: 50%;
+    border: 1px solid #000000;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    position: absolute;
+    left: 0;
+}
+
+.toggle-container.toggled .toggle-circle {
+    transform: translateX(30px); /* Move circle right, adjust as needed */
+}
+
+.toggle-container.toggled ~ .toggle-wrapper .toggle-text#textBefore {
+    opacity: 0; /* Hide text before toggle */
+}
+
+.toggle-container.toggled ~ .toggle-wrapper .toggle-text#textAfter {
+    opacity: 1; /* Show text after toggle */
+}
+
+.toggle-wrapper .toggle-text#textAfter {
+    opacity: 0; /* Initially hide text after toggle */
+    transition: opacity 0.5s ease;
+}
+
+/* CSS for pp-bento section */
+#pp-bento {
+    padding: 50px 0;
+    background-color: #ffffff;
+}
+
+.pp-bento-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.pp-bento-row {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.pp-bento-rectangle {
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    width: 150px;
+    height: 100px;
+}
+
+/* Define the keyframes for the border color animation */
+@keyframes borderColorPass {
+    0% {
+        border-image-source: linear-gradient(to right, #000000 0%, #e6e6e6 100%);
+        border-image-slice: 1;
+    }
+
+    25% {
+        border-image-source: linear-gradient(to right, #000000 50%, #e6e6e6 50%);
+    }
+
+    50% {
+        border-image-source: linear-gradient(to right, #000000 100%, #e6e6e6 0%);
+    }
+
+    75% {
+        border-image-source: linear-gradient(to right, #e6e6e6 0%, #000000 100%);
+    }
+
+    100% {
+        border-image-source: linear-gradient(to right, #e6e6e6 100%, #000000 0%);
+    }
+}
+
+/* Define the keyframes for the dot color and scale animation */
+@keyframes dotColorPass {
+    0%, 100% {
+        background-color: #e6e6e6;
+        transform: scale(1); /* Dots at original size */
+    }
+
+    50% {
+        background-color: #000000; /* Black color during animation */
+        transform: scale(1.2); /* Dots enlarge slightly */
+    }
+}
+
+/* Style for the surrounding rectangle */
+.rectangle-with-dots {
+    position: relative;
+    width: 900px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid; /* Change border to work with gradient */
+    overflow: visible; /* Allow pseudo-elements to extend beyond the container */
+    background-color: #ffffff;
+    animation: borderColorPass 10s infinite; /* Apply slower animation to borders */
+    border-image-slice: 1; /* To enable gradient border */
+}
+
+    /* Extend the top border width */
+    .rectangle-with-dots::before {
+        content: '';
+        position: absolute;
+        top: -1px; /* Align with the top border */
+        left: -120px; /* Extend the line to the left */
+        right: -120px; /* Extend the line to the right */
+        height: 1px;
+        background-color: #e6e6e6;
+        animation: borderColorPass 10s infinite; /* Apply slower animation to extended top border */
+    }
+
+    /* Extend the bottom border width */
+    .rectangle-with-dots::after {
+        content: '';
+        position: absolute;
+        bottom: -1px; /* Align with the bottom border */
+        left: -120px; /* Extend the line to the left */
+        right: -120px; /* Extend the line to the right */
+        height: 1px;
+        background-color: #e6e6e6;
+        animation: borderColorPass 10s infinite; /* Apply slower animation to extended bottom border */
+    }
+
+/* Dots on each corner */
+.corner-dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #e6e6e6;
+    border-radius: 50%;
+    animation: dotColorPass 10s infinite; /* Apply slower color and scale animation to dots */
+}
+
+.top-left {
+    top: -5px;
+    left: -5px; /* Adjusted to match the extended top border */
+}
+
+.top-right {
+    top: -5px;
+    right: -5px; /* Adjusted to match the extended top border */
+}
+
+.bottom-left {
+    bottom: -5px;
+    left: -5px; /* Adjusted to match the extended bottom border */
+}
+
+.bottom-right {
+    bottom: -5px;
+    right: -5px; /* Adjusted to match the extended bottom border */
+}
+
+
+/* Style for the horizontal line */
+.add-horizontal-line {
+    width: 30%;
+    height: 1px;
+    background-color: #e6e6e6;
+    margin: 20px auto; /* Adjust the spacing as needed */
+    transform:rotate(90deg);
+    position:relative;
+    right:-470px;
+    top:-140px;
+}
+
+
+.upd-section {
+    padding: 20px;
+    background-color: #ffffff;
+    height: 1061px;
+}
+
+.upd-exp-rounded-rect {
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    width: 80%;
+    height: 750px;
+    margin-top: 20px;
+    position: relative;
+    right: -150px;
+    overflow: hidden; /* Ensures lines stay within the rectangle */
+}
+
+.upd-horizontal-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    pointer-events: none; /* Ensures lines do not interfere with other interactions */
+}
+
+.upd-vertical-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    pointer-events: none; /* Ensures lines do not interfere with other interactions */
+}
+
+.upd-line {
+    background-color: #e6e6e6;
+}
+
+.upd-horizontal-lines .upd-line {
+    height: 1px; /* Thickness of the horizontal lines */
+}
+
+.upd-vertical-lines .upd-line {
+    width: 1px; /* Thickness of the vertical lines */
+}
+
+
+.timeline-outline {
+    display: inline-block;
+    padding: 5px 10px; /* Adjust padding as needed */
+    border: 2px solid #000000; /* Border color */
+    border-radius: 15px; /* Adjust border radius as needed for rounded corners */
+}
+
+.timeline-circle {
+    display: inline-block;
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    background-color: #000000; /* Circle color */
+    border-radius: 50%; /* Makes it a circle */
+    margin-right: 10px; /* Space between circle and text */
+    vertical-align: middle; /* Aligns with the text vertically */
+    position:relative;
+    right:-75px;
+    top:-5px;
+}
+
+.year-timeline {
+    position: absolute;
+    top: 8px; /* Adjust as needed to position the timeline */
+    left: 50px; /* Adjust as needed to position the timeline */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 100px); /* Adjust width based on container size */
+}
+
+.year-text {
+    font-size: 26px;
+    font-weight: 300;
+    letter-spacing: -2.5px;
+    color: #9d9da4; /* Adjust color as needed */
+}
+
+.exp-timeline-liv {
+    background-color: #fcfcfc;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center; /* Center the text */
+    width:170px;
+    height:90px;
+    padding-top:5px;
+    padding-left:5px;
+}
+
+    .exp-timeline-liv .exp-title {
+        font-weight: 900;
+        font-size: 18px;
+        letter-spacing: -1.2px;
+        color: #000000;
+        margin-bottom: 0px; /* Space between title and company */
+        text-align:left;
+        position:relative;
+        top:2px;
+    }
+
+    .exp-timeline-liv .exp-company {
+        font-weight: 300;
+        font-size: 16px;
+        letter-spacing: -1.0px;
+        color: #000000;
+        text-align:left;
+    }
+
+    .exp-timeline-liv .exp-dur {
+        font-weight: 300;
+        font-size: 16px;
+        letter-spacing: -1.0px;
+        color: #9d9da4;
+        text-align:left;
+    }
+
+    .exp-timeline-liv .exp-loc {
+        font-weight: 300;
+        font-size: 16px;
+        letter-spacing: -1.0px;
+        color: #fcfcfc;
+        text-align: left;
+    }
+
+
+    .exp-timeline-liv .exp-tag {
+        font-weight: 400;
+        font-size: 15px;
+        letter-spacing: -1.0px;
+        color: #000000;
+        text-align: left;
+        background:#ffffff;
+        border:1px solid #e6e6e6;
+        border-radius:10px;
+        width:73px;
+        padding-left:5px;
+    }
+
+.exp-tim-logo-container {
+    margin-top: 10px; /* Adjust spacing as needed */
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #e6e6e6;
+    position: relative;
+    top: -43px;
+    right: -148px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#ffffff;
+}
+
+.exp-tim-logo {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ensures the image fits inside the container */
+}
+

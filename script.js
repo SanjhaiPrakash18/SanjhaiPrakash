@@ -14,36 +14,6 @@
     // Add scroll event to call the handleScroll function
     window.addEventListener("scroll", handleScroll);
 
-    // Function to type out text in the typewriter effect
-    var textElement = document.getElementById('typewriter-text');
-    var textContent = "Hi, I'm Sanjhai\nWelcome To My Portfolio!";
-    textElement.innerHTML = '';
-    var cursorElement = document.getElementById('cursor');
-
-    function typeWriterEffect(index) {
-        if (index < textContent.length) {
-            if (textContent.charAt(index) === '\n') {
-                textElement.innerHTML += '<br>';
-            } else {
-                var colorClass = index < 16 ? 'green-text' : 'black-text';
-                textElement.innerHTML += `<span class="${colorClass}">${textContent.charAt(index)}</span>`;
-            }
-
-            index++;
-            setTimeout(function () {
-                typeWriterEffect(index);
-            }, 100);
-        } else {
-            setInterval(function () {
-                cursorElement.style.visibility = (cursorElement.style.visibility === 'visible') ? 'hidden' : 'visible';
-            }, 500);
-        }
-    }
-
-    setTimeout(function () {
-        typeWriterEffect(0);
-    }, 2000);
-
     // Function to handle GIF navigation change
     const gifs = document.querySelectorAll('.image-container img');
     let currentIndex = 0;
@@ -133,26 +103,9 @@
         chatbox.classList.toggle('minimized');
     }
 
-    // Variable to track if a prompt pill has been clicked for the first time
-    var promptPillClicked = false;
-
-    // Function to initialize the chat container
-    function initializeChatContainer() {
-        // Hide the scroll-to-bottom button initially
-        document.getElementById('scroll-to-bottom').style.display = 'none';
-    }
-
-    // Call the initializeChatContainer function when the page loads
-    initializeChatContainer();
-
-    // Function to display the message for the selected section
     function displayMessage(section) {
-        // If a prompt pill has been clicked for the first time, set promptPillClicked to true
-        if (!promptPillClicked) {
-            promptPillClicked = true;
-        }
-
         var message = ""; // Initialize an empty message
+        var promptPillText = ""; // Variable to store the prompt pill text
 
         // Get the current date and time in the desired format
         var currentDate = new Date();
@@ -164,11 +117,11 @@
             case "Can you tell me about yourself?":
                 message = "Hello, I'm Sanjhai.<br><br>" +
                     "With over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics, I bring valuable expertise to the table.<br><br>" +
-                    "As a Freelance Business Intelligence Solution Provider at Metricalist, based in the UAE, I've led transformative analytics solutions.<br><br>" +
-                    "Notably, I innovated the Customer Segmentation Dashboard, revolutionizing CRM analytics, and delivered solutions without active marketing efforts.<br><br>" +
+                    "As a Freelance Business Intelligence Solution Provider at Metricalist, based in the UAE, I innovated the Customer Segmentation Dashboard, revolutionizing CRM analytics, and delivered solutions without active marketing efforts.<br><br>" +
                     "My specialties include data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development and ui/ux.<br><br>" +
-                    "I possess technical proficiency in ChatGPT, Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.<br><br>" +
+                    "I possess technical proficiency in Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.<br><br>" +
                     "Explore my portfolio for insights into my expertise and how I can add value to your projects.";
+                promptPillText = "Can you tell me about yourself?";
                 break;
             case "What is your educational background?":
                 message = "<b>1. Bachelor's Degree in Biotechnology (B.Tech):</b><br><br>" +
@@ -183,87 +136,139 @@
                     "- School: St. James Matriculation Hr. Sec. School, Trichy<br>" +
                     "- Year of Completion: 2016<br>" +
                     "- Percentage: <b>87.8%</b>";
+                promptPillText = "What is your educational background?";
                 break;
             case "What is your professional experience?":
                 message = "I have over 9 months of internship experience, including 6 months as a Business Analytics Analyst at Livspace and 3 months as a Power BI Developer at NamaSYS Analytics.";
+                promptPillText = "What is your professional experience?";
                 break;
             case "What are your key skills and areas of specialization?":
-                message = "I specialize in data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development, and UI/UX. <br><br>My key skills include proficiency in ChatGPT, Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.";
+                message = "I specialize in data analysis, data visualization, business intelligence, data management, data flow automation, workflow automation, web development, and UI/UX. <br><br>My key skills include proficiency in Google Sheets, Google Apps Script, Microsoft Excel, Microsoft Power BI, Microsoft PowerPoint, Microsoft Word, SQL, Tableau, Python, Figma, HTML, CSS, and JavaScript.";
+                promptPillText = "What are your key skills and areas of specialization?";
                 break;
             case "Can I see samples of your work?":
                 message = "Yes, you can see my work samples in the portfolio section of my website.<br><br>" +
-                    "My portfolio consists of 16 projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, Tableau, and Figma.<br><br>" +
-                    "The majority of my projects were created using Microsoft Power BI.<br><br>" +
+                    "My portfolio consists of 6 main projects showcasing a range of skills across various technologies, including Microsoft Excel, Microsoft Power BI, SQL, HTML, CSS, Javascript and Figma.<br><br>" +
                     "For a clear view of my projects, please visit the Portfolio section on my website.<br><br>" +
                     "These projects are hosted on the Maven Analytics web platform, where users are redirected for further exploration.<br>";
+                promptPillText = "Can I see samples of your work?";
                 break;
             case "What services do you offer?":
                 message = "Currently, I offer Business Intelligence solutions to clients worldwide.<br><br>" +
+                    "I have expanded my services into the areas of web development and UI/UX design.<br><br>" +
                     "I am the creator of a product called the Customer Segmentation Dashboard Template, developed using Microsoft Power BI.<br><br>" +
-                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$35</b>.<br><br>" +
+                    "This template is categorized under CRM (Customer Relationship Management) on the website Metricalist and is priced at <b>$10</b>.<br><br>" +
                     "Users can purchase it through the Services section on my website, which redirects to the Metricalist website.";
+                promptPillText = "What services do you offer?";
                 break;
             case "Can I view your resume?":
-                message = "Please click on this below link to view or download my resume. Resume Link: <a href='https://drive.google.com/file/d/1TotwCJhwQ0HIyl8PWZWni3aPub3RL3Xa/view?usp=drive_link' target='_blank'>Resume</a>";
+                message = "Please click on this below link to view or download my resume. <a href='https://drive.google.com/file/d/1TotwCJhwQ0HIyl8PWZWni3aPub3RL3Xa/view?usp=drive_link' target='_blank'>Resume</a>";
+                promptPillText = "Can I view your resume?";
                 break;
             case "How can I contact you?":
                 message = "Visitors, including recruiters and clients, can contact me through the following methods:<br><br>Email: <a href='mailto:sanjhaiprakash18@gmail.com'>sanjhaiprakash18@gmail.com</a><br><br>Contact Number: <a href='tel:+919003933044'>+91 90039 33044</a><br><br>I also have a contact form available at the bottom of this website for visitors to reach out to me.";
+                promptPillText = "How can I contact you?";
                 break;
             default:
                 message = "Sorry, I don’t have an answer for that question.";
+                promptPillText = "Sorry, I don’t have an answer for that question.";
                 break;
         }
-        // Create a new message container
-        var newMessageContainer = document.createElement('div');
-        newMessageContainer.classList.add('chat-message');
-        newMessageContainer.innerHTML = message;
 
-        // Create a new element for the time
-        var timeElement = document.createElement('div');
-        timeElement.classList.add('message-time');
-        timeElement.textContent = currentTime;
+        // Create and show prerequisite message
+        var prerequisiteMessageContainer = document.createElement('div');
+        prerequisiteMessageContainer.classList.add('chat-message-prerequisite');
+        prerequisiteMessageContainer.innerHTML = promptPillText;
 
-        // Style the time element
-        timeElement.style.fontSize = '0.8em'; // Smaller font size
-        timeElement.style.color = '#636363'; // Different text color
-        timeElement.style.textAlign = 'right'; // Align to the right
-
-        // Append the time element to the message container
-        newMessageContainer.appendChild(timeElement);
-
-        // Append the new message container to the chat container
         var chatContainer = document.querySelector('.chat-container');
-        chatContainer.appendChild(newMessageContainer);
+        chatContainer.appendChild(prerequisiteMessageContainer);
 
-        // Append the message container containing prompt pills below the response
+        // Scroll to ensure the prerequisite message is visible
+        scrollToBottom();
+
+        // Show typing indicator after a short delay
+        setTimeout(() => {
+            var typingIndicatorContainer = document.createElement('div');
+            typingIndicatorContainer.classList.add('typing-indicator');
+            typingIndicatorContainer.id = 'typing-indicator';
+
+            var typingDots = document.createElement('div');
+            typingDots.classList.add('typing-dots');
+            typingDots.innerHTML = '<div></div><div></div><div></div>';
+
+            typingIndicatorContainer.appendChild(typingDots);
+
+            chatContainer.appendChild(typingIndicatorContainer);
+
+            // Show the typing indicator and then reveal the message
+            setTimeout(() => {
+                typingIndicatorContainer.style.display = 'none'; // Hide typing indicator
+
+                var newMessageContainer = document.createElement('div');
+                newMessageContainer.classList.add('chat-message');
+                newMessageContainer.innerHTML = message;
+
+                // Create a new element for the time
+                var timeElement = document.createElement('div');
+                timeElement.classList.add('message-time');
+                timeElement.textContent = currentTime;
+
+                // Style the time element
+                timeElement.style.fontSize = '0.8em'; // Smaller font size
+                timeElement.style.color = '#636363'; // Different text color
+                timeElement.style.textAlign = 'right'; // Align to the right
+
+                // Append the time element to the message container
+                newMessageContainer.appendChild(timeElement);
+
+                chatContainer.appendChild(newMessageContainer);
+
+                // Scroll to bottom after adding the message
+                scrollToBottom();
+
+                // Display prompt pills after a short delay to ensure message is visible
+                setTimeout(() => {
+                    displayPromptPills();
+                }, 500); // Adjust delay if needed
+
+            }, 3000); // Duration of typing indicator
+
+        }, 500); // Delay before showing typing indicator
+    }
+
+
+
+    // Function to display prompt pills below the message
+    function displayPromptPills() {
+        var chatContainer = document.querySelector('.chat-container');
+
+        // Create a container for prompt pills
         var promptPillsContainer = document.createElement('div');
         promptPillsContainer.classList.add('prompt-pills-container');
         promptPillsContainer.innerHTML = `
-<div class="prompt-pill" onclick="displayMessage('Can you tell me about yourself?')">Can you tell me about yourself?</div>
-<div class="prompt-pill" onclick="displayMessage('What is your educational background?')">What is your educational background?</div>
-<div class="prompt-pill" onclick="displayMessage('What is your professional experience?')">What is your professional experience?</div>
-<div class="prompt-pill" onclick="displayMessage('What are your key skills and areas of specialization?')">What are your key skills and areas of specialization?</div>
-<div class="prompt-pill" onclick="displayMessage('Can I see samples of your work?')">Can I see samples of your work?</div>
-<div class="prompt-pill" onclick="displayMessage('What services do you offer?')">What services do you offer?</div>
-<div class="prompt-pill" onclick="displayMessage('How can I contact you?')">How can I contact you?</div>
-<div class="prompt-pill" onclick="displayMessage('Can I view your resume?')">Can I view your resume?</div>
-`;
+        <div class="prompt-pill" onclick="displayMessage('Can you tell me about yourself?')">Can you tell me about yourself?</div>
+        <div class="prompt-pill" onclick="displayMessage('What is your educational background?')">What is your educational background?</div>
+        <div class="prompt-pill" onclick="displayMessage('What is your professional experience?')">What is your professional experience?</div>
+        <div class="prompt-pill" onclick="displayMessage('What are your key skills and areas of specialization?')">What are your key skills and areas of specialization?</div>
+        <div class="prompt-pill" onclick="displayMessage('Can I see samples of your work?')">Can I see samples of your work?</div>
+        <div class="prompt-pill" onclick="displayMessage('What services do you offer?')">What services do you offer?</div>
+        <div class="prompt-pill" onclick="displayMessage('Can I view your resume?')">Can I view your resume?</div>
+        <div class="prompt-pill" onclick="displayMessage('How can I contact you?')">How can I contact you?</div>
+    `;
+
         chatContainer.appendChild(promptPillsContainer);
 
-        // Show the scroll-to-bottom button when a new message is added and a prompt pill has been clicked for the first time
-        if (promptPillClicked) {
-            document.getElementById('scroll-to-bottom').style.display = 'block';
-        }
-
-        // Scroll to the bottom of chatbox
-        scrollToBottom();
+        // Ensure the prompt pills are visible and have a sliding effect
+        var promptPills = document.querySelectorAll('.prompt-pill');
+        setTimeout(() => {
+            promptPills.forEach(pill => {
+                pill.classList.add('visible');
+            });
+        }, 100); // Small delay to ensure pills appear after message
     }
 
-    // Function to scroll to the bottom or top of the chat container
     function scrollToBottom() {
         var chatContainer = document.querySelector('.chat-container');
-
-        // Scroll to the bottom of chatbox
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
 
@@ -272,13 +277,9 @@
         var chatContainer = document.querySelector('.chat-container');
         var scrollToBottomButton = document.getElementById('scroll-to-bottom');
 
-        // Calculate a threshold value to consider as being at the bottom
         var threshold = 50; // You can adjust this value as needed
-
-        // Check if the user is close enough to the bottom of the chat container
         var isAtBottom = chatContainer.scrollHeight - chatContainer.scrollTop - threshold <= chatContainer.clientHeight;
 
-        // Show or hide the scroll-to-bottom button based on scroll position
         scrollToBottomButton.style.display = isAtBottom ? 'none' : 'block';
     });
 
@@ -286,6 +287,7 @@
     document.getElementById('scroll-to-bottom').addEventListener('click', function () {
         scrollToBottom();
     });
+
 
 
     // Add event listener to the bot logo to toggle the chatbox
@@ -391,7 +393,7 @@
 
     // Function to type search placeholder
     const placeholderElement = document.querySelector('.search-input');
-    const placeholderText = "www.sanjhaiprakash.com";
+    const placeholderText = "sanjhaiprakash18.github.io/SanjhaiPrakash/";
     let index = 0;
     let cursorVisible = true; // Flag to track cursor visibility
 
@@ -429,9 +431,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const dots = document.querySelectorAll(".dot");
     const line = document.querySelector(".vertical-line");
     const dotColor = "#77DD86"; // Dot color
-    const outerLineColor = "#FFFFFF"; // Outer line color
-    const dotSize = "30px"; // New size for the enlarged dot
-    const outerLineWidth = "4px"; // Increased outer line width
+    const outerLineColor = "#1bdf73"; // Outer line color
+    const dotSize = "20px"; // New size for the enlarged dot
+    const outerLineWidth = "1px"; // Increased outer line width
 
     // Calculate the positions of each dot
     const dotPositions = Array.from(dots).map(dot => dot.getBoundingClientRect().top + window.scrollY);
@@ -546,20 +548,20 @@ const titles = [
     "Areas Of Interests",
     "Portfolio",
     "Services",
-    "Contact Me",
-    "Resume"
+    "Pricing",
+    "Contact Me"
 ];
 
 const images = [
-    "Home Page Background.jpg",
-    "Companies Music Logo.jpg",
-    "About Me Log Mus.jpg",
-    "Work Experience Image Music.png",
-    "Areas Of Interest Music.jpg",
-    "Portfolio Image Music.png",
-    "Services Image Music.png",
-    "Call Center GIF.gif",
-    "Resume Image Music.jpg"
+    "Home Page Lat Player.png",
+    "Companies Music Lat.png",
+    "About Me Lat.png",
+    "Exp Lat.png",
+    "AOI Upd.png",
+    "Portfolio Lat.png",
+    "Service Lat.png",
+    "Pricing Pic.png",
+    "Contact Me Log.png"
 ];
 
 // Function to update the music title and music image
@@ -672,7 +674,7 @@ document.addEventListener("DOMContentLoaded", function () {
     popUpNextRectangle(0);
 });
 
-function togglePopup(popupId, offset = -750) {
+function togglePopup(popupId, offset = -1100) {
     var popup = document.getElementById(popupId);
     var body = document.querySelector('body');
     if (popup.style.display === "flex") {
@@ -720,10 +722,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Call the function for each number with desired end values
-    animateValue("portfolio-stats-number", 0, 16, 1000, 5000); // Adjust duration and delay as needed
+    animateValue("portfolio-stats-number", 0, 6, 1000, 5000); // Adjust duration and delay as needed
     animateValue("experience-stats-number", 0, 2, 1000, 5000);
     animateValue("service-stats-number", 0, 1, 1000, 5000);
-    animateValue("customers-stats-number", 0, 7, 1000, 5000);
+    animateValue("customers-stats-number", 0, 10, 1000, 5000);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -1019,59 +1021,151 @@ const observer = new IntersectionObserver((entries, observer) => {
 // Observe the section
 observer.observe(section);
 
-document.addEventListener('DOMContentLoaded', function () {
-    const filterOptions = document.querySelectorAll('.AOIFilterOption');
+// JavaScript to handle scroll detection and update active filter
+document.addEventListener("DOMContentLoaded", function () {
     const sections = document.querySelectorAll('.InterestSection');
+    const filterOptions = document.querySelectorAll('.AOIFilterOption');
 
-    // Function to update the active filter based on scroll position
-    function updateActiveFilter() {
-        let scrollPos = window.scrollY + 150; // Adjust offset as needed
+    function setActiveFilter(sectionId) {
+        // Remove active class from all filter options
+        filterOptions.forEach(option => option.classList.remove('active'));
+
+        // Add active class to the corresponding filter option
+        const activeOption = document.querySelector(`.AOIFilterOption[data-filter="${sectionId}"]`);
+        if (activeOption) {
+            activeOption.classList.add('active');
+        }
+    }
+
+    function handleScroll() {
+        let currentSectionId = '';
+
         sections.forEach(section => {
-            if (section.offsetTop <= scrollPos && section.offsetTop + section.offsetHeight > scrollPos) {
-                filterOptions.forEach(option => {
-                    option.classList.remove('active');
-                    if (section.getAttribute('id') === option.getAttribute('href').substring(1)) {
-                        option.classList.add('active');
-                        console.log(`Active section: ${section.getAttribute('id')}`);
-                    }
-                });
+            const sectionTop = section.offsetTop - 100; // Adjust this value based on your layout
+            if (window.scrollY >= sectionTop) {
+                currentSectionId = section.getAttribute('id');
             }
         });
+
+        setActiveFilter(currentSectionId);
     }
 
-    // Attach the scroll event listener
-    document.addEventListener('scroll', updateActiveFilter);
+    // Initial call to set active filter on page load
+    setActiveFilter(sections[0].getAttribute('id'));
 
-    // Function to smoothly scroll to a section
-    function scrollToSection(targetSection) {
-        window.scrollTo({
-            top: targetSection.offsetTop - 90, // Adjust offset as needed
-            behavior: 'smooth'
-        });
-
-        // Call updateActiveFilter after scrolling is complete
-        setTimeout(updateActiveFilter, 800); // Adjust the timeout to match the smooth scroll duration
-        console.log(`Scrolling to section: ${targetSection.getAttribute('id')}`);
-    }
-
-    // Attach click event listeners to filter options
-    filterOptions.forEach(option => {
-        option.addEventListener('click', function (e) {
-            e.preventDefault();
-            const targetId = e.target.getAttribute('href').substring(1);
-            const targetSection = document.getElementById(targetId);
-
-            // Scroll to the target section
-            scrollToSection(targetSection);
-
-            // Remove 'active' class from all options and add to the clicked one
-            filterOptions.forEach(opt => opt.classList.remove('active'));
-            e.target.classList.add('active');
-            console.log(`Clicked on filter option: ${targetId}`);
-        });
-    });
-
-    // Initial check to set the active filter option on page load
-    updateActiveFilter();
+    // Event listener for scroll
+    window.addEventListener('scroll', handleScroll);
 });
+
+function animateLiquid() {
+    const container = document.querySelector('.livspace-new-expe-container');
+    const finalText = document.getElementById('final-text');
+
+    container.classList.add('clicked');
+    setTimeout(() => {
+        window.open('https://www.linkedin.com/in/sanjhaiprakash/details/experience/', '_blank');
+        setTimeout(() => {
+            container.classList.add('reset');
+            container.classList.remove('clicked');
+            finalText.style.opacity = 0;
+            setTimeout(() => {
+                container.classList.remove('reset');
+                finalText.style.opacity = 1;
+            }, 2000); // delay to match the reverse transition duration
+        }, 1000); // delay to start the reverse transition after opening the link
+    }, 2000); // delay to match the initial transition duration
+}
+
+function animateLiquidnamasys() {
+    const container = document.querySelector('.namasys-new-expe-container');
+    const finalText = document.getElementById('namasysfinal-text');
+
+    container.classList.add('clicked');
+    setTimeout(() => {
+        window.open('https://www.linkedin.com/in/sanjhaiprakash/details/experience/', '_blank');
+        setTimeout(() => {
+            container.classList.add('reset');
+            container.classList.remove('clicked');
+            finalText.style.opacity = 0;
+            setTimeout(() => {
+                container.classList.remove('reset');
+                finalText.style.opacity = 1;
+            }, 2000); // delay to match the reverse transition duration
+        }, 1000); // delay to start the reverse transition after opening the link
+    }, 2000); // delay to match the initial transition duration
+}
+
+
+function animateLiquidyoshops() {
+    const container = document.querySelector('.yoshops-new-expe-container');
+    const finalText = document.getElementById('yoshopsfinal-text');
+
+    container.classList.add('clicked');
+    setTimeout(() => {
+        window.open('https://www.linkedin.com/in/sanjhaiprakash/details/experience/', '_blank');
+        setTimeout(() => {
+            container.classList.add('reset');
+            container.classList.remove('clicked');
+            finalText.style.opacity = 0;
+            setTimeout(() => {
+                container.classList.remove('reset');
+                finalText.style.opacity = 1;
+            }, 2000); // delay to match the reverse transition duration
+        }, 1000); // delay to start the reverse transition after opening the link
+    }, 2000); // delay to match the initial transition duration
+}
+
+function animateLiquidsparks() {
+    const container = document.querySelector('.sparks-new-expe-container');
+    const finalText = document.getElementById('sparksfinal-text');
+
+    container.classList.add('clicked');
+    setTimeout(() => {
+        window.open('https://www.linkedin.com/in/sanjhaiprakash/details/experience/', '_blank');
+        setTimeout(() => {
+            container.classList.add('reset');
+            container.classList.remove('clicked');
+            finalText.style.opacity = 0;
+            setTimeout(() => {
+                container.classList.remove('reset');
+                finalText.style.opacity = 1;
+            }, 2000); // delay to match the reverse transition duration
+        }, 1000); // delay to start the reverse transition after opening the link
+    }, 2000); // delay to match the initial transition duration
+}
+
+function animateLiquidbiolim() {
+    const container = document.querySelector('.biolim-new-expe-container');
+    const finalText = document.getElementById('biolimfinal-text');
+
+    container.classList.add('clicked');
+    setTimeout(() => {
+        window.open('https://www.linkedin.com/in/sanjhaiprakash/details/experience/', '_blank');
+        setTimeout(() => {
+            container.classList.add('reset');
+            container.classList.remove('clicked');
+            finalText.style.opacity = 0;
+            setTimeout(() => {
+                container.classList.remove('reset');
+                finalText.style.opacity = 1;
+            }, 2000); // delay to match the reverse transition duration
+        }, 1000); // delay to start the reverse transition after opening the link
+    }, 2000); // delay to match the initial transition duration
+}
+
+function togglePlay() {
+    var video = document.getElementById('aboutMeVideo');
+    var playButton = document.getElementById('playButton');
+    var circleAnimation = document.querySelector('.VC-circle-animation');
+
+    if (video.paused || video.ended) {
+        video.play();
+        playButton.style.display = 'none'; // Hide the play button when playing
+        circleAnimation.style.display = 'none'; // Hide the circle animation when playing
+    } else {
+        video.pause();
+        playButton.style.display = 'flex'; // Show the play button when paused
+        circleAnimation.style.display = 'block'; // Show the circle animation when paused
+    }
+}
 

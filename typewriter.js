@@ -35,11 +35,14 @@ function startWordCycling() {
     wordElement.style.fontSize = '58px'; // Adjusted to match your earlier request
     wordElement.style.fontWeight = '900';
     wordElement.style.letterSpacing = '-4.8px';
-    wordElement.style.color = '#77DD86';
+    wordElement.style.color = '#D8F849';
     wordElement.style.display = 'inline-block';
     wordElement.style.position = 'relative'; // Use relative positioning for custom positioning
-    wordElement.style.top = '10px'; // Adjust as needed to move the word down
+    wordElement.style.top = '70px'; // Adjust as needed to move the word down
     wordElement.style.left = '2px'; // Adjust as needed to move the word left
+    wordElement.style.border = '1px solid #000000'; // Set a 1px solid black border
+    wordElement.style.paddingRight = '8px'; //
+    wordElement.style.paddingTop = '0px'; // 
 
     typewriterwordeffect.appendChild(wordElement);
 
@@ -66,3 +69,19 @@ function startWordCycling() {
 setTimeout(function () {
     typeWriterEffect(0);
 }, 2000);
+
+function addDots() {
+    var typewriterContainer = document.getElementById('typewriterwordeffect');
+
+    // Array of dot positions with "Herosec" prefix
+    var dotClasses = ['Herosec-top-left', 'Herosec-top-right', 'Herosec-bottom-left', 'Herosec-bottom-right'];
+
+    dotClasses.forEach(function (positionClass) {
+        var dot = document.createElement('div');
+        dot.classList.add('Herosec-dot', positionClass); // Add both 'Herosec-dot' and position class
+        typewriterContainer.appendChild(dot);   // Append the dot to the container
+    });
+}
+
+// Call this function after setting up your typewriter effect
+addDots();

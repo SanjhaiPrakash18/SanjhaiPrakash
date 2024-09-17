@@ -1,7 +1,90 @@
 ﻿body {
     font-family: Montserrat, sans-serif;
     overflow-x: hidden;
+    overflow-y: auto;
     /*cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Ik0wLDBMMjQsMTJMMCwyNCBRNiwxMiAwLDBaIiBmaWxsPSIjNzdERDg2IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiIHRyYW5zZm9ybT0icm90YXRlIC00NSwgMTIsIDEyKSIvPjwvc3ZnPg=='), auto;*/
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.preloader-content {
+    position: relative;
+    text-align: center;
+    height: 300px; /* Adjust height based on content */
+}
+
+.pass-rectangle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 60px; /* Adjust height as needed */
+    transform: translate(-50%, -50%);
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    background-color: #ffffff;
+    z-index: 1;
+}
+
+.preloader-step {
+    opacity: 0.3; /* Default less opacity */
+    transform: translateY(100px); /* Initially below the pass rectangle */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    letter-spacing: -1.4px;
+    position: relative;
+    transition: opacity 0.5s, transform 0.5s, font-size 0.5s;
+    z-index: 2;
+}
+
+    .preloader-step.passing {
+        opacity: 1;
+        font-size: 24px;
+        transform: translateY(0);
+        animation: moveThroughPass 0.5s forwards; /* Reduce animation duration */
+    }
+
+    .preloader-step.finished {
+        opacity: 0.3;
+        transform: translateY(-60px);
+        transition: opacity 0.25s, transform 0.25s, font-size 0.25s; /* Reduce transition time */
+    }
+
+@keyframes moveThroughPass {
+    0% {
+        transform: translateY(100px); /* Start below the pass rectangle */
+    }
+
+    50% {
+        transform: translateY(0); /* Position at the pass rectangle */
+    }
+
+    100% {
+        transform: translateY(-60px); /* Move up from the pass rectangle */
+    }
+}
+
+.preloader-tick {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
 }
 
 /* Header styles */
@@ -87,7 +170,7 @@ header {
                 transform: translateX(-50%);
                 width: 12px; /* Set the width of the circle */
                 height: 12px; /* Set the height of the circle */
-                background-color: #77DD86; /* Set the color of the circle */
+                background-color: #9d9da4; /* Set the color of the circle */
                 border-radius: 50%; /* Make it a circle */
             }
 
@@ -127,6 +210,10 @@ header {
                 margin-right: 0; /* Remove margin from the last list item */
             }
 
+.main-nav {
+    perspective: 1000px; /* Create a 3D perspective for its children */
+}
+
     .main-nav .nav-link {
         text-decoration: none;
         color: #000000;
@@ -134,11 +221,15 @@ header {
         font-size: 14.3px;
         padding: 10px 20px;
         display: block;
+        transition: transform 0.2s ease; /* Smooth transition for transform */
+        will-change: transform; /* Optimize performance for transform */
+        transform:none;
     }
 
-        .main-nav .nav-link:hover {
-            color: #555;
-        }
+    .main-nav .nav-link {
+        transform: rotateX(10deg) rotateY(10deg);
+        color:#9d9da4;
+    }
 
     .main-nav .resume-pill {
         display: inline-block; /* Ensure the resume link is displayed inline */
@@ -165,7 +256,7 @@ header {
 
         .main-nav.scrolled .nav-link,
         .main-nav.scrolled .resume-pill a {
-            color: #ffffff;
+            color: #000000;
         }
 
 @keyframes expandFromLeft {
@@ -209,31 +300,42 @@ header {
 .main-nav {
     padding-top: 1px;
     padding-bottom: 1px;
-    border-radius: 60px;
+    border-radius: 15px;
     width: 970px; /* Ensure this matches the width used in the animation */
-    background: #ffffff;
+    background: #fcfcfc;
     text-align: center;
     height: 40px;
     position: relative;
-    right: -35px; /* Initial position */
+    right: 35px; /* Initial position */
     overflow: hidden; /* Ensure content doesn't overflow during animation */
     transition: none; /* Disable default transition to only use keyframe animations */
+    border:1px solid #e6e6e6;
 }
 
-    .main-nav ul {
-        padding-left: 20px; /* Add padding to move the links to the right */
-        display: inline-block; /* Ensure the list items are aligned properly */
-    }
-
     .main-nav.scrolled {
-        background: #000000;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.04);
-        right: 60px; /* Reduced right position when scrolled */
+        background: #ffffff;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
+        right: 140px;
+        backdrop-filter: blur(2px); /* Adds a slight blur */
     }
 
-        .main-nav.scrolled .nav-link {
-            animation: slideInFromRight 0.8s ease-out forwards;
-        }
+    .main-nav .nav-link {
+        text-decoration: none;
+        color: #000000;
+        font-weight: 400;
+        font-size: 14.3px;
+        padding: 10px 20px;
+        display: block;
+        transition: transform 0.2s ease; /* Smooth transition for transform */
+        will-change: transform; /* Optimize performance for transform */
+        transform:none;
+    }
+
+    /* Make sure this applies to links inside the scrolled nav as well */
+    .main-nav.scrolled .nav-link {
+        color: #9d9da4;
+    }
+
 
     .main-nav .resume-pill {
         display: inline-block; /* Ensure resume pill is always visible */
@@ -252,22 +354,23 @@ header {
                 color: #555;
             }
 
+
 .get-bi-solution-link {
     text-decoration: none;
 }
 
 .get-bi-solution-rect {
-    background-color: #FCFCFC;
+    background-color: #ffffff;
     border: 1px solid #e6e6e6;
-    border-radius: 12px; /* Adjust the radius as needed */
-    padding: 8px 8px; /* Adjust the padding as needed */
+    border-radius: 12px;
+    padding: 8px 8px;
     display: inline-flex;
     align-items: center;
     color: #9D9DA4;
-    font-family: Montserrat, sans-serif; /* Adjust the font as needed */
+    font-family: Montserrat, sans-serif;
     position: relative;
     right: 40px;
-    overflow: hidden; /* Ensures the text doesn’t overflow the container */
+    overflow: hidden;
 }
 
     .get-bi-solution-rect:hover {
@@ -313,10 +416,17 @@ header {
 }
 
 .get-bi-solution-text svg {
-    width: 16px; /* Adjust the width to reduce the SVG size */
-    height: 16px; /* Adjust the height to reduce the SVG size */
-    margin-left: 8px; /* Adjust the spacing between text and icon */
-    fill: #9D9DA4; /* Ensure the SVG color matches the text */
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    fill: #9D9DA4;
+    background-color: #fcfcfc;
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 2px;
+    padding-left: 2px;
 }
 
 .hide-on-scroll {
@@ -369,6 +479,180 @@ p {
             background-color: #159e5a; /* Change background color on hover */
         }
 
+.iphone {
+    position: relative;
+    width: 300px;
+    height: 550px;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: -940px;
+    right: -1100px;
+    outline: 1px solid #e6e6e6; /* Added outline for the border around the iPhone */
+    outline-offset: 8px; /* Offset the outline by 8px */
+}
+
+.iphone-notch {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    height: 30px;
+    background-color: #000000;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    z-index: 3;
+}
+
+.iphone-screen {
+    flex-grow: 1;
+    width: 92.5%;
+    height: 75%; /* Increased the height of the screen */
+    border-radius: 45px;
+    background-color: transparent;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+    .iphone-screen h1 {
+        font-size: 18px;
+        color: #000;
+    }
+
+.iphone-home-button {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 0px solid #e6e6e6;
+    z-index: 3;
+}
+
+.ios-chat-header {
+    position: absolute;
+    top: 0px; /* Moved below the notch */
+    width: 300px;
+    height: 120px;
+    background-color: #fcfcfc;
+    border-radius:45px; /* Rounded bottom corners */
+    display: flex;
+    justify-content: start; /* Align items to the start (left) */
+    align-items: center;
+    padding-left: 0px; /* Padding for the SVG */
+    z-index: 2; /* Set z-index lower than the notch but above other content */
+    border-bottom: 1px solid #e6e6e6;
+    border-bottom-left-radius:0px;
+    border-bottom-right-radius:0px;
+}
+
+    .ios-chat-header svg {
+        fill: #017AFF; /* Optional: Change the color of the SVG */
+        position:relative;
+        right:-5px;
+        top:10px;
+    }
+
+    .ios-chat-header .second-svg {
+        fill: #f5f5f5; /* Specific fill color for the second SVG */
+    }
+
+.ios-chat-person-image-container {
+    border-radius: 50%;
+    margin-right: 10px; /* Space between containers */
+    border: 1px solid #fcfcfc;
+    background-size: cover;
+    background-position: center;
+}
+
+    .ios-chat-person-image-container.small {
+        width: 25px;
+        height: 25px;
+        background-image: url('HR Manager Prof Pic.png');
+        position:relative;
+        top:26px;
+        right:-73px;
+    }
+
+    .ios-chat-person-image-container.medium {
+        width: 30px;
+        height: 30px;
+        background-image: url('client profile image.png');
+        position:relative;
+        right:-55px;
+        top:0px;
+    }
+
+    .ios-chat-person-image-container.large {
+        width: 35px;
+        height: 35px;
+        background-image: url('Sanjhai New LinkedIn DP.png');
+        position:relative;
+        right:27px;
+        top:-5px;
+    }
+
+.ios-chat-header-text {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #000000;
+    text-align: center;
+    letter-spacing:-0.8px;
+    font-weight:500;
+    position:relative;
+    top:-130px;
+    z-index:3;
+    right:-55px;
+}
+
+.ios-chat-sub-text {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #9d9da4;
+    text-align: center;
+    letter-spacing: -0.3px;
+    font-weight: 700;
+    position: relative;
+    top: -107px;
+    z-index: 3;
+}
+
+.ios-chat-client-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #9d9da4;
+    letter-spacing: -0.9px;
+    text-align: center;
+    z-index: 1;
+    position:relative;
+    top:-300px;
+}
+
+.Client-Message-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    top: -1380px; /* Adjust based on desired positioning */
+    right: -1215px; /* Adjust to align with your layout */
+    z-index: 1;
+    letter-spacing:-0.8px;
+    border-bottom-left-radius:0px;
+}
+
+
 /* Section styles */
 section {
     padding: 100px;
@@ -387,7 +671,11 @@ footer {
     color: #000000;
     padding: 20px;
     text-align: center;
-    position: relative; /* Add position relative to position pseudo-element */
+    position: relative;
+    background-image: linear-gradient(to top, #FFFFFF 0%, transparent 65%, #FFFFFF 100%), linear-gradient(to bottom, #FFFFFF 0%, transparent 0%, #FFFFFF 0%), linear-gradient(rgba(230, 230, 230, 0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(230, 230, 230, 0.8) 1px, transparent 1px);
+    background-size: 100% 50%, 100% 50%, 40px 40px, /* Increased grid tile size */ 40px 40px;
+    background-repeat: no-repeat, no-repeat, repeat, repeat;
+    background-position: top, bottom, 0 0, 0 0;
 }
 
     footer::before {
@@ -544,9 +832,10 @@ h2.home-text {
     font-size: 72px;
     letter-spacing: -7.1px;
     position: relative;
-    top: 45px;
+    top: 110px;
 }
 
+/* Button container */
 .button-container {
     display: flex;
     justify-content: center;
@@ -557,35 +846,44 @@ h2.home-text {
     margin-bottom: 10px;
 }
 
+/* General rounded button styling */
 .rounded-button {
     display: inline-block;
     padding: 15px 30px;
     background-color: #000000;
     color: #fff;
-    border-radius: 15px;
+    border-radius: 20px;
     text-decoration: none;
-    transition: background-color 0.3s;
-    letter-spacing: -1.0px;
+    letter-spacing: -1px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-    .rounded-button:hover {
-        background-color: #77DD86;
-    }
+/* Subtle zoom effect and smooth color fill on hover */
+.zoom-button:hover {
+    transform: scale(1.05); /* Slight zoom-in effect */
+    background-color: #77DD86; /* Change background color */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease; /* Ensure smooth color fill */
+}
 
+/* Reduced letter spacing */
 .reduced-letter-spacing {
-    letter-spacing: -1px; /* Adjust the value as needed */
+    letter-spacing: -1px;
 }
 
+/* Text color on hover */
 .button-container a:hover {
-    color: white;
+    color: #fff;
 }
 
+/* Image inside the button */
 .north-east-arrow-img {
-    width: 25px; /* Adjust the size as needed */
-    height: auto; /* Maintains the aspect ratio */
-    vertical-align: middle; /* Aligns the image with the text */
+    width: 25px;
+    height: auto; /* Maintains aspect ratio */
+    vertical-align: middle;
     margin-left: 3px;
 }
+
 
 .music-player {
     display: flex;
@@ -601,12 +899,16 @@ h2.home-text {
     left: 360px;
     position: relative;
     border: 1px solid #E6E6E6; /* Light grey border */
-    top: 18px;
+    top: 20px;
+    border-bottom: 4px solid #e6e6e6;
+    overflow: hidden; /* Ensure pseudo-element stays within bounds */
+    transition: background-color 0.3s ease;
 }
 
 .music-info {
     display: flex;
     align-items: center;
+    z-index: 2;
 }
 
 .music-image-container {
@@ -626,6 +928,11 @@ h2.home-text {
 
 .music-details {
     flex-grow: 1;
+    z-index: 2;
+}
+
+.music-title, .music-subtitle, .playlist-question {
+    transition: color 0.3s ease;
 }
 
 .music-title {
@@ -634,19 +941,13 @@ h2.home-text {
     font-weight: bold;
     color: #000000; /* Change text color */
     margin-top: -15px;
-    letter-spacing: -2.2px;
+    letter-spacing: -1.8px;
 }
 
 .music-subtitle {
     margin: 0;
     font-size: 14px; /* Adjust the font size as needed */
     color: #000000; /* Change text color */
-}
-
-.music-controls {
-    display: flex;
-    gap: 10px;
-    left: -50px;
 }
 
 .playlist-question {
@@ -658,19 +959,38 @@ h2.home-text {
     color: #000000;
 }
 
+.music-controls {
+    display: flex;
+    gap: 10px;
+    left: -50px;
+}
+
 .control-button {
     background: none;
     border: none;
     font-size: 20px;
     cursor: pointer;
     outline: none;
-    color: #003F3C; /* Change icon color */
+    color: #003F3C; /* Default color */
     position: relative;
-    z-index: 1;
+    z-index: 3;
+    display: inline-flex; /* Ensure the symbols are inline */
+    align-items: center; /* Align symbols vertically centered */
+    justify-content: center; /* Center the content */
+    gap: 5px; /* Adjust spacing between the symbols */
 }
 
+    /* Styling for rewind and forward buttons */
+    .control-button.rewind-button,
+    .control-button.forward-button {
+        color: #003f3c;
+    }
+
     .control-button.pause-button {
-        color: white; /* White color for the pause icon */
+        color: #003f3c; /* Text color for the pause icon */
+        font-size: 20px;
+        position: relative;
+        z-index: 3;
     }
 
         .control-button.pause-button::before {
@@ -680,15 +1000,16 @@ h2.home-text {
             left: 50%;
             width: 32px;
             height: 32px;
-            background-color: #003F3C; /* Circle color */
+            background-color: #fcfcfc;
+            border: 1px solid #e6e6e6;
             border-radius: 50%;
             transform: translate(-50%, -50%);
-            z-index: -1; /* Place the circle behind the icon */
+            z-index: -1;
         }
 
 .progress-container {
     width: 75%; /* Same width as the progress bar */
-    height: 5px; /* Same height as the progress bar */
+    height: 2px; /* Same height as the progress bar */
     background-color: #F6F6F6; /* Background color for the progress container */
     border-radius: 10px; /* Same border radius as the progress bar */
     margin-top: 30px;
@@ -696,14 +1017,16 @@ h2.home-text {
     bottom: 15px; /* Adjust as needed */
     left: 90px;
     overflow: hidden; /* Ensures the progress bar does not overflow */
+    z-index:3;
 }
 
 .progress-bar {
-    height: 100%; /* Change to 100% to fill the container */
-    background-color: #77DD86; /* Change progress bar color */
+    height: 60%; /* Change to 100% to fill the container */
+    background-color: #D8F849; /* Change progress bar color */
     border-radius: 10px; /* Same border radius as the container */
     width: 0%; /* Start with 0% width */
     animation: progress-animation 26s linear infinite; /* Animation for the progress bar */
+    z-index:3;
 }
 
 @keyframes progress-animation {
@@ -720,20 +1043,60 @@ h2.home-text {
     }
 }
 
+.music-player {
+    position: relative;
+    overflow: hidden; /* Ensure the effect stays within bounds */
+}
+
+.music-player-hover-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #232730; /* Semi-transparent dark background */
+    pointer-events: none; /* Allow hover events to work */
+    transform: scale(0); /* Start hidden */
+    transition: transform 0.3s ease;
+    z-index: 1;
+    clip-path: circle(0% at 50% 50%); /* Start with a fully invisible effect */
+}
+
+.music-player .music-title,
+.music-player .music-subtitle,
+.music-player .playlist-question,
+.music-player .progress-bar,
+.music-player .control-button {
+    transition: color 0.3s ease;
+}
+
+.music-player.hover .music-title,
+.music-player.hover .music-subtitle,
+.music-player.hover .playlist-question,
+.music-player.hover .progress-bar,
+.music-player.hover .control-button {
+    color: #ffffff; /* Change text color on hover */
+}
+
+/* Targeting only the pause button */
+.music-player.hover .pause-button {
+    color: #000000; /* Pause button specific color on hover */
+}
+
 .browser-window {
     position: relative;
     width: 1200px;
     height: 620px;
-    border: 1px solid #D8F3D8; /* Window outline color */
+    border: 1px solid #e6e6e6; /* Window outline color */
     border-radius: 20px;
     overflow: hidden;
-    margin-top: -420px; /* Move window up */
+    margin-top: -400px; /* Move window up */
     margin-left: 60px; /* Move window right */
     z-index: -1;
 }
 
 .browser-titlebar {
-    background-color: #77DD86; /* Title bar background color */
+    background-color: #fafaff; /* Title bar background color */
     height: 30px;
     display: flex;
     align-items: center;
@@ -752,14 +1115,17 @@ h2.home-text {
 
 .browser-close-button {
     background-color: #ffffff;
+    border:1px solid #e6e6e6;
 }
 
 .browser-minimize-button {
     background-color: #ffffff;
+    border: 1px solid #e6e6e6;
 }
 
 .browser-maximize-button {
     background-color: #ffffff;
+    border: 1px solid #e6e6e6;
 }
 
 .browser-content {
@@ -785,17 +1151,23 @@ h2.home-text {
 .animated-fade {
     animation: fadeInOut 20s ease-in-out infinite;
 }*/
+.hero-sliding-text {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+}
 
 .popping-circle-container {
     position: relative;
     display: inline-block;
-    transform: translate(-40px, 10px); /* Adjust the position as needed */
+    transform: translate(-100px, 15px);
 }
 
 .popping-circle {
-    width: 17px; /* Adjust the size as needed */
-    height: 17px; /* Adjust the size as needed */
-    background-color: #77DD86; /* Adjust the color as needed */
+    width: 17px;
+    height: 17px;
+    background-color: #77DD86;
     border-radius: 50%;
     position: absolute;
     top: 0;
@@ -803,13 +1175,13 @@ h2.home-text {
 }
 
 .blinking-circle {
-    width: 18px; /* Adjust the size as needed */
-    height: 18px; /* Adjust the size as needed */
-    background-color: #77DD86; /* Adjust the color as needed */
+    width: 18px;
+    height: 18px;
+    background-color: #e6e6e6;
     border-radius: 50%;
     position: absolute;
-    top: -25px; /* Center the circle around the popping circle */
-    left: 44px; /* Center the circle around the popping circle */
+    top: -32px;
+    left: 100px;
     animation: blink 1s infinite;
 }
 
@@ -822,6 +1194,36 @@ h2.home-text {
         opacity: 1;
     }
 }
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+.hero-sliding-word {
+    display: inline-block;
+    animation: slideLeft 1s forwards;
+    font-weight: 400;
+    letter-spacing: -1.5px;
+    line-height: 1.2;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.hero-hidden {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
 
 /* Livspace */
 .livspace-text-home-ad-rect {
@@ -952,22 +1354,189 @@ h2.home-text {
 
 .home-stats-container {
     display: flex;
-    justify-content: flex-start; /* Keep items left-aligned */
-    margin-left: 198px; /* Adjust margin to move items to the right */
+    justify-content: flex-start;
+    margin-left: 198px;
+    position: relative; /* Add relative positioning to the container */
+}
+
+.home-stats-wrapper {
+    position: relative; /* Make the wrapper relative to allow absolute positioning inside */
 }
 
 .Home-stats-rounded-rectangle {
-    width: 200px; /* Adjust width as needed */
-    height: 220px; /* Adjust height as needed */
-    background-color: #77DD86;
-    border-radius: 60px; /* Adjust border-radius as needed */
-    margin-right: 40px; /* Adjust space between rectangles */
+    width: 200px;
+    height: 220px;
+    background-color: #ffffff;
+    border-radius: 60px;
+    margin-right: 40px;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: rotate(0deg);
+    border: 1px solid #e6e6e6;
+}
+
+.dashed-rounded-rectangle {
+    width: 200px;
+    height: 220px;
+    border-radius: 60px;
+    outline: 2px dashed #e6e6e6;
+    outline-offset: 5px;
+    position: absolute;
+    top: 0; /* Align the dashed rectangle with the top of the stats rectangle */
+    left: 0; /* Align the dashed rectangle with the left of the stats rectangle */
+    z-index: -1; /* Ensure the dashed rectangle is behind the stats rectangle */
+    background-color:#fcfcfc;
+}
+
+.Home-stats-rounded-rectangle:hover {
+    background-color: #000000;
+    transform: rotate(-15deg) scale(1.1); /* Rotate and enlarge */
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+
+        /* Bounce animation on hover */
+        .Home-stats-rounded-rectangle:hover .stats-text {
+            animation: bounce 0.7s ease-out;
+        }
+
+/* Bounce keyframes */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    30% {
+        transform: translateY(-15px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    70% {
+        transform: translateY(-5px);
+    }
+
+    90% {
+        transform: translateY(-2px);
+    }
+}
+
+.stats-text {
+    display: inline-block;
+    position: relative;
+    z-index: 2;
+    color: #000000;
+    padding-left: 30px; /* Add padding to make space for the square */
+}
+
+    .stats-text::before {
+        content: '';
+        position: absolute;
+        left: -12%; /* Adjusted to position the outer circle correctly */
+        top: 15%;
+        transform: translateY(-50%);
+        width: 40px; /* Slightly larger than the inner circle */
+        height: 40px;
+        background-color: transparent; /* No background for outer circle */
+        border-radius: 50%;
+        border: 1px solid #e6e6e6; /* Outer circle border */
+        z-index: 0; /* Ensure it is behind the inner circle */
+    }
+
+    .stats-text::after {
+        content: '';
+        position: absolute;
+        left: -9%; /* Adjusted to move the circle to the right */
+        top: 15%;
+        transform: translateY(-50%);
+        width: 35px;
+        height: 35px;
+        background-color: #fcfcfc; /* Inner circle background */
+        border-radius: 50%;
+        border-bottom: 6px solid #fafaff; /* Bottom border for the inner circle */
+        z-index: 1; /* Ensure it is above the outer circle */
+    }
+
+/* Bounce animation on hover */
+.Home-stats-rounded-rectangle:hover .stats-text::after {
+    background-color:#000000;
+    border:1px solid #000000;
+}
+
+/* Bounce animation on hover */
+.Home-stats-rounded-rectangle:hover .stats-text::before {
+    background-color: #000000;
+    border: 1px solid #000000;
+}
+
+.secret-text {
+    display: block;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: color 0.3s ease, transform 0.5s ease; /* Add transform transition */
+    transform: translateY(100%); /* Initially position the text below */
+}
+
+.Home-stats-rounded-rectangle:hover .secret-text {
+    color: #000000;
+    font-weight: 300;
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding-left: 5px;
+    padding-right: 5px;
+    transform: translateY(0) rotate(15deg); /* Slide the text up and rotate */
+    background-color: #fcfcfc;
+    letter-spacing:-1.0px;
+}
+
+.Home-stats-rounded-rectangle:hover .stats-text {
+    font-weight: 900;
+}
+
+.Home-stats-rounded-rectangle:hover .Home-stats-circle {
+    background-color:none !important;
+}
+
+.Home-stats-rounded-rectangle:hover .stats-number {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.Home-stats-rounded-rectangle:hover .stats-text {
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing:-3.5px;
+    font-size:35px;
+}
+
+.stats-text svg {
+    position: absolute;
+    left: -15px; /* Adjust this value as needed to position the SVG correctly */
+    top: 15%;
+    transform: translateY(-50%);
+    width: 40px; /* Adjust the size of the SVG as needed */
+    height: 40px;
+}
+
+.Home-stats-rounded-rectangle:hover .stats-text svg {
+    position: absolute;
+    left: -15px; /* Adjust this value as needed to position the SVG correctly */
+    top: 15%;
+    transform: translateY(-50%);
+    width: 40px; /* Adjust the size of the SVG as needed */
+    height: 40px;
+    display:none;
 }
 
 .Home-stats-circle {
     width: 100px; /* Adjust circle diameter as needed */
     height: 100px; /* Adjust circle diameter as needed */
-    background-color: #D8F3D8;
+    background-color: #ffffff;
     border-radius: 50%;
     opacity: 0.15; /* Adjust transparency as needed */
     margin: 10px auto; /* Adjust margin to center circle within rectangle */
@@ -1158,18 +1727,18 @@ h2.home-text {
     font-weight: bold;
     display: block;
     font-size: 71px;
-    color: #FFFFFF;
+    color: #000000;
 }
 
 .stats-text {
     font-weight: 300; /* Thin */
-    color: #FFFFFF;
+    color: #9d9da4;
     display: inline-block; /* Display as block to enable line breaks */
     max-width: 100px; /* Adjust max-width as needed */
     text-align: center; /* Center the text */
     white-space: nowrap; /* Prevent single words from breaking */
     word-break: break-all; /* Break words if they exceed the max-width */
-    font-size: 22px;
+    font-size: 18px;
     letter-spacing: -1.2px;
 }
 
@@ -1398,19 +1967,38 @@ button[type="submit"] {
     margin-top: 20px;
     display: inline-block;
     padding: 10px 20px;
-    background-color: #000000;
-    color: #fff;
-    border: none;
+    background-color: #ffffff;
+    color: #000000;
     border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.3s;
     font-family: 'Montserrat', sans-serif;
-    transition: transform 0.3s;
+    border: 1px solid #e6e6e6;
+    position: relative;
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
     button[type="submit"]:hover {
-        background-color: #1DBF73;
-        transform: scale(1.1);
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    button[type="submit"] span {
+        font-size: 1.2em;
+        font-weight: 900;
+        border: 2px solid #000000;
+        border-radius: 50%;
+        padding: 0 6px;
+        margin-left: 5px;
+        background-color: #e6e6e6;
+        color: #000000;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    button[type="submit"]:hover span {
+        background-color: #000000 !important;
+        color: #ffffff;
+        border:2px solid #ffffff !important; 
     }
 
 /* Improved UI for the About section video player */
@@ -1987,8 +2575,6 @@ section#contact h2 {
         border-color: #000000; /* Change border to black */
     }
 
-
-
 .green-text {
     color: #000000;
 }
@@ -1999,7 +2585,7 @@ section#contact h2 {
     font-size: 64px;
     letter-spacing: -4.8px;
     position: relative;
-    top: 40px;
+    top: 100px;
 }
 
 .cursor {
@@ -2098,9 +2684,51 @@ section#contact h2 {
 
 #services {
     padding: 200px;
-    padding-bottom: 3124px; /* Adjust this value to increase bottom padding */
+    padding-bottom: 3124px;
     text-align: center;
     background-color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+}
+
+    #services::before {
+        content: "";
+        position: absolute;
+        width: 1550px;
+        height: 1550px;
+        background-color: #ffffff;
+        border: 1px solid #e6e6e6;
+        border-radius: 50%;
+        top: 17.5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+    }
+
+    /* Small asteroid rotating on the border */
+    #services::after {
+        content: "";
+        position: absolute;
+        width: 30px; /* Size of the asteroid */
+        height: 30px;
+        background-color: #e6e6e6; /* Asteroid color */
+        border-radius: 50%;
+        top: calc(17.5% + 775px); /* Position on the edge of the circle */
+        left: 50%;
+        transform-origin: center -775px; /* Set rotation point */
+        z-index: -1;
+        animation: rotateAsteroid 4s linear infinite; /* Adjust speed with '4s' */
+    }
+
+/* Keyframes to rotate the asteroid */
+@keyframes rotateAsteroid {
+    0% {
+        transform: rotate(0deg) translateX(0);
+    }
+
+    100% {
+        transform: rotate(360deg) translateX(0);
+    }
 }
 
     #services h2 {
@@ -2308,17 +2936,20 @@ rounded-rectangle {
 
 .rounded-rectangle.service-ads {
     position: relative;
-    border: 1px solid #FFFFFF;
-    background-color: #FFFFFF; /* Example background color */
-    border-radius: 20px; /* Example border radius */
-    padding: 20px; /* Example padding */
-    margin-top: -550px; /* Example margin from the top */
-    right: -450px; /* Example margin from the right */
+    border: 1px solid #000000;
+    background-color: #fafaff;
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: -550px;
+    right: -450px;
     height: 160px;
     width: 270px;
-    /* Add any other styling properties as needed */
-    overflow: hidden; /* Hide overflow to clip the dotted line */
+    overflow: hidden;
     top: 80px;
+    background-image: radial-gradient(circle, #e6e6e6 1px, transparent 1.4px);
+    background-size: 20px 20px;
+    border-bottom:8px solid #000000;
+    padding-top:4px;
 }
 
 @keyframes connectLine {
@@ -2354,8 +2985,8 @@ rounded-rectangle {
 }
 
 .circle {
-    width: 23px;
-    height: 23px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background-color: white; /* Start with white color */
     margin-bottom: 30px; /* Space between circles */
@@ -2368,9 +2999,10 @@ rounded-rectangle {
 }
 
     .circle.active {
-        background-color: #77DD86; /* Change to #77DD86 after animation */
+        background-color: #ffffff; /* Change to #77DD86 after animation */
         transform: scale(1); /* Scale up when active */
         opacity: 1; /* Show when active */
+        border:2px solid #000000;
     }
 
 .circle-text {
@@ -2384,18 +3016,29 @@ rounded-rectangle {
     font-weight: 300;
     white-space: nowrap; /* Prevent text from wrapping */
     transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and position transition */
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 5px;
+    background-color: #D8F849;
 }
 
 .circle::after {
-    content: '\2714'; /* Unicode character for the tick mark */
-    font-size: 18px; /* Adjust font size for a smaller tick */
-    color: transparent; /* Hide tick initially */
+    content: '';
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: color 0.3s ease; /* Smooth color transition */
+    width: 24px;
+    height: 24px;
+    background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="black" d="M12.16,28a3,3,0,0,1-2.35-1.13L3.22,18.62a1,1,0,0,1,1.56-1.24l6.59,8.24A1,1,0,0,0,13,25.56L27.17,4.44a1,1,0,1,1,1.66,1.12L14.67,26.67A3,3,0,0,1,12.29,28Z"/></svg>') no-repeat center;
+    background-size: contain;
+    opacity: 1; /* Hidden by default */
+    transition: opacity 0.3s ease;
 }
+
 
 .circle.active .circle-text {
     color: #000000; /* Show text when circle is active */
@@ -2431,18 +3074,72 @@ rounded-rectangle {
     margin-bottom: 10px;
 }
 
-.dotted-rectangle {
-    border: 1px solid #e6e6e6;
-    border-radius: 20px;
-    padding: 8px;
-    color: #9d9da4;
-    background-color: #fcfcfc;
-    letter-spacing: -1.5px;
-    font-size: 16px;
-    width: 100px;
-    font-weight: 800;
-    opacity: 0;
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
+
+.dotted-rectangle {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 8px 60px 8px 8px; /* Increase padding on the right for the image */
+    color: #000000;
+    background-color: #fcfcfc;
+    letter-spacing: -0.8px;
+    font-size: 16px;
+    width: 240px; /* Increase width to accommodate both text and image */
+    font-weight: 400;
+    opacity: 1;
+    position: relative; /* Enable positioning for the ::after element */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center align text */
+    padding-right: 45px;
+    border-bottom: 4px solid #000000;
+    border-left: 4px solid #000000;
+    animation-play-state: running; /* Ensures animation runs by default */
+}
+
+    .dotted-rectangle:hover {
+        animation-play-state: paused !important; /* Pauses the animation on hover */
+    }
+
+    .dotted-rectangle::after {
+        content: '';
+        position: absolute;
+        right: 10px; /* Adjust to position the image correctly */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 35px; /* Set width of the image */
+        height: 35px; /* Set height of the image */
+        background: url('Free_Hand_Curve-removebg-preview.png') no-repeat center;
+        background-size: contain; /* Ensure image fits within dimensions */
+    }
+
+    .dotted-rectangle:nth-child(1) {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .dotted-rectangle:nth-child(2) {
+        animation: float 5s ease-in-out infinite;
+    }
+
+    .dotted-rectangle:nth-child(3) {
+        animation: float 3.5s ease-in-out infinite;
+    }
+
+    .dotted-rectangle:nth-child(4) {
+        animation: float 4.5s ease-in-out infinite;
+    }
 
 .data-dashboard-outline {
     border: 0.6px solid #e6e6e6;
@@ -2451,29 +3148,24 @@ rounded-rectangle {
     border-radius: 20px;
     position: relative;
     left: -480px;
-    background-color:#fcfcfc;
+    background-color: #fcfcfc;
+    transition: transform 0.3s ease-out; /* Smoother transition for the 3D effect */
+    perspective: 800px; /* Adjusted 3D perspective for a more noticeable effect */
+    transform-style: preserve-3d; /* Ensures children are transformed in 3D */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02); /* Adding a subtle shadow */
+    border-bottom: 6px solid #e6e6e6;
 }
 
 .datadb-title-bar {
     border: 0.6px solid #e6e6e6;
     background-color: #e6e6e6;
     color: white;
-    padding: 5px 10px;
+    padding: 10px 20px;
     border-radius: 20px;
     font-weight: bold;
     height: 10px;
-}
-
-.datadb-title-bar {
-    border: 0.6px solid #e6e6e6;
-    background-color: #e6e6e6;
-    color: white;
-    padding: 10px 20px; /* Adjust padding for enlarged size */
-    border-radius: 20px;
-    font-weight: bold;
-    height: 10px;
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflowed text */
+    white-space: nowrap;
+    overflow: hidden;
     animation: slideAndEnlarge 1s linear infinite alternate;
 }
 
@@ -2558,6 +3250,8 @@ rounded-rectangle {
     position: relative;
     left: -310px;
 }
+
+
 
 .try-now-btn {
     font-family: montserrat;
@@ -3205,7 +3899,7 @@ button {
 
     .statement span {
         font-weight: 200;
-        color: #77DD86;
+        color: #ffffff;
     }
 
 .creative-line {
@@ -3485,11 +4179,13 @@ button {
 .mac-window {
     background-color: #FCFCFC;
     border-radius: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
     padding: 10px;
     width: 455px;
     max-width: 100%;
     margin: 0 auto;
+    border: 1px solid #e6e6e6;
+    height: 65px;
 }
 
 /* CSS for search bar */
@@ -3497,7 +4193,7 @@ button {
     display: flex;
     align-items: center;
     padding: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #e6e6e6;
     border-radius: 20px;
     width: 395px;
     overflow: hidden;
@@ -4508,7 +5204,7 @@ button {
     left: 0;
     width: 100%;
     height: 40px; /* Adjust height as needed */
-    background-color: #fafaff;
+    background-color: none;
     border-radius: 0 0 20px 20px; /* Adjust border-radius for the curve */
     transform: translateY(100%);
 }
@@ -4560,6 +5256,7 @@ button {
     margin: 0 auto 10px;
     margin-left: 2px;
     margin-top: 5px;
+    position: relative; /* Enable positioning for the ::after pseudo-element */
 }
 
     .image-container-bot img {
@@ -4572,6 +5269,28 @@ button {
     .image-container-bot:hover img {
         transform: scale(1.1);
     }
+
+    .image-container-bot::after {
+        content: "Sanjhai's Assistant";
+        position: absolute;
+        left: 60px; /* Adjust based on the width of your image container */
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #000; /* Background color of the text rectangle */
+        color: #fff; /* Text color */
+        padding: 5px 10px;
+        border-radius: 5px;
+        white-space: nowrap; /* Prevent text wrapping */
+        opacity: 0; /* Hide by default */
+        transition: opacity 0.3s ease; /* Fade-in effect */
+        z-index: 10; /* Ensure it appears above other content */
+        pointer-events: none; /* Prevents the text from blocking mouse events */
+    }
+
+    .image-container-bot:hover::after {
+        opacity: 1; /* Show on hover */
+    }
+
 
 .chat-container {
     position: relative; /* Needed to position the pseudo-element */
@@ -4596,7 +5315,6 @@ button {
         opacity: 0.04; /* Adjust this value to reduce the opacity of the background image */
         z-index: -1; /* Place behind the content */
     }
-
 
     .chat-container::-webkit-scrollbar {
         width: 6px; /* Width of the scrollbar */
@@ -4640,9 +5358,10 @@ button {
     animation: slideIn ease 0.5s;
     letter-spacing: -1.0px;
     position: relative;
-    right: -15px;
-    border-bottom-right-radius: 0px;
+    right: 20px;
+    border-top-left-radius: 0px;
     top: -12px;
+    text-align:left;
 }
 
     .chat-message.response {
@@ -4679,6 +5398,10 @@ button {
     letter-spacing: -1.0px;
     position: relative;
     top: -5px;
+    text-align: left;
+    display: block;
+    right: 20px;
+    margin-bottom: 9px;
 }
 
     .prompt-pill.response {
@@ -4692,6 +5415,9 @@ button {
         font-family: 'Montserrat', sans-serif; /* Font family */
         font-size: 14px; /* Font size */
         transition: background-color 0.3s ease; /* Prompt pill animation */
+        text-align:left;
+        display:block;
+        margin-bottom:10px;
     }
 
     .prompt-pill:hover {
@@ -4741,25 +5467,39 @@ button {
 
 .scroll-to-bottom {
     position: fixed;
-    bottom: 40px; /* Adjust the bottom position */
-    right: 175px; /* Adjust the right position */
-    width: 30px; /* Set equal width and height for a circular shape */
+    bottom: 40px;
+    right: 175px;
+    width: 30px;
     height: 30px;
-    background-color: #FFFFFF; /* Button background color */
-    border: 1px solid #51ABF5; /* Button border color */
-    border-radius: 50%; /* Make it circular */
-    font-size: 30px; /* Adjust font size for arrow */
-    color: #51ABF5; /* Arrow color */
-    line-height: 25px; /* Center the arrow vertically */
+    background-color: #FFFFFF;
+    border: 1px solid #51ABF5;
+    border-radius: 50%;
+    font-size: 30px;
+    color: #51ABF5;
+    line-height: 30px; /* Center the arrow vertically */
     text-align: center; /* Center the arrow horizontally */
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    will-change: transform; /* Optimize for animation */
 }
 
     .scroll-to-bottom:hover {
-        background: linear-gradient(to right, #49ABF9, #68D3E7); /* Button background color on hover */
-        color: #FFFFFF; /* Arrow color on hover */
+        background: linear-gradient(to right, #49ABF9, #68D3E7);
+        color: #FFFFFF;
+        animation: bounce 0.5s; /* Apply bounce animation */
     }
+
+/* Bouncy animation */
+@keyframes bounce {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2); /* Enlarge on hover */
+    }
+}
+
 
 .notification-container {
     position: fixed;
@@ -4769,8 +5509,8 @@ button {
 }
 
 .notification-box {
-    background: #fcfcfc;
-    color: #000000;
+    background: #ffffff;
+    color: #ffffff;
     border-radius: 40px;
     padding: 15px;
     max-width: 300px;
@@ -4785,6 +5525,8 @@ button {
     border: 1px solid #e6e6e6;
     position: relative; /* Ensure the pseudo-element is positioned relative to this container */
     overflow: hidden; /* Hide any overflow from the pseudo-element */
+    height:53px;
+    border-bottom-right-radius:0px;
 }
 
     .notification-box::before {
@@ -4799,18 +5541,13 @@ button {
         opacity: 0.03; /* Adjust the opacity to your preference */
         z-index: -1; /* Ensure the image is behind the content */
         border-radius: 40px; /* Match the border-radius of the container */
+        filter: invert(0%); /* Inverts the colors of the image */
     }
-
 
     .notification-box.active {
         transform: translateY(0);
         opacity: 1;
     }
-
-.notification-content {
-    display: flex;
-    align-items: center;
-}
 
 .notification-icon {
     font-size: 40px; /* Adjust size as needed */
@@ -4818,10 +5555,35 @@ button {
     animation: waving 1s infinite linear;
 }
 
+.notification-content {
+    display: flex;
+    align-items: flex-start; /* Aligns items at the start */
+}
+
 .notification-message {
-    flex: 1;
-    letter-spacing: -1.0px;
+    display: block; /* Ensures the message takes up the full width */
     font-size: 18px;
+    letter-spacing: -1.0px;
+    position: relative;
+    top: 2px;
+    margin-bottom: 5px; /* Adds space between the message and the submessage */
+    color:#000000;
+}
+
+.notification-submessage {
+    display: block;
+    font-size: 16px;
+    color: #ffffff; /* Text color */
+    position: relative;
+    top: -2px;
+    letter-spacing: -0.5px;
+    border-radius: 20px;
+    padding-left: 1.5px;
+    padding-right: 1.5px;
+    width: 140px;
+    padding-left: 5px; /* Add space for the circle */
+    right: 2px;
+    background: #000000;
 }
 
 .notification-close-btn {
@@ -5376,7 +6138,7 @@ button {
 }
 
 .text-container {
-    background-color: #ffffff;
+    background-color: #fafaff;
     border-radius: 60px;
     padding: 50px 70px;
     margin: 20px auto;
@@ -5390,10 +6152,9 @@ button {
     align-items: flex-start;
     overflow: hidden;
     border: 1px solid #e6e6e6;
-    /* Tile grid background */
     background-image: linear-gradient(to right, #eeeeee 1px, transparent 1px), linear-gradient(to bottom, #eeeeee 1px, transparent 1px);
-    background-size: 30px 30px; /* Size of each tile */
-    background-position: 0 0, 0 0; /* Position of the lines */
+    background-size: 30px 30px;
+    background-position: 0 0, 0 0;
 }
 
 .box {
@@ -5516,6 +6277,9 @@ button {
     transform: rotate(-25deg);
     animation: slide-loop 18.2s linear infinite; /* Adjust the timing as per your requirement */
     animation-fill-mode: both; /* Ensures the element stays in its final state after animation */
+    background-color:none;
+    border-bottom:5px solid #000000;
+    border-left:5px solid #000000;
 }
 
 @keyframes slide-loop {
@@ -5564,7 +6328,7 @@ button {
     height: 135px;
     border: 0.8px solid #000000;
     border-radius: 20px;
-    background-color: transparent;
+    background-color: none;
     position: relative;
     top: 6px;
 }
@@ -5583,11 +6347,30 @@ button {
     background-color: #FFFFFF;
     top: 130px;
     right: 670px;
-    opacity: 0; /* Initially set opacity to 0 */
+    opacity: 1; /* Initially set opacity to 0 */
     animation: slideAndFade 10s ease-in-out infinite;
     overflow: hidden; /* Ensure the wavy shape stays within the rectangle */
     border: 1px solid #E6E6E6;
+    transition: transform 0.6s ease-in-out; /* Slower and smoother transition */
 }
+
+    .text-ad-cont-analytics-rectangle:hover {
+        transform: scale(1.05) translateY(-5px); /* Enlarge slightly and move up */
+        animation: slowBounce 1s ease-in-out; /* Slow and smooth bounce effect */
+        z-index:3;
+    }
+
+/* Keyframes for the slow bounce effect */
+@keyframes slowBounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px); /* Reduced bounce height for a smoother effect */
+    }
+}
+
 
 .text-ad-content {
     position: relative;
@@ -5607,55 +6390,6 @@ button {
     opacity: 0.5; /* Adjust opacity as needed */
 }
 
-
-@keyframes moveWave {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-@keyframes slideAndFade {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-
-    5% {
-        transform: translateX(-100%);
-        opacity: 0.1; /* Adjust opacity gradually */
-    }
-
-    20%, 60% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    60.01%, 70% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-
-    80%, 100% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-}
-
-.text-ad-cont-analytics-rectangle:nth-child(1) {
-    animation-delay: 0s; /* Delay for the first rectangle */
-}
-
-.text-ad-cont-analytics-rectangle:nth-child(2) {
-    animation-delay: 3s; /* Delay for the second rectangle */
-}
-
-.text-ad-cont-analytics-rectangle:nth-child(3) {
-    animation-delay: 6s; /* Delay for the third rectangle */
-}
 
 .text-ad-content {
     text-align: center;
@@ -5941,6 +6675,7 @@ video:not(.playing) + .VC-circle-animation {
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 5px;
+    background-color:#fcfcfc;
 }
 
 @keyframes moveFromBottom {
@@ -6034,9 +6769,11 @@ video:not(.playing) + .VC-circle-animation {
         left: 0;
         width: 100%;
         height: 100%;
-        background: repeating-linear-gradient( 0deg, #F5F5F5, #F5F5F5 1px, transparent 1px, transparent 20px ), repeating-linear-gradient( 90deg, #F5F5F5, #F5F5F5 1px, transparent 1px, transparent 20px );
-        background-size: 20px 20px; /* Larger tiles */
         z-index: -2;
+        background-color: #fcfcfc;
+        background-image: radial-gradient(circle, #e6e6e6 2px, transparent 1px); /* Increase the size of the dots */
+        background-size: 40px 30px; /* Adjust spacing to match the new dot size */
+        border:1px solid #e6e6e6;
     }
 
     .flow-chart-contact::after {
@@ -6061,15 +6798,51 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .flow-chart-contact-step {
-    border: 0.5px solid #e6e6e6;
-    background-color: #ffffff;
-    border-radius: 40px;
+    border: 2px solid #000000;
+    background-color: #fafafa;
+    border-radius: 15px;
     padding: 20px;
     width: 250px;
     text-align: center;
     margin: 0 10px;
     box-shadow: 0 2px 4px 0 rgba(0, 63, 60, 0.01), 0 6px 20px 0 rgba(0, 63, 60, 0.01);
+    transition: transform 0.6s ease-in-out, box-shadow 0.6s ease-in-out;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 6px solid #000000;
+    background-image: linear-gradient(to right, #eeeeee 1px, transparent 1px), linear-gradient(to bottom, #eeeeee 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 0;
 }
+
+    .flow-chart-contact-step::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.01; /* Adjust the opacity as needed */
+        z-index: 0; /* Ensure it stays behind the text content */
+    }
+
+    .flow-chart-contact-step::after {
+        font-size: 55px;
+        letter-spacing: -5.8px;
+        font-weight: 900;
+        color: #000000;
+        position: absolute;
+        top: 20%;
+        left: 60%;
+        transform: translate(-50%, -50%);
+        opacity: 0.5;
+        z-index: 1; /* Keeps the text shadow above the image */
+        white-space: nowrap;
+        content: attr(data-step);
+    }
 
 .flow-chart-contact-arrow {
     width: 100px;
@@ -6288,15 +7061,16 @@ video:not(.playing) + .VC-circle-animation {
 .submits-highlight {
     position: relative;
     display: inline-block;
-    color: #000000; /* Initial text color */
+    color: #000000;
     font-weight: 300;
-    overflow: hidden; /* Hide overflow to keep border clean */
-    padding: 10px 20px; /* Padding to accommodate the border */
-    border-radius: 40px; /* Match the border radius of the rectangle */
-    transition: color 0.5s ease; /* Smooth transition for color */
-    animation: highlightAnimation 14s infinite; /* Highlight animation */
+    overflow: hidden;
+    padding: 10px 20px;
+    border-radius: 40px;
+    transition: color 0.5s ease;
+    animation: highlightAnimation 14s infinite;
     top: 22px;
-    border-bottom: 5px solid #000000;
+    border-bottom: 8px solid #000000;
+    background-color: #fcfcfc;
 }
 
     .submits-highlight::before {
@@ -6314,33 +7088,6 @@ video:not(.playing) + .VC-circle-animation {
         transition: opacity 0.5s ease;
         border-bottom: 8px solid #000000;
     }
-
-/* Keyframes for highlight animation */
-@keyframes highlightAnimation {
-    0% {
-        color: #000000;
-        background-color: transparent; /* No background color initially */
-        opacity: 0; /* Rectangle hidden initially */
-    }
-
-    20% {
-        color: #ffffff; /* Change text color */
-        background-color: #77dd86; /* Background color */
-        opacity: 1; /* Show rectangle */
-    }
-
-    80% {
-        color: #ffffff; /* Keep text color */
-        background-color: #77dd86; /* Keep background color */
-        opacity: 1; /* Keep rectangle visible */
-    }
-
-    100% {
-        color: #000000; /* Return text color */
-        background-color: transparent; /* Remove background color */
-        opacity: 0; /* Hide rectangle */
-    }
-}
 
 /* Keyframes for button press effect */
 @keyframes buttonPressEffect {
@@ -6512,6 +7259,9 @@ video:not(.playing) + .VC-circle-animation {
 .typing-dots {
     display: flex;
     align-items: center;
+    position: relative;
+    right: 25px;
+    top: -12px;
 }
 
     .typing-dots div {
@@ -6568,7 +7318,6 @@ video:not(.playing) + .VC-circle-animation {
     padding: 10px;
     margin-top: 10px;
     border-radius: 20px;
-    margin-bottom: 10px;
     max-width: 80%;
     display: inline-block;
     text-align: center;
@@ -6576,7 +7325,97 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -5px;
     letter-spacing: -1.0px;
+    right: -45px;
+    margin-bottom: 52px;
+    border-bottom-right-radius: 0px;
+    width: 300px; /* Set a fixed width to control the positioning */
 }
+
+    .chat-message-prerequisite::after {
+        content: '';
+        position: absolute;
+        left: -30%;
+        transform: translateX(-50%);
+        bottom: -45px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-image: url('Chatbot Logo.png');
+        background-size: cover;
+        background-position: center;
+        transition: transform 0.3s ease;
+    }
+
+    .chat-message-prerequisite:hover::after {
+        transform: translateX(-50%) scale(1.1);
+    }
+
+    .chat-message-prerequisite::before {
+        content: '';
+        position: absolute;
+        left: calc(50% - 90px); /* Move further left */
+        bottom: calc(-45px + 10px); /* Move further up */
+        transform: translateX(0%);
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 14px;
+        white-space: nowrap; /* Ensure text does not wrap */
+        opacity: 0; /* Hidden by default */
+    }
+
+    .chat-message-prerequisite:hover::before {
+        content: 'Sanjhai\'s Assistant';
+        position: absolute;
+        left: calc(50% - 175px); /* Adjusted for the text */
+        bottom: calc(-45px + 15px); /* Move further up */
+        transform: translateX(0%) translateY(0); /* Initial position */
+        background-color: black;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        font-size: 14px;
+        white-space: nowrap; /* Ensure text does not wrap */
+        transition: opacity 0.4s ease; /* Smooth transition for visibility */
+        opacity: 1; /* Fully visible on hover */
+        padding-bottom: 2px;
+        padding-top: 2px;
+        letter-spacing: -0.6px;
+        animation: bounce-text 1.2s cubic-bezier(0.42, 0, 0.58, 1) forwards; /* Trigger the bounce animation */
+    }
+
+@keyframes bounce-text {
+    0% {
+        transform: translateX(0%) translateY(0); /* Start at initial position */
+    }
+
+    30% {
+        transform: translateX(-8px) translateY(-5px); /* Move left and slightly up */
+    }
+
+    60% {
+        transform: translateX(8px) translateY(-10px); /* Move right and up */
+    }
+
+    80% {
+        transform: translateX(-4px) translateY(5px); /* Slight left and down */
+    }
+
+    90% {
+        transform: translateX(0%) translateY(-2px) scale(1); /* Bounce up a bit before settling */
+    }
+
+    95% {
+        transform: translateX(0%) translateY(2px) scale(1.05); /* Slight bounce down */
+    }
+
+    100% {
+        transform: translateX(0%) translateY(0px) scale(1); /* Final position */
+    }
+}
+
 
 /* Styling for chat messages */
 .chat-message {
@@ -6723,6 +7562,11 @@ video:not(.playing) + .VC-circle-animation {
     animation: float-diagonal 5s ease-in-out infinite; /* Default floating animation */
 }
 
+.company-dec-rounded-rect:hover {
+    animation-play-state: paused; /* Pauses the animation on hover */
+}
+
+
     .company-dec-rounded-rect::before {
         content: "";
         position: absolute;
@@ -6867,6 +7711,7 @@ video:not(.playing) + .VC-circle-animation {
     pointer-events: auto;
     padding-left: 0px; /* Adjust to create space for the arrow */
     transition: background-color 1s, color 1s; /* Smooth color transitions */
+    border-top-left-radius:0px;
 }
 
     .floating-rectangle.recruiter {
@@ -6886,13 +7731,13 @@ video:not(.playing) + .VC-circle-animation {
     }
 
     .floating-rectangle.recruiter .arrow-wrapper {
-        top: 50%;
+        top: -10%;
         left: -30px; /* Adjust as needed */
         transform: translateY(-50%);
     }
 
     .floating-rectangle.client .arrow-wrapper {
-        top: 50%;
+        top: -10%;
         left: -30px; /* Adjust as needed */
         transform: translateY(-50%);
     }
@@ -7211,107 +8056,160 @@ video:not(.playing) + .VC-circle-animation {
 
 .projects-preface .impact {
     font-weight: 300;
-    letter-spacing:-6.5px;
+    letter-spacing: -6.5px;
 }
 
 .proj-pref-img-containers {
     display: flex;
-    overflow: hidden; /* Hide horizontal overflow */
+    overflow: hidden;
     margin-top: 40px;
-    padding-bottom: 10px; /* Add some padding to the bottom if needed */
-    position: relative; /* Needed for the sliding effect */
-    width: 100%;
+    padding-bottom: 10px;
+    position: relative;
+    width: 120%;
+    right: 95px;
 }
 
 /* Wrapper for animation */
 .proj-pref-img-wrapper {
     display: flex;
     flex-direction: row;
-    animation: slide-left 30s linear infinite; /* Adjust duration for slower effect */
-    animation-play-state: running; /* Ensure animation runs by default */
-    transition: animation-play-state 0.3s; /* Smooth transition for play/pause */
+    /* No need for transition here as we are using keyframe animations */
 }
 
-    /* Pause animation on hover */
-    .proj-pref-img-wrapper:hover {
-        animation-play-state: paused; /* Pause animation */
+/* Animation for sliding left */
+.slide-left .proj-pref-img-wrapper {
+    animation: slide-left 251s linear infinite; /* Slower duration */
+}
+
+.slide-left:hover .proj-pref-img-wrapper {
+    animation-play-state: paused; /* Pause animation on hover */
+}
+
+/* Animation for sliding right */
+.slide-right .proj-pref-img-wrapper {
+    animation: slide-right 140s linear infinite; /* Slower duration */
+}
+
+.slide-right:hover .proj-pref-img-wrapper {
+    animation-play-state: paused; /* Pause animation on hover */
+}
+
+/* Keyframes for sliding left */
+@keyframes slide-left {
+    0% {
+        transform: translateX(50);
     }
+
+    100% {
+        transform: translateX(-100%); /* Ensure it moves fully out of view */
+    }
+}
+
+/* Keyframes for sliding right */
+@keyframes slide-right {
+    0% {
+        transform: translateX(-50%); /* Start from right */
+    }
+
+    100% {
+        transform: translateX(50); /* Move to the start position */
+    }
+}
 
 /* Image container styling */
 .proj-pref-img-item {
     display: flex;
-    flex-direction: column; /* Stack text above image */
-    align-items: center; /* Center text and image */
+    flex-direction: column; /* Stack text above subtitle */
+    align-items: center; /* Center text and subtitle */
     margin-right: 35px; /* Space between containers */
+    background-color: #ffffff; /* Background color for rectangles */
+    border-radius: 15px; /* Rounded corners */
+    border: 1px solid #e6e6e6; /* Border color */
+    border-bottom: 4px solid #fafaff;
+    height: 185px; /* Set height */
+    width: 380px; /* Set width */
+    padding: 20px; /* Padding for internal spacing */
+    box-sizing: border-box; /* Include padding and border in width/height */
+    background: linear-gradient(to top, rgb(255, 255, 255) 60%, transparent 100%, rgb(255, 255, 255) 10%), repeating-linear-gradient(55deg, rgb(238, 238, 238), rgb(238, 238, 238) 0.05px, transparent 1.5px, transparent 50px), repeating-linear-gradient(-35deg, rgb(238, 238, 238), rgb(238, 238, 238) 0.05px, transparent 1.5px, transparent 50px);
+}
+
+.proj-pref-img-text-container {
+    display: flex;
+    align-items: center; /* Vertically center the items */
 }
 
 .proj-pref-img-text {
-    color: #9D9DA4;
-    font-size: 18px; /* Adjust text size as needed */
-    margin-bottom: 20px; /* Space between text and image */
-    letter-spacing:-1.0px;
-    font-weight:500;
+    color: #000000;
+    font-size: 25px; /* Title font size */
+    font-weight: 900; /* Title font weight */
+    letter-spacing: -1.5px; /* Letter spacing for title */
+    margin-bottom: 10px; /* Space between title and subtitle */
+    text-align: left !important;
+    margin-right: 15px; /* Space between text and SVG */
 }
 
-.proj-pref-img-cont {
-    width: 300px;
-    height: 400px;
-    border-radius: 20px;
-    background-color: #ffffff; /* Placeholder color */
-    border: 1px solid #e6e6e6;
-    background-size: cover; /* Cover the entire container */
-    background-position: center; /* Center the image */
-    flex-shrink: 0; /* Prevent shrinking */
+.proj-pref-img-text-container svg {
+    height: 10px; /* Adjust height as needed */
+    width: 10px; /* Adjust width as needed */
+    position:relative;
+    right:-80px;
+    top:-20px;
 }
 
-/* Duplicate the containers to maintain order and seamless scrolling */
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(7) .proj-pref-img-cont {
-    background-image: url('Proj Pref Web.png');
-}
 
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(8) .proj-pref-img-cont {
-    background-image: url('Proj Pref Analytics.png');
-}
-
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(9) .proj-pref-img-cont {
-    background-image: url('Proj Pref UI_UX.png');
-}
-
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(10) .proj-pref-img-cont {
-    background-image: url('Proj Pref Anal Exc.png');
-}
-
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(11) .proj-pref-img-cont {
-    background-image: url('Proj Pref Analy Excel.png');
-}
-
-.proj-pref-img-wrapper .proj-pref-img-item:nth-child(12) .proj-pref-img-cont {
-    background-image: url('Consumer Goods Logo.png');
-}
-
-/* Animation to slide the images */
-@keyframes slide-left {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(-50%); /* Adjust this to match the width of the images */
-    }
+/* Subtitle text styling */
+.proj-pref-img-subtitle {
+    color: #9d9da4; /* Subtitle color */
+    font-weight: 300; /* Subtitle font weight */
+    font-size: 19px; /* Subtitle font size */
+    letter-spacing: -1.2px; /* Letter spacing for subtitle */
+    text-align:left !important;
 }
 
 /* Responsive Design for Android Mobile Screens */
 @media (max-width: 600px) {
-    .proj-pref-img-cont {
-        width: 150px; /* Adjust size for mobile */
+    .proj-pref-img-item {
+        width: 150px; /* Adjust width for mobile */
         height: 200px; /* Adjust height proportionally */
         margin-right: 10px; /* Adjust spacing for mobile */
+        padding: 10px; /* Adjust padding for mobile */
     }
 
     .proj-pref-img-text {
-        font-size: 12px; /* Adjust text size for mobile */
-        margin-bottom: 5px; /* Space between text and image on mobile */
+        font-size: 18px; /* Adjust text size for mobile */
+        margin-bottom: 5px; /* Space between text and subtitle on mobile */
     }
+
+    .proj-pref-img-subtitle {
+        font-size: 14px; /* Adjust subtitle size for mobile */
+    }
+}
+
+.proj-pref-tag {
+    color: #000000;
+    font-size: 16px;
+    font-weight: 300;
+    letter-spacing: -1.0px;
+    margin-top: 10px; /* Space between subtitle and tag text */
+    text-align: left; /* Align text to the left */
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    padding: 2px 5px; /* Padding for tag */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    position: relative;
+    right: -95px;
+    background-color: #fcfcfc;
+    box-shadow: 0px 4px 8px rgba(230, 230, 230, 0.2); /* Box shadow with color #e6e6e6 */
+}
+
+    .proj-pref-tag svg {
+        margin-right: 5px; /* Space between the SVG and the text */
+    }
+
+.proj-pref-img-item {
+    position: relative;
+    /* Your existing styles */
 }
 
 .enlarge-on-hover:hover {
@@ -7323,7 +8221,7 @@ video:not(.playing) + .VC-circle-animation {
     padding: 10px 20px;
     background: #ffffff;
     color: #000000;
-    letter-spacing:-1.0px;
+    letter-spacing: -1.0px;
     text-decoration: none;
     border: 1px solid #000000;
     border-radius: 20px;
@@ -7335,7 +8233,7 @@ video:not(.playing) + .VC-circle-animation {
     .get-started-btn:hover {
         background-color: #000000;
         color: #ffffff;
-        transform: scale(1.10);
+        transform: scale(1.10); /* Add scale effect on hover */
     }
 
     .get-started-btn span {
@@ -7345,17 +8243,18 @@ video:not(.playing) + .VC-circle-animation {
         border-radius: 50%;
         padding: 0 6px;
         margin-left: 5px;
-        background-color: #e6e6e6; /* Default background color of the arrow */
-        color: #000000; /* Default color of the arrow */
+        background-color: #e6e6e6;
+        color: #000000;
         transition: background-color 0.3s, color 0.3s;
     }
 
     .get-started-btn:hover span {
-        background-color: #000000; /* Background color of the arrow on hover */
-        color: #ffffff; /* Color of the arrow on hover */
-        border-color: #ffffff; /* Optional: changes the border color of the arrow */
-        border:2px solid #ffffff;
+        background-color: #000000;
+        color: #ffffff;
+        border-color: #ffffff;
+        border: 2px solid #ffffff;
     }
+
 
 .pricing-card {
     flex: 1;
@@ -7367,12 +8266,31 @@ video:not(.playing) + .VC-circle-animation {
     padding: 20px;
     margin: 10px;
     height: 688px;
-    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for box-shadow */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-    .pricing-card:hover {
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Adjust the shadow as needed */
+    .pricing-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle, #fafaff 15%, transparent 50%);
+        pointer-events: none;
+        transition: background 0.3s ease-in-out;
+        background-size: 100%;
+        transform: translate(-50%, -60%);
     }
+
+
+    .pricing-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
 
 .floating-rectangle-own {
     position: absolute;
@@ -7500,9 +8418,89 @@ video:not(.playing) + .VC-circle-animation {
     z-index: -2;
 }
 
+@keyframes popupEffect {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(30px) rotate(0deg);
+    }
+
+    25% {
+        opacity: 1;
+        transform: scale(1.1) translateY(-15px) rotate(0deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(0deg);
+    }
+
+    75% {
+        opacity: 1;
+        transform: scale(1.05) translateY(-5px) rotate(0deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0) rotate(var(--rotate));
+    }
+}
+
+@keyframes floatEffect {
+    0% {
+        opacity: 1;
+        transform: scale(1) translateY(0) translateX(0) rotate(var(--rotate));
+    }
+
+    50% {
+        opacity: 0.5;
+        transform: scale(0.9) translateY(-20px) translateX(20px) rotate(var(--rotate));
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5) translateY(60px) translateX(60px) rotate(var(--rotate));
+    }
+}
+
+.target-audience {
+    position: absolute;
+    opacity: 0;
+    transform: scale(0.9) translateY(0) translateX(0) rotate(var(--rotate));
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    width: 100%; /* Adjust the width to fit the image */
+    height: 100%; /* Adjust the height to fit the image */
+}
+
+    .target-audience::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('Chat Cartoon.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0.03; /* Adjust the opacity value as needed */
+        z-index: -1; /* Ensure the image stays behind the content */
+    }
+
+    .target-audience.visible {
+        opacity: 1;
+        transform: scale(1);
+        animation: popupEffect 0.8s ease;
+    }
+
+    .target-audience.hidden {
+        opacity: 0;
+        animation: floatEffect 0.8s ease forwards; /* Use floatEffect for diagonal movement */
+    }
+
+
 .nav-bar-anima {
     background-color: #fcfcfc;
-    border: 0.5px solid #000000;
+    border: 0.8px solid #e6e6e6;
     border-radius: 20px;
     padding: 10px 20px;
     text-align: center;
@@ -8071,29 +9069,17 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: 10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding-right: 0px;
     width: 90px;
     border: 1px solid #e6e6e6;
     right: 0px;
     white-space: nowrap;
-    padding-left: 12px; /* Adjust to make space for the circle */
+    padding-left: 0px; /* Adjust to make space for the circle */
     padding-right:0px;
+    border-bottom:4px solid;
 }
-
-    .socials-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Adjust distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
 
 .contact-tag-cont {
     font-weight: 400;
@@ -8103,27 +9089,15 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: 10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
-    padding-right: 0px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding-right: 4px;
     width: 90px;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
+    padding-left: 2px; /* Space for the circle */
+    border-bottom:4px solid;
 }
-
-    .contact-tag-cont::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
 
 .pricing-tag-cont {
     font-weight: 400;
@@ -8133,28 +9107,16 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
-    padding-right: 0px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding-right: 3px;
     width: 90px;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
+    padding-left: 0px; /* Space for the circle */
     right:-570px;
+    border-bottom:4px solid;
 }
-
-    .pricing-tag-cont::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
 
 .service-tag-container {
     font-weight: 400;
@@ -8164,28 +9126,24 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
-    padding-right: 0px;
+    background-color: #ffffff;
+    border-radius: 8px;
     width: 90px;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
-    right:-525px;
-
+    padding-left: 8px; /* Adjust the padding for the space beside the SVG */
+    padding-right: 5px;
+    display: flex; /* Aligns the SVG and text */
+    align-items: center; /* Vertically centers the SVG and text */
+    gap: 0px; /* Adds space between the SVG and the text */
+    right: -525px;
+    border-bottom: 4px solid;
 }
 
-    .service-tag-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
+    .service-tag-container svg {
+        width: 22px; /* Set width of the SVG */
+        height: 22px; /* Set height of the SVG */
+        flex-shrink: 0; /* Ensures the SVG does not shrink */
     }
 
 .portfolio-tag-container {
@@ -8196,28 +9154,16 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding-right: 0px;
-    width: 90px;
+    width: 105px;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
-    right:-630px;
+    padding-left: 0px;
+    right: -630px;
+    border-bottom: 4px solid;
 }
-
-    .portfolio-tag-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
 
 .aoi-tag-container {
     font-weight: 400;
@@ -8227,28 +9173,16 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding-right: 0px;
-    width: 150px; /* Adjusted width */
+    width: 170px; /* Adjusted width */
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
+    padding-left: 0px; /* Space for the circle */
     right:-670px;
+    border-bottom: 4px solid;
 }
-
-    .aoi-tag-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
 
 .about-me-tag-container {
     font-weight: 400;
@@ -8258,27 +9192,24 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding-right: 0px;
-    width: 120px; /* Adjusted width */
+    width: 120px;
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
-    right:-600px;
+    padding-left: 6px; /* Adjust the padding for the space beside the SVG */
+    display: flex; /* Aligns the SVG and text */
+    align-items: center; /* Vertically centers the SVG and text */
+    gap: 8px; /* Adds space between the SVG and the text */
+    right: -600px;
+    border-bottom: 4px solid;
 }
 
-    .about-me-tag-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
+    .about-me-tag-container svg {
+        width: 18px; /* Set width of the SVG */
+        height: 18px; /* Set height of the SVG */
+        flex-shrink: 0; /* Ensures the SVG does not shrink */
     }
 
 .profile-stats-tag-container {
@@ -8289,28 +9220,24 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: -10px;
     color: #9d9da4;
-    background-color: #fcfcfc;
-    border-radius: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
     padding-right: 0px;
-    width: 120px; /* Adjusted width */
+    width: 130px; /* Adjusted width */
     border: 1px solid #e6e6e6;
     white-space: nowrap;
-    padding-left: 12px; /* Space for the circle */
-    right:-600px;
+    padding-left: 12px; /* Space for the icon */
+    border-bottom: 4px solid;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Space between the icon and text */
+    right:-570px;
 }
 
-    .profile-stats-tag-container::before {
-        content: '';
-        display: block;
-        width: 12px; /* Diameter of the circle */
-        height: 12px; /* Diameter of the circle */
-        background-color: #9d9da4; /* Color of the circle */
-        border-radius: 50%; /* Makes it a circle */
-        position: absolute;
-        left: 8px; /* Distance from the left edge */
-        top: 50%; /* Centers the circle vertically with the text */
-        transform: translateY(-50%); /* Centers the circle vertically */
-    }
+.profile-stats-icon {
+    display: inline-block;
+}
+
 
 /* Hide the hover-text by default */
 .hover-text {
@@ -8363,6 +9290,8 @@ video:not(.playing) + .VC-circle-animation {
     box-sizing: border-box; /* Ensures padding/border are included in the width/height */
     position:relative;
     right:-150px;
+    top:-10px;
+    background-color:#fcfcfc;
 }
 
 .innov-search-bar-container {
@@ -8475,9 +9404,9 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .innov-rectangle {
-    background-color: #fcfcfc;
+    background-color: #ffffff;
     color: #000000;
-    border: 1px solid #000000;
+    border: 1px solid #e6e6e6;
     border-radius: 10px; /* Rounded corners */
     width: 250px; /* Adjust width as needed */
     height: 100px; /* Adjust height as needed */
@@ -8490,6 +9419,7 @@ video:not(.playing) + .VC-circle-animation {
     font-weight: 900;
     letter-spacing: -2.6px;
     text-align: left; /* Center text inside the rectangle */
+    border-bottom: 7.1px solid #E1E1E1;
 }
 
 .inner-innov-rectangle {
@@ -8708,24 +9638,30 @@ video:not(.playing) + .VC-circle-animation {
     transition: transform 0.5s ease;
     position: absolute;
     left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+    .toggle-circle .toggle-symbol {
+        color: #ffffff;
+        font-weight: 900;
+        font-size: 25px; /* Adjust font size as needed */
+        transition: opacity 0.5s ease;
+    }
 
 .toggle-container.toggled .toggle-circle {
     transform: translateX(30px); /* Move circle right, adjust as needed */
 }
 
-.toggle-container.toggled ~ .toggle-wrapper .toggle-text#textBefore {
-    opacity: 0; /* Hide text before toggle */
+.toggle-container.toggled .toggle-symbol {
+    content: '*';
+    font-weight: 900;
+    font-size: 35px;
+    position: relative;
+    top: 7px;
 }
 
-.toggle-container.toggled ~ .toggle-wrapper .toggle-text#textAfter {
-    opacity: 1; /* Show text after toggle */
-}
-
-.toggle-wrapper .toggle-text#textAfter {
-    opacity: 0; /* Initially hide text after toggle */
-    transition: opacity 0.5s ease;
-}
 
 /* CSS for pp-bento section */
 #pp-bento {
@@ -8833,9 +9769,11 @@ video:not(.playing) + .VC-circle-animation {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: #e6e6e6;
-    border-radius: 50%;
-    animation: dotColorPass 10s infinite; /* Apply slower color and scale animation to dots */
+    background-color: #fcfcfc;
+    border-radius: 10%;
+    animation: dotColorPass 10s infinite;
+    z-index: 3;
+    border: 1px solid #e6e6e6;
 }
 
 .top-left {
@@ -8879,15 +9817,18 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .upd-exp-rounded-rect {
-    background-color: #ffffff;
+    background-color: #fcfcfc;
     border: 1px solid #e6e6e6;
     border-radius: 15px;
     width: 90%;
-    height: 750px;
+    height: 850px;
     margin-top: 20px;
     position: relative;
     right: -70px;
     overflow: hidden; /* Ensures lines stay within the rectangle */
+    background-image: linear-gradient(to right, #eeeeee 1px, transparent 1px), linear-gradient(to bottom, #eeeeee 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 0;
 }
 
 .upd-horizontal-lines {
@@ -8915,23 +9856,245 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .upd-line {
-    background-color: #e6e6e6;
+    border-style: dashed;
+    border-color: #e6e6e6; /* Color of the dashed lines */
+    border-width: 0; /* Reset the border width */
 }
 
 .upd-horizontal-lines .upd-line {
-    height: 1px; /* Thickness of the horizontal lines */
+    height: 4px; /* Height corresponds to the dot size */
+    background-image: radial-gradient(circle, #9d9da4 50%, transparent 50%); /* Big dots */
+    background-size: 20px 4px; /* Width determines the spacing between dots */
+    background-repeat: repeat-x; /* Repeat dots horizontally */
+    width: 100%; /* Ensures the line spans the full width */
+    opacity: 0;
 }
 
+
 .upd-vertical-lines .upd-line {
-    width: 1px; /* Thickness of the vertical lines */
+    width: 4px; /* Width corresponds to the dot size */
+    background-image: radial-gradient(circle, #9d9da4 50%, transparent 50%); /* Big dots */
+    background-size: 4px 20px; /* Height determines the spacing between dots */
+    background-repeat: repeat-y; /* Repeat dots vertically */
+    height: 100%; /* Ensures the line spans the full height */
+    opacity: 0;
 }
 
 
 .timeline-outline {
+    color: #000000 !important;
     display: inline-block;
     padding: 5px 10px; /* Adjust padding as needed */
     border: 2px solid #000000; /* Border color */
-    border-radius: 15px; /* Adjust border radius as needed for rounded corners */
+    border-radius: 30px; /* Adjust border radius as needed for rounded corners */
+    transition: transform 0.3s ease, color 0.3s ease, background-color 0.3s ease; /* Smooth transition for the transformation */
+    letter-spacing: -6.0px;
+    padding-left: 50px;
+    background-color: #fcfcfc;
+    position: relative; /* Required for absolute positioning of floating text */
+}
+
+    .timeline-outline::before {
+        content: "";
+        position: absolute;
+        left: 5px; /* Position the circle to the left of the text */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px; /* Diameter of the circle */
+        height: 50px; /* Diameter of the circle */
+        background-color: #000000; /* Black color for the circle */
+        border-radius: 50%; /* Makes the element a circle */
+    }
+
+    .timeline-outline::after {
+        content: "";
+        position: absolute;
+        bottom: -13px; /* Position the lines below the timeline-outline */
+        left: 0;
+        right: 0;
+        height: 10px; /* Height of the larger lines */
+        background: repeating-linear-gradient( to right, #000000, /* Large line */
+        #000000 10px, /* End of large line */
+        transparent 10px, /* Gap before small lines */
+        transparent 15px, /* End of gap before small lines */
+        #000000 15px, /* Small line 1 */
+        #000000 16px, /* End of small line 1 */
+        transparent 16px, /* Gap after small line 1 */
+        transparent 20px, /* End of gap after small line 1 */
+        #000000 20px, /* Small line 2 */
+        #000000 21px, /* End of small line 2 */
+        transparent 21px, /* Gap after small line 2 */
+        transparent 25px, /* End of gap after small line 2 */
+        #000000 25px, /* Small line 3 */
+        #000000 26px, /* End of small line 3 */
+        transparent 26px, /* Gap after small line 3 */
+        transparent 30px, /* End of gap after small line 3 */
+        #000000 30px, /* Small line 4 */
+        #000000 31px, /* End of small line 4 */
+        transparent 31px, /* Gap after small line 4 */
+        transparent 35px, /* End of gap after small line 4 */
+        #000000 35px, /* Small line 5 */
+        #000000 36px, /* End of small line 5 */
+        transparent 36px, /* Gap after small line 5 */
+        transparent 45px, /* End of gap after small lines */
+        #000000 45px, /* Next large line */
+        #000000 55px, /* End of large line */
+        transparent 55px, /* Repeat */
+        transparent 60px );
+        transition: background-color 0.3s ease; /* Smooth transition for color change */
+    }
+
+    .timeline-outline:hover {
+        transform: scale(1.1) translateX(-10px); /* Enlarge and move left */
+        background-color: #000000;
+        color: #ffffff !important;
+    }
+
+        .timeline-outline:hover::after {
+            background: repeating-linear-gradient( to right, #ffffff, /* Large line */
+            #ffffff 10px, /* End of large line */
+            transparent 10px, /* Gap before small lines */
+            transparent 15px, /* End of gap before small lines */
+            #ffffff 15px, /* Small line 1 */
+            #ffffff 16px, /* End of small line 1 */
+            transparent 16px, /* Gap after small line 1 */
+            transparent 20px, /* End of gap after small line 1 */
+            #ffffff 20px, /* Small line 2 */
+            #ffffff 21px, /* End of small line 2 */
+            transparent 21px, /* Gap after small line 2 */
+            transparent 25px, /* End of gap after small line 2 */
+            #ffffff 25px, /* Small line 3 */
+            #ffffff 26px, /* End of small line 3 */
+            transparent 26px, /* Gap after small line 3 */
+            transparent 30px, /* End of gap after small line 3 */
+            #ffffff 30px, /* Small line 4 */
+            #ffffff 31px, /* End of small line 4 */
+            transparent 31px, /* Gap after small line 4 */
+            transparent 35px, /* End of gap after small line 4 */
+            #ffffff 35px, /* Small line 5 */
+            #ffffff 36px, /* End of small line 5 */
+            transparent 36px, /* Gap after small line 5 */
+            transparent 45px, /* End of gap after small lines */
+            #ffffff 45px, /* Next large line */
+            #ffffff 55px, /* End of large line */
+            transparent 55px, /* Repeat */
+            transparent 60px );
+        }
+
+.secret-floating-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg); /* Center and rotate diagonally */
+    pointer-events: none; /* Ensure that floating text does not interfere with hover effect */
+    opacity: 0; /* Initially hide the floating text */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+    font-weight:500;
+}
+
+.timeline-outline:hover .secret-floating-text {
+    opacity: 1; /* Show floating text on hover */
+}
+
+/* Define unique animations for each secret year */
+
+/* Floating animation for 2022 */
+@keyframes float2022 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -20px); /* Move up and to the right */
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Floating animation for 2023 */
+@keyframes float2023 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-20px, 40px); /* Move down and to the left */
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+/* Floating animation for 2024 */
+@keyframes float2024 {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, 20px); /* Move down and to the right */
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+.secret-year {
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    background-color: #000000;
+    border-radius: 20px;
+    padding: 1px 3px; /* Small padding for small text */
+    margin: 0 2px; /* Adjust spacing between years */
+    display: inline-block;
+    font-size: 14px; /* Make the text readable */
+    transform: rotate(45deg); /* Rotate text to appear diagonal */
+    letter-spacing: -1.0px;
+    width: 65px;
+    position: relative; /* Required for the ::before pseudo-element */
+    font-weight: 600;
+    padding-right: 1px;
+}
+
+    .secret-year::before {
+        content: "";
+        position: absolute;
+        left: 9px; /* Adjust position relative to text */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 8px; /* Diameter of the circle */
+        height: 8px; /* Diameter of the circle */
+        background-color: #77dd86; /* White color for the circle */
+        border-radius: 50%; /* Makes the element a circle */
+    }
+
+    /* Apply animations to each secret year */
+
+    .secret-year:nth-child(1) {
+        animation: float2022 3s ease-in-out infinite;
+    }
+
+    .secret-year:nth-child(2) {
+        animation: float2023 3s ease-in-out infinite;
+    }
+
+    .secret-year:nth-child(3) {
+        animation: float2024 3s ease-in-out infinite;
+    }
+
+
+
+.sec-timeline {
+    display: block;
+    color: #77DD86;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: color 0.3s ease; /* Smooth transition for text color */
 }
 
 .timeline-circle {
@@ -8961,26 +10124,27 @@ video:not(.playing) + .VC-circle-animation {
     font-size: 26px;
     font-weight: 300;
     letter-spacing: -2.5px;
-    color: #9d9da4; /* Adjust color as needed */
+    color: #000000; /* Adjust color as needed */
 }
 
 .exp-timeline-liv {
-    background-color: #fcfcfc;
+    background-color: #eeeeee;
     border: 1px solid #e6e6e6;
     border-radius: 15px;
     padding: 20px;
     margin-top: 20px;
     text-align: center; /* Center the text */
-    width:170px;
-    height:90px;
-    padding-top:5px;
-    padding-left:5px;
+    width: 170px;
+    height: 130px;
+    padding-top: 5px;
+    padding-left: 5px;
+    color:#000000;
 }
 
     .exp-timeline-liv .exp-title {
         font-weight: 900;
-        font-size: 18px;
-        letter-spacing: -1.2px;
+        font-size: 26px;
+        letter-spacing: -2.0px;
         color: #000000;
         margin-bottom: 0px; /* Space between title and company */
         text-align:left;
@@ -9000,7 +10164,7 @@ video:not(.playing) + .VC-circle-animation {
         font-weight: 300;
         font-size: 16px;
         letter-spacing: -1.0px;
-        color: #9d9da4;
+        color: #000000;
         text-align:left;
     }
 
@@ -9008,7 +10172,7 @@ video:not(.playing) + .VC-circle-animation {
         font-weight: 300;
         font-size: 16px;
         letter-spacing: -1.0px;
-        color: #fcfcfc;
+        color: #ffffff;
         text-align: left;
     }
 
@@ -9019,9 +10183,9 @@ video:not(.playing) + .VC-circle-animation {
         letter-spacing: -1.0px;
         color: #000000;
         text-align: left;
-        background:#ffffff;
-        border:1px solid #e6e6e6;
-        border-radius:10px;
+        background-color:#77dd86;
+        border:1px solid #77dd86;
+        border-radius:6px;
         width:73px;
         padding-left:5px;
     }
@@ -9032,9 +10196,9 @@ video:not(.playing) + .VC-circle-animation {
     height: 35px;
     border-radius: 50%;
     overflow: hidden;
-    border: 1px solid #e6e6e6;
+    border: 2px solid #fafaff;
     position: relative;
-    top: -43px;
+    top: -128px;
     right: -148px;
     display: flex;
     justify-content: center;
@@ -9048,3 +10212,368 @@ video:not(.playing) + .VC-circle-animation {
     object-fit: contain; /* Ensures the image fits inside the container */
 }
 
+.lightning-icon {
+    display: inline-block;
+    transition: transform 0.2s ease-in-out;
+}
+
+@keyframes lightningEffect {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-2px, 2px) rotate(-10deg); /* Small jolt to the left and down */
+    }
+
+    50% {
+        transform: translate(3px, -3px) rotate(10deg); /* Sharp jolt to the right and up */
+    }
+
+    75% {
+        transform: translate(-1px, 1px) rotate(-5deg); /* Small jolt back to the left */
+    }
+
+    100% {
+        transform: translate(0, 0); /* Return to the original position */
+    }
+}
+
+.lightning-icon:hover {
+    animation: lightningEffect 0.3s ease-in-out infinite; /* Short, repeated animation */
+}
+
+/* Define the shaking animation */
+@keyframes shake {
+    0% {
+        transform: translateY(0);
+    }
+
+    20% {
+        transform: translateY(-5px);
+    }
+
+    40% {
+        transform: translateY(0);
+    }
+
+    60% {
+        transform: translateY(-3px);
+    }
+
+    80% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-2px);
+    }
+}
+
+/* Apply the shaking effect on hover */
+.svg-hover-shake:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+.pricing-pop {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 10px;
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 20px;
+    font-weight: 300;
+    font-size: 16.5px;
+    letter-spacing: -1.1px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+    transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
+    padding-top:0px;
+}
+
+    .pricing-pop:hover {
+        animation: bounce 1s ease forwards; /* Apply bounce animation */
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4); /* Enhanced shadow on hover */
+    }
+
+@keyframes bounce {
+    0% {
+        transform: rotate(-15deg) translateY(0); /* Start with original rotation and position */
+    }
+
+    50% {
+        transform: rotate(0deg) translateY(-15px); /* Move up slightly more */
+    }
+
+    70% {
+        transform: rotate(0deg) translateY(0); /* Return to original Y position */
+    }
+
+    100% {
+        transform: rotate(0deg) translateY(-5px); /* Final position with slight bounce */
+    }
+}
+
+.price-bold {
+    font-weight: 900;
+}
+
+.min-logo-container-group {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    top: -20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+}
+
+.min-logo-container {
+    width: 26px; /* Adjust size as needed */
+    height: 26px; /* Adjust size as needed */
+    border: 2px solid #fafaff;
+    border-radius: 50%; /* Makes the container rounded */
+    overflow: hidden;
+    position: relative; /* Create a stacking context */
+    margin-left: -12px; /* Negative margin to create overlap */
+    background-color: #fafaff; /* Background color for container */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 2; /* Ensure the container is above other elements */
+}
+
+    .min-logo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .min-logo-container:hover {
+        transform: scale(1.1); /* Enlarge the container */
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+        animation: bounce 0.5s ease; /* Bouncy animation */
+        z-index: 3; /* Ensure container is above other elements on hover */
+    }
+
+    .min-logo-container::before {
+        content: 'Logo'; /* Text inside the tooltip */
+        position: absolute;
+        top: -35px; /* Position the tooltip above the container */
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 5px 10px; /* Padding for the tooltip */
+        background-color: #000000; /* Tooltip background color */
+        color: #ffffff; /* Tooltip text color */
+        border-radius: 20px; /* Rounded corners for the tooltip */
+        font-size: 12px; /* Font size for the tooltip text */
+        white-space: nowrap; /* Prevent the text from wrapping */
+        opacity: 0; /* Initially hide the tooltip */
+        pointer-events: none; /* Prevent the tooltip from interfering with other elements */
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth transition for tooltip appearance */
+        z-index: 999; /* Very high z-index to ensure visibility */
+    }
+
+    .min-logo-container:hover::before {
+        opacity: 1; /* Show the tooltip on hover */
+        transform: translateX(-50%) translateY(-5px); /* Slightly move the tooltip upwards */
+    }
+
+.dotted-circle-container {
+    position: relative;
+    width: 100%;
+}
+
+.dotted-circle {
+    position: absolute;
+    border: 2px dashed #000000;
+    border-radius: 50%;
+    opacity: 0.05;
+}
+
+.circle1 {
+    width: 500px;
+    height: 500px;
+    top: 0px;
+    left: -550px;
+    background-color:#fcfcfc;
+}
+
+.circle2 {
+    width: 400px;
+    height: 400px;
+    top: 50px;
+    left: -500px;
+}
+
+.circle3 {
+    width: 450px;
+    height: 450px;
+    top: 25px;
+    left: -525px;
+}
+
+.dummy-project-stats-rectangle {
+    width: 310px;
+    height: 135px;
+    background-color: #fafaff;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #9d9da4;
+    font-size: 50px;
+    letter-spacing: -4.8px;
+    font-weight: 200;
+    text-align: center;
+    position: relative;
+    top: 220px;
+    right: 570px;
+    transform: rotate(12deg);
+    transform-style: flat;
+    perspective: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
+    border-right: 8px solid #000000;
+    border-bottom: 8px solid #000000;
+    transition: transform 0.4s cubic-bezier(.4, 0, .2, 1), box-shadow 0.4s cubic-bezier(.4, 0, .2, 1), background-color 0.4s cubic-bezier(.4, 0, .2, 1), border-color 0.4s cubic-bezier(.4, 0, .2, 1);
+}
+
+.upd-exp-rounded-rect {
+    position: relative;
+    cursor: none; /* Hide default cursor */
+}
+
+.custom-cursor-container {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%); /* Center the cursor */
+}
+
+.custom-cursor {
+    width: 24px; /* Set desired width */
+    height: 24px; /* Set desired height */
+    background: url('Mac_Modern_Cursor-removebg-preview.png') no-repeat center center;
+    background-size: contain;
+    opacity:0.8;
+}
+
+.custom-rect {
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-left: 10px; /* Adjust space between cursor and rectangle */
+    letter-spacing: -1.5px;
+}
+
+.new-custo-image-container {
+    width: 30px; /* Adjust size as needed */
+    height: 30px;
+    margin-right: 10px; /* Adjust spacing between image and text */
+    border-radius: 50%;
+    overflow: hidden;
+    position:relative;
+    right:5px;
+}
+
+    .new-custo-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+.upd-exp-rounded-rect:hover .custom-cursor-container {
+    display: flex;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the typewriter word effect container */
+#typewriterwordeffect {
+    position: relative; /* This is necessary to place the dots relative to the container */
+}
+
+/* Common style for the dots */
+.Herosec-dot {
+    width: 10px; /* Size of the square dots */
+    height: 10px;
+    background-color: #ffffff; /* Color of the dot */
+    border: 1px solid #000000; /* Border of the dot */
+    position: absolute;
+    z-index:3;
+}
+
+/* Top-left dot */
+.Herosec-top-left {
+    top: 71px;
+    left: 0;
+}
+
+/* Top-right dot */
+.Herosec-top-right {
+    top: 71px;
+    right: -5px;
+}
+
+/* Bottom-left dot */
+.Herosec-bottom-left {
+    bottom: -73px;
+    left: 0;
+}
+
+/* Bottom-right dot */
+.Herosec-bottom-right {
+    bottom: -73px;
+    right: -5px;
+}
+
+.stats-text svg {
+    position: absolute;
+    left: -15px; /* Adjust this value as needed to position the SVG correctly */
+    top: 15%;
+    transform: translateY(-50%);
+    width: 40px; /* Adjust the size of the SVG as needed */
+    height: 40px;
+}
+
+.freelance-container {
+    position: absolute;
+    /* Position this outside relative to .upd-exp-rounded-rect */
+    top: -220px; /* Adjust this value based on where you want it outside the other rectangle */
+    left: 50%; /* Adjust for horizontal positioning */
+    transform: translateX(-50%);
+}
+
+.freelance-box {
+    width: 170px;
+    height: 200px;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px; /* Makes it rounded */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-10deg);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02); /* Add this line for box shadow */
+}
+
+.freelance-title {
+    font-size: 35px;
+    font-weight: 900;
+    letter-spacing: -3.5px;
+    color: #000000;
+    margin: 0; /* Remove any default margins */
+}
+
+.freelance-subtitle {
+    font-size: 21px;
+    font-weight: 300;
+    letter-spacing: -1.8px;
+    color: #bbbbbb;
+    text-align: center; /* Center align the subtitle */
+    margin-top: 10px; /* Add some space between the title and subtitle */
+}

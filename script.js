@@ -512,33 +512,46 @@ function closeNotification() {
 }
 
 // Function to simulate typing effect
-function typeMessage(message, element, delay) {
+function typeMessage(message, element, delay, callback) {
     let index = 0;
+    element.textContent = ''; // Clear the text content before typing
+
     const interval = setInterval(function () {
         if (index < message.length) {
             element.textContent += message.charAt(index);
             index++;
         } else {
             clearInterval(interval);
+            if (callback) callback(); // Call the callback function after typing is done
         }
     }, delay);
 }
 
-// Show the notification box after a delay and apply typing effect to the message
-setTimeout(function () {
-    var notificationBox = document.getElementById('notificationBox');
+// Function to initiate the typing effect with a loop
+function startTypingLoop() {
+    const notificationBox = document.getElementById('notificationBox');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const notificationSubMessage = document.getElementById('notificationSubMessage');
+    const message = "Hello and welcome to my portfolio! How may I assist you today?";
+    const subMessage = "Get clarified early!";
+
     notificationBox.classList.add('active');
 
-    const notificationMessage = document.getElementById('notificationMessage');
-    const message = "Hello and welcome to my portfolio! How may I assist you today?";
-    typeMessage(message, notificationMessage, 50); // Adjust delay as needed
+    // Typing main message
+    typeMessage(message, notificationMessage, 50, function () {
+        // Typing sub-message after the main message is completed
+        setTimeout(function () {
+            typeMessage(subMessage, notificationSubMessage, 50);
+        }, 500); // Adjust the delay for sub-message
 
-    // Start animating the notification icon
-    animateNotificationIcon();
+        // After both messages are typed, start the loop again after 10 seconds
+        setTimeout(startTypingLoop, 20000); // 20-second interval
+    });
+}
 
-    // Start toggling the visibility of the notification icon
-    toggleNotificationIcon();
-}, 2000); // Adjust delay as needed
+// Show the notification box and start the typing loop after a delay
+setTimeout(startTypingLoop, 2000); // Initial delay before starting the loop
+
 
 const titles = [
     "Home",
@@ -651,7 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(animateCircles, 500); // Adjust delay as needed
     }, interval);
 });
-document.addEventListener("DOMContentLoaded", function () {
+/*document.addEventListener("DOMContentLoaded", function () {
     const dottedRectangles = document.querySelectorAll('.dotted-rectangle');
     const animationDuration = 0.5; // Duration of the animation in seconds
 
@@ -667,12 +680,12 @@ document.addEventListener("DOMContentLoaded", function () {
             setTimeout(function () {
                 popUpNextRectangle(nextIndex);
             }, 500); // Delay before showing the next rectangle
-        }, animationDuration * 1000); // Wait for the animation to complete before hiding
+        }, animationDuration * 6000); // Wait for the animation to complete before hiding
     }
 
     // Start the animation loop
     popUpNextRectangle(0);
-});
+});*/
 
 function togglePopup(popupId, offset = -1100) {
     var popup = document.getElementById(popupId);

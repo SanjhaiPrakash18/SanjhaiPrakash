@@ -545,7 +545,7 @@ function startTypingLoop() {
         }, 500); // Adjust the delay for sub-message
 
         // After both messages are typed, start the loop again after 10 seconds
-        setTimeout(startTypingLoop, 20000); // 20-second interval
+        setTimeout(startTypingLoop, 500000); // 500-second interval
     });
 }
 

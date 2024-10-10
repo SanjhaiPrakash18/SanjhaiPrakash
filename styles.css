@@ -223,12 +223,12 @@ header {
         display: block;
         transition: transform 0.2s ease; /* Smooth transition for transform */
         will-change: transform; /* Optimize performance for transform */
-        transform:none;
+        transform: none;
     }
 
     .main-nav .nav-link {
         transform: rotateX(10deg) rotateY(10deg);
-        color:#9d9da4;
+        color: #9d9da4;
     }
 
     .main-nav .resume-pill {
@@ -301,7 +301,7 @@ header {
     padding-top: 1px;
     padding-bottom: 1px;
     border-radius: 15px;
-    width: 970px; /* Ensure this matches the width used in the animation */
+    width: 800px; /* Ensure this matches the width used in the animation */
     background: #fcfcfc;
     text-align: center;
     height: 40px;
@@ -309,7 +309,7 @@ header {
     right: 35px; /* Initial position */
     overflow: hidden; /* Ensure content doesn't overflow during animation */
     transition: none; /* Disable default transition to only use keyframe animations */
-    border:1px solid #e6e6e6;
+    border: 1px solid #e6e6e6;
 }
 
     .main-nav.scrolled {
@@ -317,6 +317,7 @@ header {
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0);
         right: 140px;
         backdrop-filter: blur(2px); /* Adds a slight blur */
+        width:850px;
     }
 
     .main-nav .nav-link {
@@ -328,12 +329,14 @@ header {
         display: block;
         transition: transform 0.2s ease; /* Smooth transition for transform */
         will-change: transform; /* Optimize performance for transform */
-        transform:none;
+        transform: none;
     }
 
     /* Make sure this applies to links inside the scrolled nav as well */
     .main-nav.scrolled .nav-link {
         color: #9d9da4;
+        position:relative;
+        right:2px;
     }
 
 
@@ -483,24 +486,81 @@ p {
     position: relative;
     width: 300px;
     height: 550px;
-    background-color: #ffffff;
-    border: 1px solid #e6e6e6;
+    background-color: #fcfcfc;
+    border: 8px solid #303030;
     border-radius: 45px;
     display: flex;
     flex-direction: column;
     align-items: center;
     top: -940px;
     right: -1100px;
-    outline: 1px solid #e6e6e6; /* Added outline for the border around the iPhone */
-    outline-offset: 8px; /* Offset the outline by 8px */
+    background-image: radial-gradient(circle, #e6e6e6 1px, transparent 1px);
+    background-size: 20px 20px;
+    transition: all 0.3s ease;
+    transform-origin: center; /* Ensures scaling happens from the center */
 }
+
+    .iphone:hover {
+        transform: scale(1.1) translate(-20px, -10px); /* Enlarge and move diagonally left */
+        transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy effect */
+    }
+
+        .iphone:hover .iphone-notch {
+            transform: translateX(30px);
+            transition: transform 0.3s ease;
+        }
+
+            .iphone:hover .iphone-notch::after {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 20px;
+                height: 20px;
+                background-color: #ffffff;
+                border-radius: 50%;
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+                transform: translate(-50%, -50%);
+            }
+
+.ios-chat-client-text,
+.ios-chat-header-text,
+.ios-chat-sub-text,
+.Client-Message-text {
+    transition: transform 0.3s ease !important;
+}
+
+/* For the client message texts (rotated messages) */
+.Client-Message-text {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+    letter-spacing: -0.8px;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease; /* Smooth rotation transition */
+}
+
+.iphone:hover .Client-Message-text {
+    transform: rotate(0deg) !important; /* Reset to 0 degrees on hover */
+}
+
 
 .iphone-notch {
     position: absolute;
     top: 0;
     width: 150px;
     height: 30px;
-    background-color: #eeeeee;
+    background-color: #303030;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     z-index: 3;
@@ -525,13 +585,38 @@ p {
     }
 
 .iphone-home-button {
+    position: relative; /* Ensure the button's position is relative for the pseudo-element */
     width: 50px;
     height: 50px;
-    background-color: #ffffff;
+    background-color: #fcfcfc; /* Default background color */
     border-radius: 50%;
     margin-bottom: 15px;
-    border: 0px solid #e6e6e6;
+    border: 1px solid #e6e6e6;
     z-index: 3;
+    overflow: hidden; /* Hide overflow to make the water effect appear clean */
+    transition: border 0.3s ease; /* Smooth transition for border */
+}
+
+    /* Water effect on hover */
+    .iphone-home-button::before {
+        content: '';
+        position: absolute;
+        bottom: -100%; /* Start from below the button */
+        left: 0;
+        right: 0;
+        height: 100%;
+        background-color: #303030; /* Water color */
+        border-radius: 50%; /* Match the button's border radius */
+        transition: bottom 0.3s ease; /* Smooth transition for the water flow */
+    }
+
+.iphone:hover .iphone-home-button::before {
+    bottom: 0; /* Move the water to the top on hover */
+}
+
+.iphone:hover .iphone-home-button {
+    border: 1px solid #303030; /* Change border color */
+    transform: scale(1.05); /* Slightly scale up the button */
 }
 
 .ios-chat-header {
@@ -540,22 +625,21 @@ p {
     width: 300px;
     height: 120px;
     background-color: #fcfcfc;
-    border-radius:45px; /* Rounded bottom corners */
+    border-radius: 45px; /* Rounded bottom corners */
     display: flex;
     justify-content: start; /* Align items to the start (left) */
     align-items: center;
     padding-left: 0px; /* Padding for the SVG */
-    z-index: 2; /* Set z-index lower than the notch but above other content */
-    border-bottom: 1px solid #e6e6e6;
-    border-bottom-left-radius:0px;
-    border-bottom-right-radius:0px;
+    z-index: -2; /* Set z-index lower than the notch but above other content */
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
 
     .ios-chat-header svg {
         fill: #017AFF; /* Optional: Change the color of the SVG */
-        position:relative;
-        right:-5px;
-        top:10px;
+        position: relative;
+        right: -5px;
+        top: 10px;
     }
 
     .ios-chat-header .second-svg {
@@ -574,27 +658,27 @@ p {
         width: 25px;
         height: 25px;
         background-image: url('HR Manager Prof Pic.png');
-        position:relative;
-        top:26px;
-        right:-73px;
+        position: relative;
+        top: 26px;
+        right: -73px;
     }
 
     .ios-chat-person-image-container.medium {
         width: 30px;
         height: 30px;
         background-image: url('client profile image.png');
-        position:relative;
-        right:-55px;
-        top:0px;
+        position: relative;
+        right: -55px;
+        top: 0px;
     }
 
     .ios-chat-person-image-container.large {
         width: 35px;
         height: 35px;
         background-image: url('Sanjhai New LinkedIn DP.png');
-        position:relative;
-        right:27px;
-        top:-5px;
+        position: relative;
+        right: 27px;
+        top: -5px;
     }
 
 .ios-chat-header-text {
@@ -602,12 +686,12 @@ p {
     font-size: 13px;
     color: #000000;
     text-align: center;
-    letter-spacing:-0.8px;
-    font-weight:500;
-    position:relative;
-    top:-130px;
-    z-index:3;
-    right:-55px;
+    letter-spacing: -0.8px;
+    font-weight: 500;
+    position: relative;
+    top: -130px;
+    z-index: 3;
+    right: -55px;
 }
 
 .ios-chat-sub-text {
@@ -623,17 +707,18 @@ p {
 }
 
 .ios-chat-client-text {
-    font-size: 13px;
+    font-family: 'Caveat', sans-serif; /* Apply the Caveat font without cursive */
+    font-size: 20px;
     font-weight: 400;
     color: #9d9da4;
     letter-spacing: -0.9px;
     text-align: center;
-    z-index: 1;
-    position:relative;
-    top:-300px;
+    z-index: -3;
+    position: relative;
+    top: -300px;
 }
 
-.Client-Message-text {
+.Client-Message-text-one {
     font-size: 13px;
     font-weight: 400;
     color: #000000;
@@ -648,10 +733,155 @@ p {
     top: -1380px; /* Adjust based on desired positioning */
     right: -1215px; /* Adjust to align with your layout */
     z-index: 1;
-    letter-spacing:-0.8px;
-    border-bottom-left-radius:0px;
+    letter-spacing: -0.8px;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center the items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* Add box shadow */
+    transform: rotate(-10deg);
 }
 
+.Client-Message-text-two {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    top: -1380px; /* Adjust based on desired positioning */
+    right: -1215px; /* Adjust to align with your layout */
+    z-index: 1;
+    letter-spacing: -0.8px;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center the items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* Add box shadow */
+    transform: rotate(-10deg);
+}
+
+.Client-Message-text-three {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    top: -1380px; /* Adjust based on desired positioning */
+    right: -1215px; /* Adjust to align with your layout */
+    z-index: 1;
+    letter-spacing: -0.8px;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center the items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* Add box shadow */
+    transform: rotate(10deg);
+}
+
+.Client-Message-text-four {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    top: -1380px; /* Adjust based on desired positioning */
+    right: -1215px; /* Adjust to align with your layout */
+    z-index: 1;
+    letter-spacing: -0.8px;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center the items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* Add box shadow */
+    transform: rotate(10deg);
+}
+
+.Client-Message-text-five {
+    font-size: 13px;
+    font-weight: 400;
+    color: #000000;
+    background-color: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 20px;
+    padding: 10px;
+    width: fit-content;
+    max-width: 200px;
+    text-align: left;
+    position: relative;
+    top: -1380px; /* Adjust based on desired positioning */
+    right: -1215px; /* Adjust to align with your layout */
+    z-index: 1;
+    letter-spacing: -0.8px;
+    display: flex; /* Use flexbox to align items */
+    align-items: center; /* Center the items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.02); /* Add box shadow */
+    transform: rotate(10deg);
+}
+
+/* Set the default rotation for client message texts */
+.Client-Message-text-one,
+.Client-Message-text-two {
+    transform: rotate(-10deg); /* Rotate messages initially */
+}
+
+/* Set the default rotation for client message texts */
+.Client-Message-text-three,
+.Client-Message-text-four,
+.Client-Message-text-five {
+    transform: rotate(10deg); /* Rotate messages initially */
+}
+
+    /* Reset rotation on hover with smooth and bouncy effect */
+    .Client-Message-text-one:hover,
+    .Client-Message-text-two:hover,
+    .Client-Message-text-three:hover,
+    .Client-Message-text-four:hover,
+    .Client-Message-text-five:hover {
+        transform: rotate(0deg) scale(1.05); /* Reset rotation and add slight scale for bounce */
+        transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smooth bounce effect */
+    }
+
+.Client-Profile-Image {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make the image circular */
+    margin-right: 10px; /* Space between image and text */
+}
+
+.Client-Reply-Image {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make the image circular */
+    margin-left: 10px; /* Space between text and image */
+}
+
+.Rec-Profile-Image {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make the image circular */
+    margin-right: 10px; /* Space between image and text */
+}
+
+.Client-Sanjrep-Image {
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make the image circular */
+    margin-left: 10px; /* Space between text and image */
+}
+
+.res-svg-icon {
+    margin-right: 10px; /* Add space between the SVG icon and text */
+}
 
 /* Section styles */
 section {
@@ -835,6 +1065,27 @@ h2.home-text {
     top: 110px;
 }
 
+/* Keyframes for water slide effect */
+@keyframes waterSlideUp {
+    0% {
+        bottom: -100%; /* Start below the button */
+    }
+
+    100% {
+        bottom: 0; /* Move to the top of the button */
+    }
+}
+
+@keyframes waterSlideDown {
+    0% {
+        bottom: 0; /* Start at the top of the button */
+    }
+
+    100% {
+        bottom: 100%; /* Move below the button */
+    }
+}
+
 /* Button container */
 .button-container {
     display: flex;
@@ -848,20 +1099,114 @@ h2.home-text {
 
 /* General rounded button styling */
 .rounded-button {
+    position: relative; /* Ensure the button's position is relative for the pseudo-element */
+    overflow: hidden; /* Hide overflow to make the water effect appear clean */
     display: inline-block;
     padding: 15px 30px;
-    background-color: #000000;
-    color: #fff;
+    background-color: #000000; /* Default background color */
+    color: #fff; /* Default text color */
     border-radius: 20px;
     text-decoration: none;
     letter-spacing: -1px;
     transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    z-index: 3; /* Set z-index for button text */
+}
+
+/* Background text for "Get to know me" button */
+.first-button::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000; /* Background text color */
+    font-weight: bold;
+    font-size: 1.2em; /* Adjust size as needed */
+    z-index: 1; /* Ensure it stays behind the button text */
+    opacity: 0.1; /* Make it subtle */
+}
+
+/* Water effect for "Get to know me" button */
+.first-button::before {
+    content: 'My Journey';
+    position: absolute;
+    bottom: -100%; /* Start from below the button */
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #ffffff; /* Water color for this button */
+    border-radius: 40px; /* Match button border radius */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    color: #000000; /* Text color */
+    font-size: 1em; /* Adjust font size as needed */
+    margin-right: 10px; /* Adjust this value to move the text left */
+}
+
+/* Hover effect for the "Get to know me" button */
+.first-button:hover::before {
+    animation: waterSlideUp 0.6s forwards; /* Animate sliding up with slower speed */
+}
+
+.first-button:not(:hover)::before {
+    animation: waterSlideDown 0.6s forwards; /* Animate sliding down with slower speed */
+}
+
+.first-button:hover {
+    color: #000000; /* Change text color */
+    background-color: #000000; /* Button background color on hover */
+}
+
+/* Background text for "Check out my work" button */
+.second-button::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff; /* Background text color */
+    font-weight: bold;
+    font-size: 1.2em; /* Adjust size as needed */
+    z-index: 1; /* Ensure it stays behind the button text */
+    opacity: 0.1; /* Make it subtle */
+}
+
+/* Water effect for "Check out my work" button */
+.second-button::before {
+    content: 'My Projects';
+    position: absolute;
+    bottom: -100%; /* Start from below the button */
+    left: 0;
+    right: 0;
+    height: 100%;
+    background-color: #000000; /* Water color for this button */
+    border-radius: 40px; /* Match button border radius */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    color: #ffffff; /* Text color */
+    font-size: 1em; /* Adjust font size as needed */
+    margin-right: 10px; /* Adjust this value to move the text left */
+}
+
+/* Hover effect for the "Check out my work" button */
+.second-button:hover::before {
+    animation: waterSlideUp 0.6s forwards; /* Animate sliding up with slower speed */
+}
+
+.second-button:not(:hover)::before {
+    animation: waterSlideDown 0.6s forwards; /* Animate sliding down with slower speed */
+}
+
+.second-button:hover {
+    color: #ffffff; /* Change text color */
+    background-color: #77DD86; /* Button background color on hover */
 }
 
 /* Subtle zoom effect and smooth color fill on hover */
 .zoom-button:hover {
     transform: scale(1.05); /* Slight zoom-in effect */
-    background-color: #77DD86; /* Change background color */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
     transition: background-color 0.3s ease-in-out, transform 0.3s ease, box-shadow 0.3s ease; /* Ensure smooth color fill */
 }
@@ -871,9 +1216,9 @@ h2.home-text {
     letter-spacing: -1px;
 }
 
-/* Text color on hover */
+/* Ensure the text color remains white on hover for both buttons */
 .button-container a:hover {
-    color: #fff;
+    color: #fff; /* This will be overridden by the button-specific hover styles */
 }
 
 /* Image inside the button */
@@ -883,7 +1228,6 @@ h2.home-text {
     vertical-align: middle;
     margin-left: 3px;
 }
-
 
 .music-player {
     display: flex;
@@ -1017,7 +1361,7 @@ h2.home-text {
     bottom: 15px; /* Adjust as needed */
     left: 90px;
     overflow: hidden; /* Ensures the progress bar does not overflow */
-    z-index:3;
+    z-index: 3;
 }
 
 .progress-bar {
@@ -1026,7 +1370,7 @@ h2.home-text {
     border-radius: 10px; /* Same border radius as the container */
     width: 0%; /* Start with 0% width */
     animation: progress-animation 26s linear infinite; /* Animation for the progress bar */
-    z-index:3;
+    z-index: 3;
 }
 
 @keyframes progress-animation {
@@ -1115,7 +1459,7 @@ h2.home-text {
 
 .browser-close-button {
     background-color: #ffffff;
-    border:1px solid #e6e6e6;
+    border: 1px solid #e6e6e6;
 }
 
 .browser-minimize-button {
@@ -1386,7 +1730,7 @@ h2.home-text {
     top: 0; /* Align the dashed rectangle with the top of the stats rectangle */
     left: 0; /* Align the dashed rectangle with the left of the stats rectangle */
     z-index: -1; /* Ensure the dashed rectangle is behind the stats rectangle */
-    background-color:#fcfcfc;
+    background-color: #fcfcfc;
 }
 
 .Home-stats-rounded-rectangle:hover {
@@ -1396,10 +1740,10 @@ h2.home-text {
 }
 
 
-        /* Bounce animation on hover */
-        .Home-stats-rounded-rectangle:hover .stats-text {
-            animation: bounce 0.7s ease-out;
-        }
+    /* Bounce animation on hover */
+    .Home-stats-rounded-rectangle:hover .stats-text {
+        animation: bounce 0.7s ease-out;
+    }
 
 /* Bounce keyframes */
 @keyframes bounce {
@@ -1462,8 +1806,8 @@ h2.home-text {
 
 /* Bounce animation on hover */
 .Home-stats-rounded-rectangle:hover .stats-text::after {
-    background-color:#000000;
-    border:1px solid #000000;
+    background-color: #000000;
+    border: 1px solid #000000;
 }
 
 /* Bounce animation on hover */
@@ -1491,7 +1835,7 @@ h2.home-text {
     padding-right: 5px;
     transform: translateY(0) rotate(15deg); /* Slide the text up and rotate */
     background-color: #fcfcfc;
-    letter-spacing:-1.0px;
+    letter-spacing: -1.0px;
 }
 
 .Home-stats-rounded-rectangle:hover .stats-text {
@@ -1499,7 +1843,7 @@ h2.home-text {
 }
 
 .Home-stats-rounded-rectangle:hover .Home-stats-circle {
-    background-color:none !important;
+    background-color: none !important;
 }
 
 .Home-stats-rounded-rectangle:hover .stats-number {
@@ -1510,8 +1854,8 @@ h2.home-text {
 .Home-stats-rounded-rectangle:hover .stats-text {
     color: #ffffff;
     font-weight: 900;
-    letter-spacing:-3.5px;
-    font-size:35px;
+    letter-spacing: -3.5px;
+    font-size: 35px;
 }
 
 .stats-text svg {
@@ -1530,7 +1874,7 @@ h2.home-text {
     transform: translateY(-50%);
     width: 40px; /* Adjust the size of the SVG as needed */
     height: 40px;
-    display:none;
+    display: none;
 }
 
 .Home-stats-circle {
@@ -1699,12 +2043,12 @@ h2.home-text {
         opacity: 0;
         transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
         transform: translateY(100%); /* Start off the screen */
-        letter-spacing:-6.8px;
+        letter-spacing: -6.8px;
     }
 
     .lat-statement span {
         display: inline; /* or remove if there's no need for custom display */
-    } 
+    }
 
 @keyframes moveFromBottom {
     0% {
@@ -1963,6 +2307,28 @@ h2.home-text {
         border-radius: 10px;
     }
 
+/* Keyframes for water slide effect */
+@keyframes waterSlideUp {
+    0% {
+        bottom: -100%; /* Start below the button */
+    }
+
+    100% {
+        bottom: 0; /* Move to the top of the button */
+    }
+}
+
+@keyframes waterSlideDown {
+    0% {
+        bottom: 0; /* Start at the top of the button */
+    }
+
+    100% {
+        bottom: 150%; /* Move below the button */
+    }
+}
+
+/* Style for the submit button */
 button[type="submit"] {
     margin-top: 20px;
     display: inline-block;
@@ -1978,11 +2344,45 @@ button[type="submit"] {
     overflow: hidden; /* Prevent content from overflowing */
 }
 
+    /* Hover effect for the button */
     button[type="submit"]:hover {
         background-color: #000000;
         color: #ffffff;
     }
 
+    /* Pseudo-element for background text */
+    button[type="submit"]::before {
+        content: "Let's Talk"; /* Background text */
+        position: absolute;
+        bottom: -100%; /* Start from below the button */
+        left: 0; /* Keep it aligned with the left edge */
+        right: 0; /* Keep it aligned with the right edge */
+        width: 100%; /* Width of the element */
+        height: 100%; /* Match the button height */
+        background-color: #000000; /* Background color */
+        color: #ffffff; /* Text color */
+        border-radius: 25px; /* Match button’s border radius */
+        padding: 10px 0; /* Padding for the text */
+        display: flex; /* Use flexbox for centering */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        transition: bottom 0.5s ease; /* Smooth transition for sliding */
+        z-index: 1; /* Ensure it stays behind the button text */
+        transform: translateY(10px); /* Move text down */
+        margin-left: -20px; /* Move text slightly to the left */
+    }
+
+    /* Water effect on hover */
+    button[type="submit"]:hover::before {
+        animation: waterSlideUp 0.5s forwards; /* Animate sliding up - slow down effect */
+    }
+
+    /* Slide back down when not hovered */
+    button[type="submit"]:not(:hover)::before {
+        animation: waterSlideDown 0.5s forwards; /* Animate sliding down - slow down effect */
+    }
+
+    /* Style for the span inside the button */
     button[type="submit"] span {
         font-size: 1.2em;
         font-weight: 900;
@@ -1993,12 +2393,21 @@ button[type="submit"] {
         background-color: #e6e6e6;
         color: #000000;
         transition: background-color 0.3s, color 0.3s;
+        position: relative; /* Position for the span */
+        z-index: 2; /* Ensure it stays above the water effect */
     }
 
+    /* Hover effect for the span */
     button[type="submit"]:hover span {
         background-color: #000000 !important;
         color: #ffffff;
-        border:2px solid #ffffff !important; 
+        border: 2px solid #ffffff !important;
+    }
+
+    /* Ensure smooth transitions */
+    button[type="submit"]:hover {
+        transform: scale(1.05); /* Slight zoom-in effect */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
     }
 
 /* Improved UI for the About section video player */
@@ -2684,51 +3093,11 @@ section#contact h2 {
 
 #services {
     padding: 200px;
-    padding-bottom: 3124px;
+    padding-bottom: 424px;
     text-align: center;
     background-color: #FFFFFF;
     position: relative;
     overflow: hidden;
-}
-
-    #services::before {
-        content: "";
-        position: absolute;
-        width: 1550px;
-        height: 1550px;
-        background-color: #ffffff;
-        border: 1px solid #e6e6e6;
-        border-radius: 50%;
-        top: 17.5%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: -1;
-    }
-
-    /* Small asteroid rotating on the border */
-    #services::after {
-        content: "";
-        position: absolute;
-        width: 30px; /* Size of the asteroid */
-        height: 30px;
-        background-color: #e6e6e6; /* Asteroid color */
-        border-radius: 50%;
-        top: calc(17.5% + 775px); /* Position on the edge of the circle */
-        left: 50%;
-        transform-origin: center -775px; /* Set rotation point */
-        z-index: -1;
-        animation: rotateAsteroid 4s linear infinite; /* Adjust speed with '4s' */
-    }
-
-/* Keyframes to rotate the asteroid */
-@keyframes rotateAsteroid {
-    0% {
-        transform: rotate(0deg) translateX(0);
-    }
-
-    100% {
-        transform: rotate(360deg) translateX(0);
-    }
 }
 
     #services h2 {
@@ -2759,7 +3128,7 @@ section#contact h2 {
     align-items: center;
     text-align: center;
     transition: transform 0.3s ease-out; /* Smooth transition for scaling effect */
-    position:relative;
+    position: relative;
 }
 
     /* Diagonal enlargement effect on hover */
@@ -2948,8 +3317,8 @@ rounded-rectangle {
     top: 80px;
     background-image: radial-gradient(circle, #e6e6e6 1px, transparent 1.4px);
     background-size: 20px 20px;
-    border-bottom:8px solid #000000;
-    padding-top:4px;
+    border-bottom: 8px solid #000000;
+    padding-top: 4px;
 }
 
 @keyframes connectLine {
@@ -3002,7 +3371,7 @@ rounded-rectangle {
         background-color: #ffffff; /* Change to #77DD86 after animation */
         transform: scale(1); /* Scale up when active */
         opacity: 1; /* Show when active */
-        border:2px solid #000000;
+        border: 2px solid #000000;
     }
 
 .circle-text {
@@ -3374,7 +3743,7 @@ rounded-rectangle {
     padding: 10px;
     display: inline-block;
     border: 1px solid #000000;
-    border-bottom:8px solid;
+    border-bottom: 8px solid;
     font-weight: 300;
 }
 
@@ -3580,30 +3949,81 @@ rounded-rectangle {
         margin-bottom: 20px;
     }
 
+/* Keyframes for water slide effect with more bounce */
+@keyframes waterSlideUp {
+    0% {
+        bottom: -100%; /* Start below the button */
+    }
+
+    60% {
+        bottom: 15%; /* More bounce halfway through */
+    }
+
+    100% {
+        bottom: 0; /* Settle at the top of the button */
+    }
+}
+
+@keyframes waterSlideDown {
+    0% {
+        bottom: 0; /* Start at the top of the button */
+    }
+
+    40% {
+        bottom: 15%; /* More bounce halfway through */
+    }
+
+    100% {
+        bottom: 150%; /* Move below the button */
+    }
+}
+
+/* Styling the buy-now-button */
 .buy-now-button {
     display: inline-block;
     padding: 6px 12px;
-    background-color: #ffffff; /* Change background color to white */
+    background-color: #ffffff;
     color: #000000;
     text-decoration: none;
     border-radius: 20px;
-    transition: all 0.3s ease-in-out;
-    margin-left: 15px;
-    font-size: 15px;
-    width: 60px;
-    border: 1px solid #77DD86; /* Add border with color #77DD86 */
-    font-weight: 400;
+    transition: all 0.3s ease-in-out; /* Slightly faster transition */
     font-size: 18px;
-    margin-left: 10px;
+    width: 60px;
+    border: 1px solid #e6e6e6;
+    font-weight: 400;
     letter-spacing: -1.0px;
+    position: relative; /* Position relative for pseudo-element */
+    overflow: hidden; /* Ensure the water effect is contained within the button */
 }
 
-    .buy-now-button:hover {
-        background-color: #77DD86;
-        color: #FFFFFF;
-        transform: scale(1.1) translate(5px, -5px); /* Enlarge and move on hover */
-        font-weight: 800;
-        letter-spacing: -1.0px;
+    /* Water slide effect using ::before */
+    .buy-now-button::before {
+        content: 'Buy Now'; /* Content that slides in */
+        position: absolute;
+        bottom: -100%; /* Start from below the button */
+        left: 0;
+        right: 0;
+        height: 100%;
+        background-color: #000000; /* Background color of the slide */
+        color: #FFFFFF; /* Text color when sliding up */
+        border-radius: 20px; /* Match button’s border radius */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85em; /* Smaller font size */
+        font-weight: 300; /* Lighter font weight */
+        transition: bottom 0.8s ease; /* Slightly faster transition */
+        z-index: 1; /* Ensure it stays behind the button text */
+    }
+
+    /* Hover state to trigger water slide with bounce */
+    .buy-now-button:hover::before {
+        animation: waterSlideUp 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards; /* Faster bounce */
+    }
+
+    /* Reset slide with bounce when not hovering */
+    .buy-now-button:not(:hover)::before {
+        animation: waterSlideDown 0.8s cubic-bezier(0.68, -0.6, 0.32, 1.6) forwards; /* Faster bounce */
     }
 
 .view-demo-button {
@@ -3756,13 +4176,13 @@ button {
     .robot-logo::after {
         content: '';
         position: absolute;
-        bottom: -2px; /* Adjust the position as needed */
-        right: -5px; /* Adjust the position as needed */
-        width: 15px; /* Adjust the size of the circle */
-        height: 15px; /* Adjust the size of the circle */
-        border: 3px solid #FAFAFA; /* Dark blue color */
-        border-radius: 50%; /* Make it a circle */
-        animation: blink 1s infinite alternate; /* Blinking animation */
+        bottom: -2px;
+        right: -5px;
+        width: 15px;
+        height: 15px;
+        border: 3px solid #6AC0F3;
+        border-radius: 50%;
+        animation: blink 1s infinite alternate;
         background-color: #6AC0F3;
     }
 
@@ -3886,7 +4306,7 @@ button {
     padding: 20px 0;
     text-align: center;
     margin-bottom: 0px; /* Add space below the section */
-    height:1250px;
+    height: 1250px;
 }
 
 /* Styles for the statement and creative line */
@@ -4253,7 +4673,7 @@ button {
 .mac-window {
     position: relative; /* Ensure the container is positioned relative */
     top: -68px; /* Move the container up */
-    left: -93px; /* Move the container left */
+    left: -123px; /* Move the container left */
 }
 
 .mac-icons {
@@ -4555,7 +4975,7 @@ button {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color:#ffffff;
+        background-color: #ffffff;
         opacity: 0.12; /* Adjust the opacity value to control transparency */
         z-index: -1; /* Ensures the image is behind the content */
     }
@@ -5361,7 +5781,7 @@ button {
     right: 20px;
     border-top-left-radius: 0px;
     top: -12px;
-    text-align:left;
+    text-align: left;
 }
 
     .chat-message.response {
@@ -5389,7 +5809,7 @@ button {
     margin: 5px;
     background-color: #FFFFFF; /* White background color */
     color: #4BABF9; /* Text color */
-    border-radius: 9px;
+    border-radius: 20px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
@@ -5415,9 +5835,9 @@ button {
         font-family: 'Montserrat', sans-serif; /* Font family */
         font-size: 14px; /* Font size */
         transition: background-color 0.3s ease; /* Prompt pill animation */
-        text-align:left;
-        display:block;
-        margin-bottom:10px;
+        text-align: left;
+        display: block;
+        margin-bottom: 10px;
     }
 
     .prompt-pill:hover {
@@ -5525,8 +5945,8 @@ button {
     border: 1px solid #e6e6e6;
     position: relative; /* Ensure the pseudo-element is positioned relative to this container */
     overflow: hidden; /* Hide any overflow from the pseudo-element */
-    height:53px;
-    border-bottom-right-radius:0px;
+    height: 53px;
+    border-bottom-right-radius: 0px;
 }
 
     .notification-box::before {
@@ -5567,7 +5987,7 @@ button {
     position: relative;
     top: 2px;
     margin-bottom: 5px; /* Adds space between the message and the submessage */
-    color:#000000;
+    color: #000000;
 }
 
 .notification-submessage {
@@ -6189,17 +6609,17 @@ button {
 }
 
 
-    .text-container::before {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 360px;
-        background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
-        border-radius: 0 0 60px 60px;
-        pointer-events: none;
-    }
+.text-container::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 360px;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0));
+    border-radius: 0 0 60px 60px;
+    pointer-events: none;
+}
 
 .text-content p {
     color: #FFFFFF;
@@ -6277,9 +6697,9 @@ button {
     transform: rotate(-25deg);
     animation: slide-loop 18.2s linear infinite; /* Adjust the timing as per your requirement */
     animation-fill-mode: both; /* Ensures the element stays in its final state after animation */
-    background-color:none;
-    border-bottom:5px solid #000000;
-    border-left:5px solid #000000;
+    background-color: none;
+    border-bottom: 5px solid #000000;
+    border-left: 5px solid #000000;
 }
 
 @keyframes slide-loop {
@@ -6357,7 +6777,7 @@ button {
     .text-ad-cont-analytics-rectangle:hover {
         transform: scale(1.05) translateY(-5px); /* Enlarge slightly and move up */
         animation: slowBounce 1s ease-in-out; /* Slow and smooth bounce effect */
-        z-index:3;
+        z-index: 3;
     }
 
 /* Keyframes for the slow bounce effect */
@@ -6450,7 +6870,7 @@ button {
     border-radius: 12px; /* Rounded corners */
     padding: 5px 10px; /* Padding around the text */
     margin-top: 10px; /* Space between the small rectangle and the text label */
-    background:#000000;
+    background: #000000;
 }
 
 .project-cont-label {
@@ -6675,7 +7095,7 @@ video:not(.playing) + .VC-circle-animation {
     border-radius: 20px;
     padding-right: 10px;
     padding-left: 5px;
-    background-color:#fcfcfc;
+    background-color: #fcfcfc;
 }
 
 @keyframes moveFromBottom {
@@ -6760,6 +7180,9 @@ video:not(.playing) + .VC-circle-animation {
     align-items: center;
     position: relative;
     padding: 40px 50px; /* Reduced bottom padding */
+    outline: 2px dashed #e6e6e6;
+    outline-offset: 48px;
+    margin: -2px; /* Adjust this value as needed for offset */
 }
 
     .flow-chart-contact::before {
@@ -6773,7 +7196,6 @@ video:not(.playing) + .VC-circle-animation {
         background-color: #fcfcfc;
         background-image: radial-gradient(circle, #e6e6e6 2px, transparent 1px); /* Increase the size of the dots */
         background-size: 40px 30px; /* Adjust spacing to match the new dot size */
-        border:1px solid #e6e6e6;
     }
 
     .flow-chart-contact::after {
@@ -6783,13 +7205,126 @@ video:not(.playing) + .VC-circle-animation {
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient( to bottom, rgba(250, 250, 255, 0) 0%, /* Gradient at the top */
+        background: linear-gradient(to bottom, rgba(250, 250, 255, 0) 0%, /* Gradient at the top */
         rgba(250, 250, 255, 0) 30%, /* Transition to transparent */
         rgba(250, 250, 255, 0) 70%, /* Transition from transparent */
         rgba(250, 250, 255, 0) 100% /* Gradient at the bottom */
-        ), linear-gradient( to bottom, rgba(250, 250, 255, 0) 0%, rgba(250, 250, 255, 0) 30%, rgba(250, 250, 255, 0) 70%, rgba(250, 250, 255, 0) 100% );
+        ), linear-gradient(to bottom, rgba(250, 250, 255, 0) 0%, rgba(250, 250, 255, 0) 30%, rgba(250, 250, 255, 0) 70%, rgba(250, 250, 255, 0) 100%);
         z-index: -1;
     }
+
+    .flow-chart-contact::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -2;
+        background-color: #fcfcfc;
+        background-image: radial-gradient(circle, #e6e6e6 2px, transparent 1px); /* Increase the size of the dots */
+        background-size: 40px 30px; /* Adjust spacing to match the new dot size */
+    }
+
+    .flow-chart-contact::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(250, 250, 255, 0) 0%, /* Gradient at the top */
+        rgba(250, 250, 255, 0) 30%, /* Transition to transparent */
+        rgba(250, 250, 255, 0) 70%, /* Transition from transparent */
+        rgba(250, 250, 255, 0) 100% /* Gradient at the bottom */
+        ), linear-gradient(to bottom, rgba(250, 250, 255, 0) 0%, rgba(250, 250, 255, 0) 30%, rgba(250, 250, 255, 0) 70%, rgba(250, 250, 255, 0) 100%);
+        z-index: -1;
+    }
+
+    /* Small circles in the corners */
+    .flow-chart-contact::before {
+        /* Existing styles */
+    }
+
+    .flow-chart-contact .corner-circle {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: #9d9da4;
+        border-radius: 30%;
+        z-index: -1; /* Ensure it stays in the background */
+    }
+
+    .flow-chart-contact .top-left {
+        top: -56px;
+        left: -55px;
+        z-index: 3;
+    }
+
+    .flow-chart-contact .top-right {
+        top: -56px;
+        right: -55px;
+        z-index: 3;
+    }
+
+    .flow-chart-contact .bottom-left {
+        z-index: 3;
+        bottom: -56px;
+        left: -55px;
+    }
+
+    .flow-chart-contact .bottom-right {
+        bottom: -56px;
+        right: -55px;
+        z-index: 3;
+    }
+
+    .flow-chart-contact .corner-plus {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        border: 1px dashed #e6e6e6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+        .flow-chart-contact .corner-plus::before,
+        .flow-chart-contact .corner-plus::after {
+            content: '';
+            position: absolute;
+            background-color: #e6e6e6;
+        }
+
+        .flow-chart-contact .corner-plus::before {
+            width: 1px;
+            height: 120px;
+        }
+
+        .flow-chart-contact .corner-plus::after {
+            width: 120px;
+            height: 1px;
+        }
+
+        .flow-chart-contact .corner-plus.top-left {
+            top: -63.5px;
+            left: -63px;
+        }
+
+        .flow-chart-contact .corner-plus.top-right {
+            top: -64px;
+            right: -63.5px;
+        }
+
+        .flow-chart-contact .corner-plus.bottom-left {
+            bottom: -63.5px;
+            left: -63px;
+        }
+
+        .flow-chart-contact .corner-plus.bottom-right {
+            bottom: -64.5px;
+            right: -63px;
+        }
 
 .flow-chart-contact-row {
     display: flex;
@@ -6973,6 +7508,21 @@ video:not(.playing) + .VC-circle-animation {
     animation: fillSpecialCircle 10s infinite;
 }
 
+.support-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 30px;
+    position: relative;
+    border: 1px solid #000000;
+    border-radius: 40px;
+    background-color: #f5f5f5;
+    top: 62px; /* Adjust as needed to align with the text */
+    margin-left: -10px; /* Slight adjustment to pull the toggle closer to 'P' */
+    right: -163px;
+}
+
 .aboutme-fill-animation-container {
     width: 85%;
     height: 5px;
@@ -7109,8 +7659,8 @@ video:not(.playing) + .VC-circle-animation {
 
 /* Double press effect on hover */
 .submits-highlight:hover {
-    background-color:#77dd86;
-    color:#ffffff;
+    background-color: #77dd86;
+    color: #ffffff;
     animation: buttonPressEffect 0.4s ease-in-out 2; /* Apply double press effect */
 }
 
@@ -7562,9 +8112,9 @@ video:not(.playing) + .VC-circle-animation {
     animation: float-diagonal 5s ease-in-out infinite; /* Default floating animation */
 }
 
-.company-dec-rounded-rect:hover {
-    animation-play-state: paused; /* Pauses the animation on hover */
-}
+    .company-dec-rounded-rect:hover {
+        animation-play-state: paused; /* Pauses the animation on hover */
+    }
 
 
     .company-dec-rounded-rect::before {
@@ -7579,7 +8129,7 @@ video:not(.playing) + .VC-circle-animation {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
-        opacity:0.8;
+        opacity: 0.8;
     }
 
 /* Floating animations for diagonal directions */
@@ -7711,7 +8261,7 @@ video:not(.playing) + .VC-circle-animation {
     pointer-events: auto;
     padding-left: 0px; /* Adjust to create space for the arrow */
     transition: background-color 1s, color 1s; /* Smooth color transitions */
-    border-top-left-radius:0px;
+    border-top-left-radius: 0px;
 }
 
     .floating-rectangle.recruiter {
@@ -7952,8 +8502,8 @@ video:not(.playing) + .VC-circle-animation {
     white-space: nowrap;
     border-right: 0.15em solid #333;
     font-family: 'Montserrat', sans-serif;
-    letter-spacing:-0.6px;
-    color:#000000;
+    letter-spacing: -0.6px;
+    color: #000000;
 }
 
 .typewrite-text {
@@ -7976,10 +8526,10 @@ video:not(.playing) + .VC-circle-animation {
     color: #999;
     user-select: none;
     border-right: 1px solid #ddd;
-    font-size:12px;
-    position:relative;
-    right:12px;
-    top:-18px;
+    font-size: 12px;
+    position: relative;
+    right: 12px;
+    top: -18px;
 }
 
 .code-content {
@@ -7989,9 +8539,9 @@ video:not(.playing) + .VC-circle-animation {
 .code-line {
     margin: 0;
     white-space: pre;
-    font-size:12px;
-    color:#000000;
-    font-family:montserrat;
+    font-size: 12px;
+    color: #000000;
+    font-family: montserrat;
 }
 
     .code-line span {
@@ -8019,7 +8569,7 @@ video:not(.playing) + .VC-circle-animation {
 
     .servwebdev-mac-window.halfmoon-active .line-numbers,
     .servwebdev-mac-window.halfmoon-active .code-line span,
-    .servwebdev-mac-window.halfmoon-active .servwebdev-mac-title{
+    .servwebdev-mac-window.halfmoon-active .servwebdev-mac-title {
         color: #ffffff !important;
     }
 
@@ -8151,9 +8701,9 @@ video:not(.playing) + .VC-circle-animation {
 .proj-pref-img-text-container svg {
     height: 10px; /* Adjust height as needed */
     width: 10px; /* Adjust width as needed */
-    position:relative;
-    right:-80px;
-    top:-20px;
+    position: relative;
+    right: -80px;
+    top: -20px;
 }
 
 
@@ -8163,7 +8713,7 @@ video:not(.playing) + .VC-circle-animation {
     font-weight: 300; /* Subtitle font weight */
     font-size: 19px; /* Subtitle font size */
     letter-spacing: -1.2px; /* Letter spacing for subtitle */
-    text-align:left !important;
+    text-align: left !important;
 }
 
 /* Responsive Design for Android Mobile Screens */
@@ -8217,23 +8767,24 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .get-started-btn {
+    position: relative; /* Position relative for the button */
     display: inline-block;
     padding: 10px 20px;
-    background: #ffffff;
+    background: #fcfcfc;
     color: #000000;
     letter-spacing: -1.0px;
     text-decoration: none;
-    border: 1px solid #000000;
+    border: 2px solid #000000;
     border-radius: 20px;
     text-align: center;
     margin-top: 20px;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s; /* Include transform in transition */
+    overflow: hidden; /* Hide overflowing liquid effect */
+    z-index: 1; /* Ensure the button content is above the pseudo-element */
+    transition: transform 0.3s; /* Smooth scale transition */
 }
 
     .get-started-btn:hover {
-        background-color: #000000;
-        color: #ffffff;
-        transform: scale(1.10); /* Add scale effect on hover */
+        transform: scale(1.10); /* Scale effect on hover */
     }
 
     .get-started-btn span {
@@ -8245,16 +8796,76 @@ video:not(.playing) + .VC-circle-animation {
         margin-left: 5px;
         background-color: #e6e6e6;
         color: #000000;
-        transition: background-color 0.3s, color 0.3s;
+        transition: background-color 0.3s, color 0.3s, margin-left 0.3s;
+        z-index: 2; /* Ensure the arrow stays above the liquid effect */
+        position: relative; /* Position relative for the span */
     }
 
     .get-started-btn:hover span {
-        background-color: #000000;
-        color: #ffffff;
-        border-color: #ffffff;
-        border: 2px solid #ffffff;
+        background-color: #000000; /* Change background on hover */
+        color: #ffffff; /* Change text color on hover */
+        border-color: #ffffff; /* Change border color on hover */
+        margin-left: 30px; /* Move the span when hovered */
     }
 
+    /* Liquid effect for hover */
+    .get-started-btn::before {
+        content: 'Start Fresh'; /* Text for the liquid effect */
+        position: absolute;
+        bottom: -100%; /* Start off-screen at the bottom */
+        left: 0;
+        right: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Center text */
+        background-color: #000000; /* Background color for the liquid effect */
+        color: #ffffff; /* Text color for the liquid effect */
+        border-radius: 20px; /* Match button’s border radius */
+        transition: bottom 0.4s ease-in-out; /* Smooth transition for sliding */
+        z-index: 1; /* Ensure the liquid is below the span */
+    }
+
+    /* Move the liquid effect up on hover */
+    .get-started-btn:hover::before {
+        bottom: 0; /* Move up to cover the button */
+    }
+
+    /* Move the liquid effect back down when not hovered */
+    .get-started-btn:not(:hover)::before {
+        bottom: -100%; /* Move to below the button when not hovered */
+    }
+
+/* Keyframes for sliding to the second floor */
+@keyframes slide-up {
+    from {
+        bottom: -100%; /* Start from below */
+    }
+
+    to {
+        bottom: 0; /* Move to current position (first floor) */
+    }
+}
+
+/* Keyframes for sliding to the ground floor */
+@keyframes slide-down {
+    from {
+        bottom: 0; /* Start from current position (first floor) */
+    }
+
+    to {
+        bottom: 100%; /* Move back down to ground (bottom) */
+    }
+}
+
+/* Apply the sliding animation */
+.get-started-btn:hover::before {
+    animation: slide-up 0.4s forwards; /* Slide up on hover */
+}
+
+.get-started-btn:not(:hover)::before {
+    animation: slide-down 0.4s forwards; /* Slide down when not hovered */
+}
 
 .pricing-card {
     flex: 1;
@@ -8307,7 +8918,7 @@ video:not(.playing) + .VC-circle-animation {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 1s ease-in-out;
     overflow: hidden; /* Ensure text stays within bounds */
-    padding-top:0px;
+    padding-top: 0px;
 }
 
     /* Floating effects */
@@ -8655,7 +9266,7 @@ video:not(.playing) + .VC-circle-animation {
     position: relative;
     top: 100px;
     border-radius: 10px;
-    right:-245px;
+    right: -245px;
 }
 
 .inner-square-2 {
@@ -8698,13 +9309,13 @@ video:not(.playing) + .VC-circle-animation {
     font-size: 15px; /* Adjust as needed */
     font-weight: 300;
     color: #333333; /* Adjust color as needed */
-    letter-spacing:-1.2px;
-    position:relative;
-    top:460px;
-    text-align:center;
-    white-space:nowrap;
-    z-index:2;
-    right:170px;
+    letter-spacing: -1.2px;
+    position: relative;
+    top: 460px;
+    text-align: center;
+    white-space: nowrap;
+    z-index: 2;
+    right: 170px;
 }
 
 .insq1-circle {
@@ -8718,10 +9329,10 @@ video:not(.playing) + .VC-circle-animation {
     justify-content: center;
     font-size: 11px; /* Adjust font size as needed */
     font-weight: bold;
-    z-index:3;
-    position:relative;
-    right:-147px;
-    top:120px;
+    z-index: 3;
+    position: relative;
+    right: -147px;
+    top: 120px;
 }
 
 .insq2-circle {
@@ -8783,10 +9394,10 @@ video:not(.playing) + .VC-circle-animation {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index:3;
-    position:relative;
-    right:-224px;
-    top:109.5px;
+    z-index: 3;
+    position: relative;
+    right: -224px;
+    top: 109.5px;
 }
 
 .insql1-black-rect {
@@ -8877,7 +9488,7 @@ video:not(.playing) + .VC-circle-animation {
 .insql1-rounded-rectang-black {
     width: 36px; /* Adjust size as needed */
     height: 10px; /* Adjust size as needed */
-    border:1px solid #e6e6e6;
+    border: 1px solid #e6e6e6;
     background-color: #fcfcfc;
     border-radius: 20px; /* Rounded corners */
     display: flex;
@@ -8895,7 +9506,6 @@ video:not(.playing) + .VC-circle-animation {
     background-color: #000000;
     position: relative;
     left: 100px;
-
 }
 
 /* Styles for the new circles */
@@ -8909,7 +9519,7 @@ video:not(.playing) + .VC-circle-animation {
 .circle-large {
     width: 350px;
     height: 350px;
-    border:1px solid #e6e6e6;/* Red color */
+    border: 1px solid #e6e6e6; /* Red color */
     top: 290px; /* Adjust positioning */
     left: 6px; /* Adjust positioning */
 }
@@ -8962,6 +9572,28 @@ video:not(.playing) + .VC-circle-animation {
     right: -20px; /* Adjust positioning */
 }
 
+/* Keyframes for water slide effect */
+@keyframes waterSlideUp {
+    0% {
+        bottom: -100%; /* Start below the button */
+    }
+
+    100% {
+        bottom: 0; /* Move to the top of the button */
+    }
+}
+
+@keyframes waterSlideDown {
+    0% {
+        bottom: 0; /* Start at the top of the button */
+    }
+
+    100% {
+        bottom: 150%; /* Move below the button */
+    }
+}
+
+/* Style for the dummy button */
 .dummy-get-started-button {
     display: inline-flex;
     align-items: center;
@@ -8975,15 +9607,39 @@ video:not(.playing) + .VC-circle-animation {
     border-radius: 40px;
     border: 1px solid #e6e6e6;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0);
-    transition: background-color 0.3s, color 0.3s, border 0.3s;
+    position: relative; /* Positioning for pseudo-element */
+    overflow: hidden; /* Prevent content from overflowing */
 }
 
-    .dummy-get-started-button:hover {
-        color: #ffffff; /* Text color on hover */
-        background-color: #000000; /* Background color on hover */
-        border: 1px solid #ffffff; /* Border color on hover */
+    /* Pseudo-element for background text */
+    .dummy-get-started-button::before {
+        content: "Dive In"; /* Background text */
+        position: absolute;
+        bottom: -100%; /* Start from below the button */
+        left: -10px; /* Adjust left offset to move text left */
+        right: 0; /* Align right */
+        height: 100%; /* Match the button height */
+        background-color: #000000; /* Background color */
+        color: #ffffff; /* Text color */
+        border-radius: 40px; /* Match button’s border radius */
+        display: flex; /* Use flexbox for centering */
+        align-items: center; /* Center vertically */
+        justify-content: center; /* Center horizontally */
+        transition: bottom 0.3s ease; /* Smooth transition for sliding */
+        z-index: 1; /* Ensure it stays behind the button text */
     }
 
+    /* Water effect on hover */
+    .dummy-get-started-button:hover::before {
+        animation: waterSlideUp 0.5s forwards; /* Animate sliding up - slow down effect */
+    }
+
+    /* Slide back down when not hovered */
+    .dummy-get-started-button:not(:hover)::before {
+        animation: waterSlideDown 0.5s forwards; /* Animate sliding down - slow down effect */
+    }
+
+/* Style for the arrow circle */
 .dummy-arrow-circle {
     display: inline-flex;
     align-items: center;
@@ -8997,34 +9653,37 @@ video:not(.playing) + .VC-circle-animation {
     margin-left: 8px; /* Space between text and circle */
     line-height: 1; /* Adjust to align the arrow vertically */
     transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+    z-index: 3;
 }
 
+/* Hover effect for the arrow circle */
 .dummy-get-started-button:hover .dummy-arrow-circle {
     background-color: #000000; /* Circle background color on hover */
     border: 2px solid #ffffff; /* Circle border color on hover */
     color: #ffffff; /* Arrow color on hover */
+    z-index: 3;
 }
 
 .try-now-btn-pred span {
     display: inline-block;
-    width:22px;
-    height:22px;
-    font-size:1.2em;
+    width: 22px;
+    height: 22px;
+    font-size: 1.2em;
     border: 2px solid #000; /* Initial border color */
     border-radius: 50%; /* Circular border for the icon */
     transition: border-color 0.3s ease; /* Smooth transition for hover effect */
-    background:#e6e6e6;
+    background: #e6e6e6;
 }
 
 .try-now-btn-pred:hover span {
     border-color: #fff; /* Border color on hover */
-    background:#000000;
+    background: #000000;
 }
 
 .try-now-btn-pred .text {
     vertical-align: middle; /* Align text vertically */
-    position:relative;
-    top:-5px;
+    position: relative;
+    top: -5px;
 }
 
 .try-now-btn-geo span {
@@ -9035,12 +9694,12 @@ video:not(.playing) + .VC-circle-animation {
     border: 2px solid #000; /* Initial border color */
     border-radius: 50%; /* Circular border for the icon */
     transition: border-color 0.3s ease; /* Smooth transition for hover effect */
-    background:#e6e6e6;
+    background: #e6e6e6;
 }
 
 .try-now-btn-geo:hover span {
     border-color: #fff; /* Border color on hover */
-    background:#000000;
+    background: #000000;
 }
 
 .try-now-btn span {
@@ -9052,8 +9711,8 @@ video:not(.playing) + .VC-circle-animation {
     border-radius: 50%; /* Circular border for the icon */
     transition: border-color 0.3s ease; /* Smooth transition for hover effect */
     background: none;
-    position:relative;
-    top:2px;
+    position: relative;
+    top: 2px;
 }
 
 .try-now-btn:hover span {
@@ -9077,8 +9736,8 @@ video:not(.playing) + .VC-circle-animation {
     right: 0px;
     white-space: nowrap;
     padding-left: 0px; /* Adjust to make space for the circle */
-    padding-right:0px;
-    border-bottom:4px solid;
+    padding-right: 0px;
+    border-bottom: 4px solid;
 }
 
 .contact-tag-cont {
@@ -9096,7 +9755,7 @@ video:not(.playing) + .VC-circle-animation {
     border: 1px solid #e6e6e6;
     white-space: nowrap;
     padding-left: 2px; /* Space for the circle */
-    border-bottom:4px solid;
+    border-bottom: 4px solid;
 }
 
 .pricing-tag-cont {
@@ -9114,8 +9773,8 @@ video:not(.playing) + .VC-circle-animation {
     border: 1px solid #e6e6e6;
     white-space: nowrap;
     padding-left: 0px; /* Space for the circle */
-    right:-570px;
-    border-bottom:4px solid;
+    right: -570px;
+    border-bottom: 4px solid;
 }
 
 .service-tag-container {
@@ -9180,7 +9839,7 @@ video:not(.playing) + .VC-circle-animation {
     border: 1px solid #e6e6e6;
     white-space: nowrap;
     padding-left: 0px; /* Space for the circle */
-    right:-670px;
+    right: -670px;
     border-bottom: 4px solid;
 }
 
@@ -9231,7 +9890,7 @@ video:not(.playing) + .VC-circle-animation {
     display: flex;
     align-items: center;
     gap: 8px; /* Space between the icon and text */
-    right:-570px;
+    right: -570px;
 }
 
 .profile-stats-icon {
@@ -9288,10 +9947,10 @@ video:not(.playing) + .VC-circle-animation {
     border: 1px solid #e6e6e6;
     border-radius: 20px;
     box-sizing: border-box; /* Ensures padding/border are included in the width/height */
-    position:relative;
-    right:-150px;
-    top:-10px;
-    background-color:#fcfcfc;
+    position: relative;
+    right: -150px;
+    top: -10px;
+    background-color: #fcfcfc;
 }
 
 .innov-search-bar-container {
@@ -9370,9 +10029,9 @@ video:not(.playing) + .VC-circle-animation {
     align-items: center; /* Align items vertically in the center */
     gap: 10px; /* Space between the prompts */
     margin-top: 20px; /* Adjust spacing as needed */
-    position:relative;
-    right:-515px;
-    top:-832px;
+    position: relative;
+    right: -515px;
+    top: -832px;
 }
 
 .search-prompts-aoi {
@@ -9400,7 +10059,7 @@ video:not(.playing) + .VC-circle-animation {
     flex-wrap: wrap; /* Allows the rectangles to wrap onto multiple lines if needed */
     gap: 20px; /* Adjust space between rectangles */
     justify-content: center; /* Center rectangles horizontally */
-    padding-bottom:5px;
+    padding-bottom: 5px;
 }
 
 .innov-rectangle {
@@ -9441,9 +10100,9 @@ video:not(.playing) + .VC-circle-animation {
     position: absolute; /* Absolute positioning */
     top: 5px; /* Position above the text */
     left: 165px; /* Adjust position relative to the parent */
-    letter-spacing:-1.0px;
-    padding-bottom:1px;
-    padding-top:1px;
+    letter-spacing: -1.0px;
+    padding-bottom: 1px;
+    padding-top: 1px;
 }
 
 .innov-rectangle {
@@ -9485,11 +10144,10 @@ video:not(.playing) + .VC-circle-animation {
     height: 40px;
     border-radius: 50%;
     transition: background-color 0.3s ease;
-    position:relative;
-    top:-735px;
-    right:-320px;
-    z-index:3;
-
+    position: relative;
+    top: -735px;
+    right: -320px;
+    z-index: 3;
 }
 
     .thin-line-back-button:hover {
@@ -9771,9 +10429,9 @@ video:not(.playing) + .VC-circle-animation {
     height: 10px;
     background-color: #fcfcfc;
     border-radius: 10%;
-    animation: dotColorPass 10s infinite;
     z-index: 3;
     border: 1px solid #e6e6e6;
+    border-bottom: 3px solid #e6e6e6;
 }
 
 .top-left {
@@ -9803,10 +10461,10 @@ video:not(.playing) + .VC-circle-animation {
     height: 1px;
     background-color: #e6e6e6;
     margin: 20px auto; /* Adjust the spacing as needed */
-    transform:rotate(90deg);
-    position:relative;
-    right:-470px;
-    top:-140px;
+    transform: rotate(90deg);
+    position: relative;
+    right: -470px;
+    top: -140px;
 }
 
 
@@ -9989,7 +10647,7 @@ video:not(.playing) + .VC-circle-animation {
     pointer-events: none; /* Ensure that floating text does not interfere with hover effect */
     opacity: 0; /* Initially hide the floating text */
     transition: opacity 0.3s ease; /* Smooth transition for opacity change */
-    font-weight:500;
+    font-weight: 500;
 }
 
 .timeline-outline:hover .secret-floating-text {
@@ -10105,9 +10763,9 @@ video:not(.playing) + .VC-circle-animation {
     border-radius: 50%; /* Makes it a circle */
     margin-right: 10px; /* Space between circle and text */
     vertical-align: middle; /* Aligns with the text vertically */
-    position:relative;
-    right:-75px;
-    top:-5px;
+    position: relative;
+    right: -75px;
+    top: -5px;
 }
 
 .year-timeline {
@@ -10138,7 +10796,9 @@ video:not(.playing) + .VC-circle-animation {
     height: 130px;
     padding-top: 5px;
     padding-left: 5px;
-    color:#000000;
+    color: #000000;
+    border-bottom: 4px solid #eeeeee;
+    border-right: 4px solid #eeeeee;
 }
 
     .exp-timeline-liv .exp-title {
@@ -10147,9 +10807,9 @@ video:not(.playing) + .VC-circle-animation {
         letter-spacing: -2.0px;
         color: #000000;
         margin-bottom: 0px; /* Space between title and company */
-        text-align:left;
-        position:relative;
-        top:2px;
+        text-align: left;
+        position: relative;
+        top: 2px;
     }
 
     .exp-timeline-liv .exp-company {
@@ -10157,7 +10817,7 @@ video:not(.playing) + .VC-circle-animation {
         font-size: 16px;
         letter-spacing: -1.0px;
         color: #000000;
-        text-align:left;
+        text-align: left;
     }
 
     .exp-timeline-liv .exp-dur {
@@ -10165,7 +10825,7 @@ video:not(.playing) + .VC-circle-animation {
         font-size: 16px;
         letter-spacing: -1.0px;
         color: #000000;
-        text-align:left;
+        text-align: left;
     }
 
     .exp-timeline-liv .exp-loc {
@@ -10183,11 +10843,11 @@ video:not(.playing) + .VC-circle-animation {
         letter-spacing: -1.0px;
         color: #000000;
         text-align: left;
-        background-color:#77dd86;
-        border:1px solid #77dd86;
-        border-radius:6px;
-        width:73px;
-        padding-left:5px;
+        background-color: #77dd86;
+        border: 1px solid #77dd86;
+        border-radius: 6px;
+        width: 73px;
+        padding-left: 5px;
     }
 
 .exp-tim-logo-container {
@@ -10203,7 +10863,7 @@ video:not(.playing) + .VC-circle-animation {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#ffffff;
+    background-color: #ffffff;
 }
 
 .exp-tim-logo {
@@ -10287,7 +10947,7 @@ video:not(.playing) + .VC-circle-animation {
     letter-spacing: -1.1px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
     transition: box-shadow 0.3s ease; /* Smooth transition for shadow */
-    padding-top:0px;
+    padding-top: 0px;
 }
 
     .pricing-pop:hover {
@@ -10392,7 +11052,7 @@ video:not(.playing) + .VC-circle-animation {
     height: 500px;
     top: 0px;
     left: -550px;
-    background-color:#fcfcfc;
+    background-color: #fcfcfc;
 }
 
 .circle2 {
@@ -10410,28 +11070,48 @@ video:not(.playing) + .VC-circle-animation {
 }
 
 .dummy-project-stats-rectangle {
-    width: 310px;
+    width: 400px; /* Adjusted to fit larger SVG */
     height: 135px;
-    background-color: #fafaff;
+    background-color: transparent;
     border-radius: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #9d9da4;
+    position: relative;
+    color: #000000;
     font-size: 50px;
     letter-spacing: -4.8px;
     font-weight: 200;
     text-align: center;
-    position: relative;
-    top: 220px;
+    top: 190px;
     right: 570px;
-    transform: rotate(12deg);
+    transform: rotate(0deg);
     transform-style: flat;
     perspective: none;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0);
-    border-right: 8px solid #000000;
-    border-bottom: 8px solid #000000;
     transition: transform 0.4s cubic-bezier(.4, 0, .2, 1), box-shadow 0.4s cubic-bezier(.4, 0, .2, 1), background-color 0.4s cubic-bezier(.4, 0, .2, 1), border-color 0.4s cubic-bezier(.4, 0, .2, 1);
+}
+
+    /* Centering the text */
+    .dummy-project-stats-rectangle .text-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* SVG scribble positioning */
+    .dummy-project-stats-rectangle .scribble-svg {
+        position: absolute;
+        top: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 750px;
+        height: 155px;
+        z-index: 0;
+    }
+
+.scribble-svg svg {
+    width: 100%;
+    height: 100%;
 }
 
 .upd-exp-rounded-rect {
@@ -10452,7 +11132,7 @@ video:not(.playing) + .VC-circle-animation {
     height: 24px; /* Set desired height */
     background: url('Mac_Modern_Cursor-removebg-preview.png') no-repeat center center;
     background-size: contain;
-    opacity:0.8;
+    opacity: 0.8;
 }
 
 .custom-rect {
@@ -10472,8 +11152,8 @@ video:not(.playing) + .VC-circle-animation {
     margin-right: 10px; /* Adjust spacing between image and text */
     border-radius: 50%;
     overflow: hidden;
-    position:relative;
-    right:5px;
+    position: relative;
+    right: 5px;
 }
 
     .new-custo-image-container img {
@@ -10499,10 +11179,11 @@ video:not(.playing) + .VC-circle-animation {
 .Herosec-dot {
     width: 10px; /* Size of the square dots */
     height: 10px;
-    background-color: #ffffff; /* Color of the dot */
-    border: 1px solid #000000; /* Border of the dot */
+    background-color: #fcfcfc; /* Color of the dot */
+    border: 1px solid #e6e6e6; /* Border of the dot */
     position: absolute;
-    z-index:3;
+    z-index: 3;
+    border-bottom: 2px solid #e6e6e6;
 }
 
 /* Top-left dot */
@@ -10558,8 +11239,24 @@ video:not(.playing) + .VC-circle-animation {
     align-items: center;
     justify-content: center;
     transform: rotate(-10deg);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02); /* Add this line for box shadow */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02); /* Box shadow */
+    position: relative; /* Required for positioning the pseudo-element */
 }
+
+    .freelance-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="%23000000" version="1.1" id="Capa_1" width="800px" height="800px" viewBox="0 0 367.339 367.34" xml:space="preserve"><g><path d="M337.591,0.932c-13.464,6.12-26.315,12.852-39.168,20.196c-11.628,6.12-25.704,12.24-35.496,21.42c-5.508,4.896,0,15.3,7.344,12.852c0,0,0.612,0,0.612-0.612c1.836,1.224,3.061,2.448,4.896,4.284c0,0.612,0.611,1.836,0.611,2.448c0.612,1.224,1.836,2.448,3.061,3.672c-17.748,33.048-34.272,66.096-55.08,96.696c-6.12,9.18-12.853,17.748-20.808,25.704c-19.584-31.212-51.409-67.32-89.965-60.588c-50.796,9.18-23.256,63.647,3.06,82.008c31.212,22.644,58.14,21.42,85.068,0c12.24,20.808,20.809,44.063,19.584,66.708c-1.836,54.468-50.796,63.647-91.8,49.571c6.12-15.912,7.956-34.271,4.284-50.184c-6.12-28.764-50.184-54.468-75.888-34.272c-25.092,20.196,22.032,71.604,37.332,82.009c4.284,3.06,9.18,6.119,14.076,8.567c-0.612,0.612-0.612,1.225-1.224,1.836c-28.152,44.064-65.484,6.12-82.62-25.092c-2.448-4.896-9.18-0.612-7.344,4.284c14.076,32.436,42.84,70.38,81.396,48.348c9.18-5.508,17.136-13.464,22.644-23.256c33.66,13.464,72.829,13.464,97.308-17.136c29.376-36.72,11.017-84.456-8.567-119.952c0.611-0.612,0.611-0.612,1.224-1.224c34.884-33.66,56.304-81.396,78.336-124.236c4.284,3.06,9.181,6.12,13.464,9.18c3.061,1.836,7.345,1.224,9.792-1.224c17.748-20.808,31.212-45.9,35.496-73.44C351.055,2.768,344.324-2.128,337.591,0.932z M178.471,207.787c-23.256,13.464-46.512-3.06-63.648-18.972c-22.644-20.808-16.524-54.468,18.36-47.735c17.748,3.672,31.824,19.584,43.452,32.436c6.12,6.732,12.241,14.687,17.749,23.255C189.488,201.056,183.979,204.728,178.471,207.787z M116.047,319.171C116.047,319.171,115.435,319.171,116.047,319.171c-16.524-8.567-28.764-20.808-38.556-36.107c-4.284-6.732-7.956-14.076-9.792-22.032c-6.12-20.808,26.928-10.404,35.496-6.12C126.451,267.764,124.615,297.14,116.047,319.171z M306.379,67.028c-0.612,0-0.612-0.612-1.224-0.612c0-1.836-1.225-3.672-3.672-4.896c-4.284-1.836-8.568-4.284-12.853-6.732c-1.836-1.224-5.508-4.896-5.508-3.672c0-0.612-0.612-1.224-1.224-1.224c6.731-3.672,13.464-8.568,20.195-12.24c8.568-4.896,17.748-9.792,26.929-14.688C324.74,38.264,316.784,53.564,306.379,67.028z"/></g></svg>');
+        background-size: 30%; /* Resize the SVG */
+        background-position: 0% 90%; /* Move further left and down */
+        background-repeat: no-repeat;
+        opacity: 0.08; /* Set the opacity */
+        z-index: -1; /* Ensure it stays behind the content */
+    }
 
 .freelance-title {
     font-size: 35px;
@@ -10567,6 +11264,12 @@ video:not(.playing) + .VC-circle-animation {
     letter-spacing: -3.5px;
     color: #000000;
     margin: 0; /* Remove any default margins */
+    background-image: linear-gradient(to right, #eeeeee 1px, transparent 1px), linear-gradient(to bottom, #eeeeee 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 0;
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    border-bottom: 4px solid #e6e6e6;
 }
 
 .freelance-subtitle {

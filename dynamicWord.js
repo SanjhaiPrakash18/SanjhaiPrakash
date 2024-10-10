@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    const words = ["Stand?","Excel?", "Shine?", "Lead?", "Thrive?"];
+document.addEventListener('DOMContentLoaded', () => {  // Removed the 'event' parameter
+    const words = ["Stand?", "Excel?", "Shine?", "Lead?", "Thrive?"];
     let index = 0;
     const dynamicWordElement = document.getElementById('dynamicWord');
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
             dynamicWordElement.style.animation = 'none';
 
             // Trigger reflow to restart animation
-            dynamicWordElement.offsetHeight; // eslint-disable-line no-unused-expressions
+            void dynamicWordElement.offsetHeight;  // Use void to avoid ESLint error
 
             // Apply animation again
             dynamicWordElement.style.animation = 'moveFromBottom 0.5s ease-in-out forwards';

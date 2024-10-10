@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const words = ["Connect!","Network!", "Engage!"];
+    const words = ["Connect!", "Network!", "Engage!"];
     let index = 0;
     const dynamicWordElement = document.getElementById('dynamicConnectWord');
 
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dynamicWordElement.style.animation = 'none';
 
             // Trigger reflow to restart animation
-            dynamicWordElement.offsetHeight; // eslint-disable-line no-unused-expressions
+            void dynamicWordElement.offsetHeight; // Use void to indicate intent
 
             // Apply animation again
             dynamicWordElement.style.animation = 'moveFromBottom 0.5s ease-in-out forwards';

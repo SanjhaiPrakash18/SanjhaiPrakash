@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Menu</title>
+    <!-- Include Montserrat font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ffffff; /* Dark background */
+            font-family: 'Montserrat', sans-serif; /* Apply Montserrat font */
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 0;
+        }
+
+            .mobile-nav-links li {
+                margin-bottom: 20px;
+            }
+
+            .mobile-nav-links a {
+                text-decoration: none;
+                color: #000000;
+                font-size: 24px;
+                font-weight: 400;
+                letter-spacing: -1.2px;
+                font-family: 'Montserrat', sans-serif; /* Ensure Montserrat font is applied */
+            }
+
+                .mobile-nav-links a:hover {
+                    color: #ddd;
+                }
+
+        /* Close Icon */
+        .close-icon {
+            font-size: 40px;
+            cursor: pointer;
+            color: #000000;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            transition: transform 0.3s ease; /* Smooth transition */
+        }
+
+            /* Hover Effect: Expand the icon */
+            .close-icon:hover {
+                transform: scale(1.2); /* Increase size by 20% */
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="close-icon" id="closeIcon">&times;</div>
+
+    <ul class="mobile-nav-links">
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#home">HOME</a></li>
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#about">ABOUT</a></li>
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#upd-section">TIMELINE</a></li>
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#projects">PORTFOLIO</a></li>
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#services">SERVICES</a></li>
+        <li><a href="https://sanjhaiprakash18.github.io/sanjhaicom.github.io/index.html#contact">CONTACT</a></li>
+        <li>
+            <a href="https://metricalist.com/powerbi-solutions/customer-segmentation-analysis-dashboard-template/"
+               target="_blank"
+               style="color: #fff; background-color: #000000; padding: 10px; text-decoration: none;border-radius:30px;">
+                GET MY BI SOLUTION !
+            </a>
+        </li>
+    </ul>
+
+    <script>
+        // Close the mobile menu and go back to the previous page
+        document.getElementById('closeIcon').addEventListener('click', () => {
+            window.history.back(); // Go back to the previous page
+        });
+    </script>
+
+</body>
+</html>

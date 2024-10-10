@@ -26,9 +26,9 @@ window.addEventListener('load', function () {
             currentIndex++;
         } else {
             setTimeout(() => {
-                preloader.style.display = 'none'; // Hide the preloader
-                mainContent.style.display = 'block'; // Show the main content
-                contactSection.style.display = 'block'; // Show the contact section
+                if (preloader) preloader.style.display = 'none'; // Hide the preloader
+                if (mainContent) mainContent.style.display = 'block'; // Show the main content
+                if (contactSection) contactSection.style.display = 'block'; // Show the contact section
             }, 1000); // Adjust this time based on the length of your animation
         }
     }

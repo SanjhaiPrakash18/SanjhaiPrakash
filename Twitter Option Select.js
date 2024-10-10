@@ -14,3 +14,12 @@ function selectOption(option) {
         yesOption.setAttribute('data-percent', '99%');
     }
 }
+
+// Add event listeners to buttons
+const yesButton = document.getElementById('option-yes');
+const noButton = document.getElementById('option-no');
+
+if (yesButton && noButton) {
+    yesButton.addEventListener('click', () => selectOption('yes'));
+    noButton.addEventListener('click', () => selectOption('no'));
+}

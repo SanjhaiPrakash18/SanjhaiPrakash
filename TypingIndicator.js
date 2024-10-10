@@ -119,3 +119,10 @@ function showPromptPills() {
         }, index * 100); // Staggered appearance of prompt pills
     });
 }
+
+// Add event listener to an element to use the toggleChatWindow function
+const chatboxToggleButton = document.getElementById('chatbox-toggle-btn');
+
+if (chatboxToggleButton) {
+    chatboxToggleButton.addEventListener('click', toggleChatWindow);
+}

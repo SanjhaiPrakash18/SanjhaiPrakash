@@ -15,3 +15,5 @@ function toggleText() {
         symbol.textContent = '#';
     }
 }
+
+toggleText();

@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function slideDownRectangles() {
         let delay = 0;
-        rectangles.forEach((rectangle, index) => {
+        rectangles.forEach((rectangle) => {
             setTimeout(() => {
                 rectangle.classList.remove('visible');
                 rectangle.classList.add('hidden');
